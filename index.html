@@ -72,6 +72,45 @@ nav{
   letter-spacing:-0.5px;
 }
 .nav-logo span{color:var(--purple)}
+  .nav-links{
+  display:flex;align-items:center;gap:32px;
+  list-style:none;margin:0;padding:0;
+}
+.nav-links a{
+  color:var(--white);text-decoration:none;
+  font-size:13px;font-weight:600;letter-spacing:0.3px;
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-6px;left:0;
+  width:0;height:1px;background:var(--purple);
+  transition:width 0.25s ease;
+}
+.nav-links a:hover{color:var(--purple-light)}
+.nav-links a:hover::after{width:100%}
+.nav-links .free-tag{
+  display:inline-block;
+  background:rgba(34,211,238,0.12);
+  border:1px solid rgba(34,211,238,0.3);
+  color:var(--cyan);
+  font-family:'DM Mono',monospace;
+  font-size:9px;font-weight:700;letter-spacing:1px;
+  padding:2px 6px;border-radius:4px;
+  margin-left:6px;vertical-align:middle;
+}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-burger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:none;padding:8px;
+}
+.nav-burger span{
+  display:block;width:22px;height:2px;
+  background:var(--white);
+  transition:transform 0.3s,opacity 0.3s;
+}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .nav-cta{
   background:var(--purple);
   color:#fff;
@@ -366,7 +405,71 @@ footer{
   letter-spacing:1.5px;padding:2px 8px;border-radius:4px;
   font-family:'DM Mono',monospace;
 }
-@media(max-width:768px){.whats-new{padding:60px 24px}
+  .free-tools{padding:100px 48px;max-width:1200px;margin:0 auto}
+.cleaner-card{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;align-items:center;
+  background:linear-gradient(135deg,rgba(138,92,246,0.06),rgba(34,211,238,0.04));
+  border:1px solid var(--border);
+  border-radius:20px;padding:56px;
+  position:relative;overflow:hidden;
+}
+.cleaner-card::before{
+  content:'';position:absolute;top:-50%;right:-20%;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(34,211,238,0.1),transparent 70%);
+  pointer-events:none;
+}
+.cleaner-info{position:relative;z-index:1}
+.cleaner-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(34,211,238,0.12);
+  border:1px solid rgba(34,211,238,0.3);
+  color:var(--cyan);font-family:'DM Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  padding:4px 12px;border-radius:20px;margin-bottom:20px;
+}
+.cleaner-info h3{
+  font-family:'DM Serif Display',serif;
+  font-size:36px;line-height:1.1;margin-bottom:16px;
+}
+.cleaner-info p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.cleaner-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.cleaner-features li{font-size:14px;color:#c4b5fd;display:flex;align-items:center;gap:10px}
+.cleaner-features li::before{content:'✦';color:var(--cyan);font-size:10px;flex-shrink:0}
+.cleaner-cta{
+  display:inline-block;background:var(--cyan);color:var(--bg);
+  padding:14px 28px;border-radius:8px;
+  text-decoration:none;font-weight:700;font-size:14px;
+  letter-spacing:0.5px;transition:all 0.2s;
+  box-shadow:0 0 30px rgba(34,211,238,0.2);
+}
+.cleaner-cta:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(34,211,238,0.4)}
+.cleaner-visual{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:280px}
+.cleaner-icon-big{
+  font-size:140px;line-height:1;
+  filter:drop-shadow(0 0 40px rgba(34,211,238,0.4));
+  animation:floatIcon 4s ease-in-out infinite;
+}
+@keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(max-width:768px){.free-tools{padding:60px 24px}
+.cleaner-card{grid-template-columns:1fr;padding:32px;gap:24px;text-align:center}
+.cleaner-features li{justify-content:center}
+.cleaner-icon-big{font-size:100px}
+.nav-burger{display:flex}
+.nav-links{
+  display:none;
+  position:absolute;top:100%;left:0;right:0;
+  flex-direction:column;align-items:stretch;
+  background:rgba(5,5,15,0.98);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:16px 24px;gap:4px;
+}
+.nav-links.open{display:flex}
+.nav-links a{padding:12px 8px;font-size:15px}
+.nav-links a::after{display:none}
+.nav-right{gap:12px}.whats-new{padding:60px 24px}
 .features-grid{grid-template-columns:1fr 1fr}
   nav{padding:16px 24px}
   section{padding:60px 24px}
@@ -385,7 +488,17 @@ footer{
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Neyko <span>FX</span></div>
-  <a href="mailto:dartiguesthibaut0@gmail.com" class="nav-cta">Contact us</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Individual Plan</a></li>
+    <li><a href="#pricing">Studio / White Label</a></li>
+    <li><a href="#cleaner">Cleaner <span class="free-tag">FREE</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="mailto:contact@neykofx.com" class="nav-cta">Contact us</a>
+    <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -456,6 +569,30 @@ footer{
       <span class="feature-icon">☁</span>
       <h3>Cloud Sync</h3>
       <p>Your presets, templates and settings synced across all machines in your studio.</p>
+    </div>
+  </div>
+</section>
+  <section id="cleaner" class="free-tools">
+  <span class="section-tag">// FREE TOOLS</span>
+  <h2 class="section-title">Neyko FX Cleaner.<br>Free, forever.</h2>
+  <p class="section-sub">A free utility panel to clean and optimize your After Effects projects in one click.</p>
+
+  <div class="cleaner-card">
+    <div class="cleaner-info">
+      <div class="cleaner-badge">✦ 100% FREE</div>
+      <h3>Clean projects.<br>Faster renders.</h3>
+      <p>Remove unused footage, purge missing files, consolidate duplicates and reduce your project size — all in one click, directly inside After Effects.</p>
+      <ul class="cleaner-features">
+        <li>Remove unused footage & comps</li>
+        <li>Detect missing files instantly</li>
+        <li>Consolidate duplicate assets</li>
+        <li>Reduce project file size up to 80%</li>
+        <li>Native AE panel, no plugins</li>
+      </ul>
+      <a href="https://payhip.com/b/ZJwQ7" target="_blank" rel="noopener" class="cleaner-cta">Download free on Payhip →</a>
+    </div>
+    <div class="cleaner-visual">
+      <div class="cleaner-icon-big">🧹</div>
     </div>
   </div>
 </section>
@@ -646,6 +783,16 @@ Just you? Check out the
 </footer>
 
 <script>
+  const burger = document.getElementById('navBurger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open');
+  navLinks.classList.remove('open');
+}));
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
