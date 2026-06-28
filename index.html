@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neyko FX — White Label for Motion Design Studios</title>
+<meta property="og:title" content="Neyko FX — White Label for Motion Design Studios">
+<meta property="og:description" content="Give your team an AI panel inside After Effects — fully branded with your studio's identity. No code required.">
+<meta property="og:type" content="website">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
 
@@ -12,11 +15,13 @@
   --bg:#05050f;
   --surface:#0d0d1f;
   --border:rgba(138,92,246,0.15);
+  --border-soft:rgba(255,255,255,0.06);
   --purple:#8a5cf6;
   --purple-light:#b08fff;
   --cyan:#22d3ee;
   --white:#f0eeff;
   --muted:#6b7280;
+  --muted-light:#9ca3af;
   --card:#0f0f22;
 }
 
@@ -26,468 +31,371 @@ body{
   color:var(--white);
   font-family:'Syne',sans-serif;
   overflow-x:hidden;
-  cursor:none;
+  line-height:1.5;
 }
 
-/* CURSOR */
-.cursor{
-  width:8px;height:8px;
-  background:var(--cyan);
-  border-radius:50%;
-  position:fixed;top:0;left:0;
-  pointer-events:none;z-index:9999;
-  transition:transform 0.15s;
-  mix-blend-mode:difference;
-}
-.cursor-ring{
-  width:32px;height:32px;
-  border:1px solid var(--purple);
-  border-radius:50%;
-  position:fixed;top:0;left:0;
-  pointer-events:none;z-index:9998;
-  transition:transform 0.35s cubic-bezier(0.23,1,0.32,1);
-  opacity:0.6;
-}
+a{color:inherit}
+svg{display:block}
+.ic{width:22px;height:22px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
-/* NOISE OVERLAY */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:1000;opacity:0.4;
-}
-
-/* NAV */
+/* ===== NAV ===== */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:20px 48px;
+  padding:16px 48px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(5,5,15,0.8);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+  background:rgba(5,5,15,0.82);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-soft);
 }
-.nav-logo{
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:20px;
-  letter-spacing:-0.5px;
-}
-.nav-logo span{color:var(--purple)}
-  .nav-links{
-  display:flex;align-items:center;gap:32px;
-  list-style:none;margin:0;padding:0;
+.brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
+.logo-mark{width:36px;height:36px;flex-shrink:0;transition:transform 0.3s;will-change:transform}
+.brand:hover .logo-mark{animation:logoFloat 1.6s ease-in-out infinite}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.5px;color:var(--white)}
+.logo-text span{color:var(--purple)}
+.nav-links{
+  display:flex;align-items:center;gap:30px;
+  list-style:none;
 }
 .nav-links a{
-  color:var(--white);text-decoration:none;
-  font-size:13px;font-weight:600;letter-spacing:0.3px;
-  transition:color 0.2s;position:relative;
+  color:var(--muted-light);text-decoration:none;
+  font-size:13px;font-weight:600;letter-spacing:0.2px;
+  transition:color 0.2s;display:inline-flex;align-items:center;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-6px;left:0;
-  width:0;height:1px;background:var(--purple);
-  transition:width 0.25s ease;
+.nav-links a:hover{color:var(--white)}
+.free-tag{
+  display:inline-block;background:rgba(34,211,238,0.1);
+  border:1px solid rgba(34,211,238,0.25);color:var(--cyan);
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:700;
+  letter-spacing:1px;padding:2px 6px;border-radius:4px;margin-left:7px;
 }
-.nav-links a:hover{color:var(--purple-light)}
-.nav-links a:hover::after{width:100%}
-.nav-links .free-tag{
-  display:inline-block;
-  background:rgba(34,211,238,0.12);
-  border:1px solid rgba(34,211,238,0.3);
-  color:var(--cyan);
-  font-family:'DM Mono',monospace;
-  font-size:9px;font-weight:700;letter-spacing:1px;
-  padding:2px 6px;border-radius:4px;
-  margin-left:6px;vertical-align:middle;
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cta{
+  background:var(--purple);color:#fff;
+  padding:9px 20px;border-radius:7px;text-decoration:none;
+  font-size:13px;font-weight:700;letter-spacing:0.3px;
+  transition:background 0.2s;
 }
-.nav-right{display:flex;align-items:center;gap:24px}
+.nav-cta:hover{background:#7a4ce6}
 .nav-burger{
   display:none;flex-direction:column;gap:5px;
-  background:none;border:none;cursor:none;padding:8px;
+  background:none;border:none;cursor:pointer;padding:6px;
 }
-.nav-burger span{
-  display:block;width:22px;height:2px;
-  background:var(--white);
-  transition:transform 0.3s,opacity 0.3s;
-}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--white);transition:transform 0.3s,opacity 0.3s}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-cta{
-  background:var(--purple);
-  color:#fff;
-  padding:10px 24px;
-  border-radius:6px;
-  text-decoration:none;
-  font-size:13px;font-weight:700;
-  letter-spacing:0.5px;
-  transition:opacity 0.2s;
-}
-.nav-cta:hover{opacity:0.85}
 
-/* HERO */
+/* ===== LAYOUT ===== */
+.wrap{max-width:1180px;margin:0 auto;padding:0 48px}
+section{padding:110px 0}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;
+  color:var(--cyan);margin-bottom:18px;display:block;text-transform:uppercase;
+}
+.h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(30px,4vw,46px);line-height:1.12;margin-bottom:16px;
+}
+.lead{font-size:16px;color:var(--muted-light);max-width:520px;line-height:1.7}
+
+/* ===== HERO ===== */
 .hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;
-  padding:120px 48px 80px;
   position:relative;
+  padding:160px 0 90px;
+  border-bottom:1px solid var(--border-soft);
   overflow:hidden;
 }
-
-/* Animated bg orbs */
-.orb{
-  position:absolute;border-radius:50%;
-  filter:blur(80px);pointer-events:none;
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(138,92,246,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(138,92,246,0.05) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
+  pointer-events:none;
 }
-.orb-1{width:500px;height:500px;background:rgba(138,92,246,0.12);top:-100px;left:-100px;animation:float1 8s ease-in-out infinite}
-.orb-2{width:400px;height:400px;background:rgba(34,211,238,0.08);bottom:-80px;right:-80px;animation:float2 10s ease-in-out infinite}
-.orb-3{width:300px;height:300px;background:rgba(138,92,246,0.06);top:50%;left:50%;transform:translate(-50%,-50%);animation:float3 6s ease-in-out infinite}
-
-@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,20px)}}
-@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-30px)}}
-@keyframes float3{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
-
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(138,92,246,0.1);
-  border:1px solid rgba(138,92,246,0.3);
-  padding:6px 16px;border-radius:20px;
+  background:rgba(138,92,246,0.08);border:1px solid rgba(138,92,246,0.25);
+  padding:6px 14px;border-radius:6px;
   font-size:11px;font-weight:600;letter-spacing:2px;
-  color:var(--purple-light);margin-bottom:32px;
-  font-family:'DM Mono',monospace;
+  color:var(--purple-light);margin-bottom:26px;font-family:'DM Mono',monospace;
 }
-.badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-
+.badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%}
 .hero h1{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(42px,6vw,80px);
-  line-height:1.05;
-  letter-spacing:-1px;
-  margin-bottom:24px;
-  max-width:800px;
+  font-size:clamp(38px,5vw,62px);line-height:1.06;
+  letter-spacing:-1px;margin-bottom:22px;
 }
-.hero h1 em{
-  font-style:italic;
-  color:var(--purple-light);
-}
-.hero h1 .cyan{color:var(--cyan)}
-
-.hero-sub{
-  font-size:18px;color:var(--muted);
-  max-width:520px;line-height:1.7;
-  margin-bottom:48px;font-weight:400;
-}
-
-.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center}
+.hero h1 em{font-style:italic;color:var(--purple-light)}
+.hero-sub{font-size:17px;color:var(--muted-light);max-width:480px;line-height:1.7;margin-bottom:34px}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .btn-primary{
-  background:var(--purple);color:#fff;
-  padding:14px 32px;border-radius:8px;
-  text-decoration:none;font-weight:700;
-  font-size:14px;letter-spacing:0.5px;
-  transition:all 0.2s;
-  box-shadow:0 0 30px rgba(138,92,246,0.3);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(138,92,246,0.5)}
-.btn-secondary{
-  color:var(--white);
-  padding:14px 32px;
-  text-decoration:none;font-weight:600;
-  font-size:14px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  transition:all 0.2s;
-}
-.btn-secondary:hover{border-color:var(--purple);color:var(--purple-light)}
-
-/* SECTION */
-section{padding:100px 48px;max-width:1200px;margin:0 auto}
-
-.section-tag{
-  font-family:'DM Mono',monospace;
-  font-size:11px;letter-spacing:3px;
-  color:var(--cyan);margin-bottom:16px;
-  display:block;
-}
-.section-title{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(32px,4vw,52px);
-  line-height:1.1;margin-bottom:16px;
-}
-.section-sub{
-  font-size:16px;color:var(--muted);
-  max-width:500px;line-height:1.7;
-  margin-bottom:60px;
-}
-
-/* WHAT IS */
-.what-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:2px;border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;
-}
-.what-item{
-  background:var(--card);
-  padding:40px;
-  border-right:1px solid var(--border);
-  border-bottom:1px solid var(--border);
+  background:var(--purple);color:#fff;padding:13px 28px;border-radius:8px;
+  text-decoration:none;font-weight:700;font-size:14px;letter-spacing:0.3px;
   transition:background 0.2s;
 }
-.what-item:hover{background:#13132a}
-.what-item:nth-child(even){border-right:none}
-.what-item:nth-child(3),.what-item:nth-child(4){border-bottom:none}
+.btn-primary:hover{background:#7a4ce6}
+.btn-secondary{
+  color:var(--white);padding:13px 26px;text-decoration:none;font-weight:600;
+  font-size:14px;border:1px solid var(--border);border-radius:8px;transition:border-color 0.2s,color 0.2s;
+}
+.btn-secondary:hover{border-color:var(--purple);color:var(--purple-light)}
+.hero-meta{
+  display:flex;gap:22px;margin-top:34px;flex-wrap:wrap;
+  font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:7px}
+.hero-meta i{width:5px;height:5px;background:var(--purple);border-radius:50%;display:inline-block}
+
+/* ===== PRODUCT MOCKUPS ===== */
+.mockup{
+  background:#0a0a18;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,0.7);
+}
+.mk-titlebar{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;background:#111122;border-bottom:1px solid var(--border-soft);
+}
+.mk-dots{display:flex;gap:6px}
+.mk-dots i{width:10px;height:10px;border-radius:50%;background:#2a2a3d;display:block}
+.mk-titlebar small{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+
+/* AI panel */
+.mk-aibar{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 14px;border-bottom:1px solid var(--border-soft);
+}
+.mk-hex{width:18px;height:18px;background:linear-gradient(135deg,var(--purple),var(--cyan));border-radius:5px;flex-shrink:0}
+.mk-brand{font-weight:800;font-size:14px}
+.mk-brand b{color:var(--purple);font-weight:800}
+.mk-online{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399}
+.mk-tab{
+  font-size:11px;font-weight:700;padding:4px 9px;border-radius:5px;
+  border:1px solid var(--border-soft);color:var(--muted-light);
+}
+.mk-tab.on{color:var(--white);border-color:rgba(138,92,246,0.4);background:rgba(138,92,246,0.12)}
+.mk-credits{margin-left:auto;font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);border:1px solid var(--border-soft);padding:3px 8px;border-radius:11px}
+.mk-up{font-size:10px;font-weight:800;letter-spacing:0.5px;color:#fff;background:var(--purple);padding:4px 9px;border-radius:5px}
+.mk-ai-body{padding:34px 22px;text-align:center}
+.mk-spark{width:30px;height:30px;margin:0 auto 14px;color:var(--purple-light)}
+.mk-ai-lead{font-size:13px;color:var(--muted-light);line-height:1.6;margin-bottom:18px}
+.mk-chip{
+  background:#101024;border:1px solid var(--border-soft);border-radius:8px;
+  padding:11px 14px;font-size:12px;color:#c9c4e8;text-align:left;margin-bottom:8px;
+  transition:border-color 0.2s;
+}
+.mk-chip:hover{border-color:rgba(138,92,246,0.4)}
+.mk-ai-input{
+  display:flex;align-items:center;gap:10px;padding:12px 14px;
+  border-top:1px solid var(--border-soft);
+}
+.mk-ai-input .pill{flex:1;background:#101024;border:1px solid var(--border-soft);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted)}
+.mk-send{width:34px;height:34px;border-radius:8px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+
+/* Expressions panel */
+.mk-exhead{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border-soft)}
+.mk-exhead .fx{width:24px;height:24px;border-radius:6px;background:rgba(138,92,246,0.15);color:var(--purple-light);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:700}
+.mk-exhead h4{font-size:15px;font-weight:700}
+.mk-exbody{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.mk-group{border:1px solid var(--border);border-radius:10px;padding:14px;background:#0c0c1c}
+.mk-group.lit{border-color:rgba(138,92,246,0.35);background:rgba(138,92,246,0.05)}
+.mk-grouphd{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.mk-grouphd .gi{width:24px;height:24px;border-radius:6px;background:rgba(138,92,246,0.12);color:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.mk-grouphd b{font-size:13px}
+.mk-grouphd small{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace}
+.mk-grouphd .tier{margin-left:auto;font-size:9px;font-family:'DM Mono',monospace;color:var(--cyan);border:1px solid rgba(34,211,238,0.25);padding:2px 6px;border-radius:4px}
+.mk-expr{display:flex;align-items:center;gap:10px;background:#0a0a18;border:1px solid var(--border-soft);border-radius:8px;padding:10px 12px}
+.mk-expr .nm{font-size:12px;font-weight:600}
+.mk-expr .prop{margin-left:auto;font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)}
+.mk-expr .ap{font-size:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--purple),#6d4ad8);padding:5px 11px;border-radius:6px}
+.mk-collapsed{display:flex;align-items:center;justify-content:space-between;background:#0c0c1c;border:1px solid var(--border-soft);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--muted-light)}
+
+/* Cleaner panel */
+.mk-clhead{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border-soft)}
+.mk-clhead .lg{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,var(--purple));flex-shrink:0}
+.mk-clhead .nm{font-weight:800;font-size:15px}
+.mk-clhead .ver{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px}
+.mk-clhead .free{font-size:9px;font-weight:800;color:#34d399;border:1px solid rgba(52,211,153,0.3);padding:2px 7px;border-radius:4px;margin-left:6px}
+.mk-clbody{padding:14px 16px}
+.mk-clsec{margin-bottom:16px}
+.mk-clsec h5{font-size:10px;letter-spacing:2px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.mk-clgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mk-clbtn{background:#0c0c1c;border:1px solid var(--border-soft);border-radius:8px;padding:11px 13px;font-size:12px;font-weight:600;color:#d6d2ec;transition:border-color 0.2s,background 0.2s}
+.mk-clbtn:hover{border-color:rgba(138,92,246,0.4);background:rgba(138,92,246,0.06)}
+.mk-clfoot{text-align:center;padding:14px;border-top:1px solid var(--border-soft);font-size:12px;font-weight:700;color:var(--purple-light)}
+
+/* ===== TRUST STRIP ===== */
+.strip{border-bottom:1px solid var(--border-soft);background:var(--surface)}
+.strip-inner{display:flex;flex-wrap:wrap;justify-content:center;gap:46px;padding:26px 0}
+.strip-item{display:flex;align-items:center;gap:10px;color:var(--muted-light);font-size:13px;font-weight:600}
+.strip-item .ic{width:18px;height:18px;color:var(--purple-light)}
+
+/* ===== WHAT YOU GET ===== */
+.what-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.what-item{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:32px;transition:border-color 0.2s,transform 0.2s;
+}
+.what-item:hover{border-color:rgba(138,92,246,0.35);transform:translateY(-3px)}
 .what-icon{
-  width:44px;height:44px;
-  background:rgba(138,92,246,0.1);
-  border:1px solid rgba(138,92,246,0.2);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;margin-bottom:20px;
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.2);
+  display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:20px;
 }
 .what-item h3{font-size:18px;font-weight:700;margin-bottom:10px}
-.what-item p{font-size:14px;color:var(--muted);line-height:1.7}
+.what-item p{font-size:14px;color:var(--muted-light);line-height:1.7}
 
-/* PRICING */
-.pricing-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+/* ===== SHOWCASE (alternating) ===== */
+.showcase{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.showcase.flip .showcase-media{order:2}
+.showcase-text h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,36px);line-height:1.15;margin-bottom:16px}
+.showcase-text p{font-size:15px;color:var(--muted-light);line-height:1.7;margin-bottom:22px}
+.showcase-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.showcase-list li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#c9c4e8}
+.showcase-list .ic{width:18px;height:18px;color:var(--cyan);flex-shrink:0;margin-top:1px}
+
+/* ===== WHATS NEW ===== */
+.version-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(34,211,238,0.07);border:1px solid rgba(34,211,238,0.22);
+  padding:5px 13px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:2px;
+  color:var(--cyan);margin-bottom:18px;font-family:'DM Mono',monospace;
 }
-.pricing-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:36px 32px;
-  position:relative;
-  transition:all 0.3s;
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.feature-card{
+  background:var(--card);border:1px solid var(--border);border-radius:13px;
+  padding:26px 24px;position:relative;transition:border-color 0.2s,transform 0.2s;
 }
+.feature-card:hover{border-color:rgba(138,92,246,0.4);transform:translateY(-3px)}
+.feature-new{
+  position:absolute;top:16px;right:16px;background:rgba(34,211,238,0.09);
+  border:1px solid rgba(34,211,238,0.2);color:var(--cyan);
+  font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace;
+}
+.feature-icon{width:40px;height:40px;border-radius:9px;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.18);display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:16px}
+.feature-card h3{font-size:16px;font-weight:700;margin-bottom:7px}
+.feature-card p{font-size:13px;color:var(--muted-light);line-height:1.6}
+
+/* ===== CLEANER / FREE TOOLS ===== */
+.cleaner-wrap{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.cleaner-badge{
+  display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,0.08);
+  border:1px solid rgba(52,211,153,0.25);color:#34d399;font-family:'DM Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:6px;margin-bottom:18px;
+}
+.cleaner-wrap h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,36px);line-height:1.15;margin-bottom:16px}
+.cleaner-wrap > div > p{font-size:15px;color:var(--muted-light);line-height:1.7;margin-bottom:22px}
+.cleaner-features{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px}
+.cleaner-features li{font-size:14px;color:#c9c4e8;display:flex;align-items:center;gap:11px}
+.cleaner-features .ic{width:18px;height:18px;color:var(--cyan);flex-shrink:0}
+.cleaner-cta{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#04121a;padding:13px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:opacity 0.2s}
+.cleaner-cta:hover{opacity:0.88}
+
+/* ===== PRICING ===== */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pricing-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:34px 30px;position:relative;transition:border-color 0.25s,transform 0.25s}
 .pricing-card:hover{transform:translateY(-4px);border-color:var(--purple)}
-.pricing-card.featured{
-  border-color:var(--purple);
-  background:linear-gradient(135deg,rgba(138,92,246,0.08),rgba(34,211,238,0.04));
-}
-.featured-tag{
-  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
-  background:var(--purple);color:#fff;
-  padding:4px 16px;border-radius:12px;
-  font-size:11px;font-weight:700;letter-spacing:1px;
-  white-space:nowrap;
-}
+.pricing-card.featured{border-color:var(--purple);background:#11102a}
+.featured-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;padding:4px 16px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap}
 .plan-name{font-size:13px;font-weight:600;letter-spacing:2px;color:var(--muted);margin-bottom:12px;font-family:'DM Mono',monospace}
 .plan-seats{font-size:14px;color:var(--purple-light);margin-bottom:20px}
-.plan-price{font-family:'DM Serif Display',serif;font-size:48px;line-height:1;margin-bottom:4px}
+.plan-price{font-family:'DM Serif Display',serif;font-size:46px;line-height:1;margin-bottom:4px}
 .plan-price span{font-size:18px;font-family:'Syne',sans-serif;color:var(--muted)}
-.plan-period{font-size:13px;color:var(--muted);margin-bottom:32px}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.plan-period{font-size:13px;color:var(--muted);margin-bottom:30px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
 .plan-features li{font-size:14px;display:flex;align-items:center;gap:10px;color:#c4b5fd}
-.plan-features li::before{content:'✦';color:var(--cyan);font-size:10px;flex-shrink:0}
-.plan-btn{
-  display:block;text-align:center;
-  background:rgba(138,92,246,0.15);
-  border:1px solid rgba(138,92,246,0.3);
-  color:var(--purple-light);
-  padding:12px;border-radius:8px;
-  text-decoration:none;font-weight:700;font-size:13px;
-  transition:all 0.2s;
-}
+.plan-features .ic{width:15px;height:15px;color:var(--cyan);flex-shrink:0}
+.plan-btn{display:block;text-align:center;background:rgba(138,92,246,0.12);border:1px solid rgba(138,92,246,0.3);color:var(--purple-light);padding:12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;transition:background 0.2s,color 0.2s}
 .plan-btn:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
 .pricing-card.featured .plan-btn{background:var(--purple);color:#fff;border-color:var(--purple)}
+.pricing-note{text-align:center;margin-top:36px;font-size:14px;color:var(--muted)}
+.pricing-note a{color:var(--purple-light);text-decoration:none;border-bottom:1px solid rgba(176,143,255,0.3);padding-bottom:1px}
+.pricing-note a:hover{border-color:var(--purple-light)}
 
-/* HOW IT WORKS */
-.steps{display:flex;flex-direction:column;gap:0}
-.step{
-  display:grid;grid-template-columns:80px 1fr;
-  gap:32px;align-items:start;
-  padding:40px 0;
-  border-bottom:1px solid var(--border);
-  position:relative;
-}
+/* ===== STEPS ===== */
+.steps{display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:64px 1fr;gap:28px;align-items:start;padding:34px 0;border-bottom:1px solid var(--border-soft)}
 .step:last-child{border-bottom:none}
-.step-num{
-  font-family:'DM Serif Display',serif;
-  font-size:56px;color:rgba(138,92,246,0.2);
-  line-height:1;
-  position:relative;
-}
-.step-num::after{
-  content:'';
-  position:absolute;bottom:-40px;left:50%;
-  width:1px;height:40px;
-  background:var(--border);
-}
-.step:last-child .step-num::after{display:none}
-.step-content h3{font-size:22px;font-weight:700;margin-bottom:10px}
-.step-content p{font-size:15px;color:var(--muted);line-height:1.7}
-.step-tag{
-  display:inline-block;
-  background:rgba(34,211,238,0.1);
-  border:1px solid rgba(34,211,238,0.2);
-  color:var(--cyan);
-  padding:3px 10px;border-radius:4px;
-  font-size:11px;font-family:'DM Mono',monospace;
-  margin-bottom:10px;
-}
+.step-num{font-family:'DM Serif Display',serif;font-size:46px;color:rgba(138,92,246,0.25);line-height:1}
+.step-content h3{font-size:21px;font-weight:700;margin-bottom:9px}
+.step-content p{font-size:15px;color:var(--muted-light);line-height:1.7}
+.step-tag{display:inline-block;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);color:var(--cyan);padding:3px 10px;border-radius:4px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:10px}
 
-/* CTA SECTION */
-.cta-section{
-  text-align:center;
-  padding:100px 48px;
-  background:linear-gradient(135deg,rgba(138,92,246,0.05),rgba(34,211,238,0.03));
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-}
-.cta-section h2{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(36px,5vw,60px);
-  margin-bottom:20px;
-}
-.cta-section p{font-size:17px;color:var(--muted);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+/* ===== CTA ===== */
+.cta-section{text-align:center;padding:100px 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);background:var(--surface)}
+.cta-section h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,4.5vw,52px);margin-bottom:18px}
+.cta-section p{font-size:16px;color:var(--muted-light);margin:0 auto 36px;max-width:460px;line-height:1.7}
 
-/* FAQ */
-.faq{display:flex;flex-direction:column;gap:0}
-.faq-item{
-  border-bottom:1px solid var(--border);
-  padding:28px 0;
-}
-.faq-q{font-size:17px;font-weight:700;margin-bottom:12px;cursor:pointer}
-.faq-a{font-size:15px;color:var(--muted);line-height:1.7}
+/* ===== FAQ ===== */
+.faq{display:flex;flex-direction:column}
+.faq-item{border-bottom:1px solid var(--border-soft);padding:26px 0}
+.faq-q{font-size:17px;font-weight:700;margin-bottom:11px}
+.faq-a{font-size:15px;color:var(--muted-light);line-height:1.7}
 
-/* FOOTER */
-footer{
-  padding:48px;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
-}
-.footer-logo{font-weight:800;font-size:18px}
-.footer-logo span{color:var(--purple)}
+/* ===== FOOTER ===== */
+footer{padding:44px 48px;border-top:1px solid var(--border-soft);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1180px;margin:0 auto}
+footer .logo-mark{width:32px;height:32px}
+footer .logo-text{font-size:18px}
 .footer-links{display:flex;gap:24px}
 .footer-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color 0.2s}
 .footer-links a:hover{color:var(--purple-light)}
 .footer-copy{font-size:12px;color:var(--muted)}
-/* WHATS NEW */
-.whats-new{padding:80px 48px;max-width:1200px;margin:0 auto}
-.version-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(34,211,238,0.08);
-  border:1px solid rgba(34,211,238,0.25);
-  padding:5px 14px;border-radius:20px;
-  font-size:11px;font-weight:700;letter-spacing:2px;
-  color:var(--cyan);margin-bottom:20px;
-  font-family:'DM Mono',monospace;
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:880px){
+  .hero-grid,.showcase,.cleaner-wrap{grid-template-columns:1fr;gap:40px}
+  .showcase.flip .showcase-media{order:0}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .what-grid{grid-template-columns:1fr 1fr}
 }
-.features-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:16px;margin-top:48px;
-}
-.feature-card{
-  background:rgba(15,15,34,0.6);
-  border:1px solid var(--border);
-  border-radius:14px;padding:28px 24px;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  position:relative;overflow:hidden;transition:all 0.3s;
-}
-.feature-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),transparent);
-  opacity:0;transition:opacity 0.3s;
-}
-.feature-card:hover{border-color:rgba(138,92,246,0.4);transform:translateY(-3px);background:rgba(138,92,246,0.07)}
-.feature-card:hover::before{opacity:1}
-.feature-icon{font-size:26px;margin-bottom:14px;display:block}
-.feature-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
-.feature-card p{font-size:13px;color:var(--muted);line-height:1.6}
-.feature-new{
-  position:absolute;top:14px;right:14px;
-  background:rgba(34,211,238,0.1);
-  border:1px solid rgba(34,211,238,0.2);
-  color:var(--cyan);font-size:9px;font-weight:700;
-  letter-spacing:1.5px;padding:2px 8px;border-radius:4px;
-  font-family:'DM Mono',monospace;
-}
-  .free-tools{padding:100px 48px;max-width:1200px;margin:0 auto}
-.cleaner-card{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:48px;align-items:center;
-  background:linear-gradient(135deg,rgba(138,92,246,0.06),rgba(34,211,238,0.04));
-  border:1px solid var(--border);
-  border-radius:20px;padding:56px;
-  position:relative;overflow:hidden;
-}
-.cleaner-card::before{
-  content:'';position:absolute;top:-50%;right:-20%;
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(34,211,238,0.1),transparent 70%);
-  pointer-events:none;
-}
-.cleaner-info{position:relative;z-index:1}
-.cleaner-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(34,211,238,0.12);
-  border:1px solid rgba(34,211,238,0.3);
-  color:var(--cyan);font-family:'DM Mono',monospace;
-  font-size:10px;font-weight:700;letter-spacing:2px;
-  padding:4px 12px;border-radius:20px;margin-bottom:20px;
-}
-.cleaner-info h3{
-  font-family:'DM Serif Display',serif;
-  font-size:36px;line-height:1.1;margin-bottom:16px;
-}
-.cleaner-info p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px}
-.cleaner-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
-.cleaner-features li{font-size:14px;color:#c4b5fd;display:flex;align-items:center;gap:10px}
-.cleaner-features li::before{content:'✦';color:var(--cyan);font-size:10px;flex-shrink:0}
-.cleaner-cta{
-  display:inline-block;background:var(--cyan);color:var(--bg);
-  padding:14px 28px;border-radius:8px;
-  text-decoration:none;font-weight:700;font-size:14px;
-  letter-spacing:0.5px;transition:all 0.2s;
-  box-shadow:0 0 30px rgba(34,211,238,0.2);
-}
-.cleaner-cta:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(34,211,238,0.4)}
-.cleaner-visual{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:280px}
-.cleaner-icon-big{
-  font-size:140px;line-height:1;
-  filter:drop-shadow(0 0 40px rgba(34,211,238,0.4));
-  animation:floatIcon 4s ease-in-out infinite;
-}
-@keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@media(max-width:768px){.free-tools{padding:60px 24px}
-.cleaner-card{grid-template-columns:1fr;padding:32px;gap:24px;text-align:center}
-.cleaner-features li{justify-content:center}
-.cleaner-icon-big{font-size:100px}
-.nav-burger{display:flex}
-.nav-links{
-  display:none;
-  position:absolute;top:100%;left:0;right:0;
-  flex-direction:column;align-items:stretch;
-  background:rgba(5,5,15,0.98);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:16px 24px;gap:4px;
-}
-.nav-links.open{display:flex}
-.nav-links a{padding:12px 8px;font-size:15px}
-.nav-links a::after{display:none}
-.nav-right{gap:12px}.whats-new{padding:60px 24px}
-.features-grid{grid-template-columns:1fr 1fr}
-  nav{padding:16px 24px}
-  section{padding:60px 24px}
-  .what-grid{grid-template-columns:1fr}
-  .pricing-grid{grid-template-columns:1fr}
-  .step{grid-template-columns:50px 1fr;gap:20px}
-  footer{padding:32px 24px;flex-direction:column;text-align:center}
+@media(max-width:680px){
+  nav{padding:14px 22px}
+  .wrap{padding:0 22px}
+  section{padding:72px 0}
+  .hero{padding:130px 0 70px}
+  .what-grid,.features-grid,.pricing-grid{grid-template-columns:1fr}
+  .mk-clgrid{grid-template-columns:1fr}
+  .strip-inner{gap:22px}
+  footer{padding:32px 22px;flex-direction:column;text-align:center}
+  .nav-burger{display:flex}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;
+    background:rgba(5,5,15,0.98);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);padding:14px 22px;gap:2px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 6px;font-size:15px}
+  .nav-right{gap:12px}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Neyko <span>FX</span></div>
+  <a href="#" class="brand" aria-label="Neyko FX — home">
+    <svg class="logo-mark" viewBox="0 0 40 40" width="36" height="36" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lgNav" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#8a5cf6"/>
+          <stop offset="1" stop-color="#22d3ee"/>
+        </linearGradient>
+      </defs>
+      <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgNav)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
+      <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="25" y="26" width="13" height="10" rx="3" fill="#22d3ee"/>
+      <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#04121a">FX</text>
+    </svg>
+    <span class="logo-text">Neyko <span>FX</span></span>
+  </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Individual Plan</a></li>
     <li><a href="#pricing">Studio / White Label</a></li>
@@ -495,243 +403,348 @@ footer{
   </ul>
   <div class="nav-right">
     <a href="mailto:contact@neykofx.com" class="nav-cta">Contact us</a>
-    <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-burger" id="navBurger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="badge-dot"></span>WHITE LABEL PROGRAM</div>
+      <h1>Your studio's AI,<br><em>your brand.</em></h1>
+      <p class="hero-sub">Give your team or clients an AI panel inside After Effects — fully branded with your studio's identity. No code required.</p>
+      <div class="hero-actions">
+        <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX" class="btn-primary">Request a demo</a>
+        <a href="#pricing" class="btn-secondary">See pricing →</a>
+      </div>
+      <div class="hero-meta">
+        <span><i></i>Native Adobe panel</span>
+        <span><i></i>Powered by Claude AI</span>
+        <span><i></i>FR / EN bilingual</span>
+      </div>
+    </div>
 
-  <div class="hero-badge">
-    <span class="badge-dot"></span>
-    WHITE LABEL PROGRAM
+    <!-- AI panel mockup -->
+    <div class="hero-media">
+      <div class="mockup mockup-ai">
+        <div class="mk-titlebar">
+          <div class="mk-dots"><i></i><i></i><i></i></div>
+          <small>Neyko FX — After Effects</small>
+        </div>
+        <div class="mk-aibar">
+          <span class="mk-hex"></span>
+          <span class="mk-brand">Neyko <b>FX</b></span>
+          <span class="mk-online"></span>
+          <span class="mk-tab on">⚡ Actions</span>
+          <span class="mk-tab">Expr</span>
+          <span class="mk-credits">1 / ∞</span>
+          <span class="mk-up">UPGRADE</span>
+        </div>
+        <div class="mk-ai-body">
+          <div class="mk-spark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg>
+          </div>
+          <p class="mk-ai-lead">Describe what you want to create.<br>I can execute actions directly in AE.</p>
+          <div class="mk-chip">Create a text fade-in animation</div>
+          <div class="mk-chip">Add wiggle to layer 1</div>
+          <div class="mk-chip">Create a new 1920×1080 comp</div>
+        </div>
+        <div class="mk-ai-input">
+          <span class="pill">Describe what you want to create…</span>
+          <span class="mk-send">
+            <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
+</header>
 
-  <h1>
-    Your studio's AI,<br>
-    <em>your brand.</em>
-  </h1>
-
-  <p class="hero-sub">
-    Give your team or clients an AI panel inside After Effects — fully branded with your studio's identity. No code required.
-  </p>
-
-  <div class="hero-actions">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScbNwkQRyhIusLxENxd_2jwFFn84fnAT579_bpk_yv4lF9Gkg/viewform" class="btn-primary">Request a demo</a>
-    <a href="#pricing" class="btn-secondary">See pricing →</a>
+<!-- TRUST STRIP -->
+<div class="strip">
+  <div class="wrap strip-inner">
+    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Native AE panel</div>
+    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Powered by Claude AI</div>
+    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>FR / EN bilingual</div>
+    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Per-seat tokens</div>
   </div>
 </div>
-<!-- WHATS NEW -->
-<section class="whats-new">
-  <div class="version-badge">✦ VERSION 3.0</div>
-  <span class="section-tag">// WHAT'S NEW</span>
-  <h2 class="section-title">Built for the next<br>generation of motion.</h2>
-  <p class="section-sub">Six new features that change how you work inside After Effects.</p>
 
-  <div class="features-grid">
-    <div class="feature-card">
-      <span class="feature-new">NEW</span>
-      <span class="feature-icon">✦</span>
-      <h3>3D Text Premium</h3>
-      <p>6 cinematic 3D text styles generated directly in your comp. No plugins required.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-new">NEW</span>
-      <span class="feature-icon">🎞</span>
-      <h3>Textures & Transitions</h3>
-      <p>AI-generated textures and smooth transitions adapted to your project's rhythm.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-new">NEW</span>
-      <span class="feature-icon">🎙</span>
-      <h3>Voice Director</h3>
-      <p>Multi-action voice commands. Describe a scene and the AI builds it layer by layer.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-new">NEW</span>
-      <span class="feature-icon">💬</span>
-      <h3>Auto Subtitles</h3>
-      <p>Automatic subtitle generation from your audio track, synced and styled to match your comp.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-new">NEW</span>
-      <span class="feature-icon">♫</span>
-      <h3>Beat Sync</h3>
-      <p>Detect drops, beats and silences. Auto-sync your animations to the music timeline.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-new">NEW</span>
-      <span class="feature-icon">☁</span>
-      <h3>Cloud Sync</h3>
-      <p>Your presets, templates and settings synced across all machines in your studio.</p>
-    </div>
-  </div>
-</section>
-  <section id="cleaner" class="free-tools">
-  <span class="section-tag">// FREE TOOLS</span>
-  <h2 class="section-title">Neyko FX Cleaner.<br>Free, forever.</h2>
-  <p class="section-sub">A free utility panel to clean and optimize your After Effects projects in one click.</p>
-
-  <div class="cleaner-card">
-    <div class="cleaner-info">
-      <div class="cleaner-badge">✦ 100% FREE</div>
-      <h3>Clean projects.<br>Faster renders.</h3>
-      <p>Remove unused footage, purge missing files, consolidate duplicates and reduce your project size — all in one click, directly inside After Effects.</p>
-      <ul class="cleaner-features">
-        <li>Remove unused footage & comps</li>
-        <li>Detect missing files instantly</li>
-        <li>Consolidate duplicate assets</li>
-        <li>Reduce project file size up to 80%</li>
-        <li>Native AE panel, no plugins</li>
-      </ul>
-      <a href="https://payhip.com/b/ZJwQ7" target="_blank" rel="noopener" class="cleaner-cta">Download free on Payhip →</a>
-    </div>
-    <div class="cleaner-visual">
-      <div class="cleaner-icon-big">🧹</div>
-    </div>
-  </div>
-</section>
-<!-- WHAT IS -->
+<!-- WHAT YOU GET -->
 <section>
-  <span class="section-tag">// WHAT YOU GET</span>
-  <h2 class="section-title">Everything your team<br>needs to move faster.</h2>
-  <p class="section-sub">A fully branded AI panel, integrated natively inside After Effects as a real Adobe panel.</p>
+  <div class="wrap">
+    <span class="eyebrow">// What you get</span>
+    <h2 class="h2">Everything your team<br>needs to move faster.</h2>
+    <p class="lead" style="margin-bottom:52px">A fully branded AI panel, integrated natively inside After Effects as a real Adobe panel.</p>
 
-  <div class="what-grid">
-    <div class="what-item">
-      <div class="what-icon">🎨</div>
-      <h3>Your Brand, Your Colors</h3>
-      <p>We customize the panel with your studio's logo, name and color palette. Your team sees your brand, not ours.</p>
+    <div class="what-grid">
+      <div class="what-item">
+        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="9.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="9.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="1.4" fill="currentColor" stroke="none"/><path d="M12 12a8 8 0 0 0 8 6"/></svg></div>
+        <h3>Your brand, your colors</h3>
+        <p>We customize the panel with your studio's logo, name and color palette. Your team sees your brand, not ours.</p>
+      </div>
+      <div class="what-item">
+        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Native AE integration</h3>
+        <p>Not a browser tab. A real Adobe panel that docks inside After Effects like any native tool — Lumetri, Essential Graphics, etc.</p>
+      </div>
+      <div class="what-item">
+        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3M9 9h6v6H9z"/></svg></div>
+        <h3>AI specialized in motion</h3>
+        <p>Expressions, kinetic typography, precompose, beat markers, error detection, smart templates — all powered by Claude AI.</p>
+      </div>
+      <div class="what-item">
+        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Secure &amp; private</h3>
+        <p>Each user gets a personal token. Usage is tracked per seat. You control who has access.</p>
+      </div>
     </div>
-    <div class="what-item">
-      <div class="what-icon">⚡</div>
-      <h3>Native AE Integration</h3>
-      <p>Not a browser tab. A real Adobe panel that docks inside After Effects like any native tool — Lumetri, Essential Graphics, etc.</p>
+  </div>
+</section>
+
+<!-- SHOWCASE: Expressions -->
+<section style="padding-top:0">
+  <div class="wrap showcase flip">
+    <div class="showcase-media">
+      <div class="mockup">
+        <div class="mk-titlebar"><div class="mk-dots"><i></i><i></i><i></i></div><small>Expressions Library</small></div>
+        <div class="mk-exhead"><span class="fx">fx</span><h4>Expressions</h4></div>
+        <div class="mk-exbody">
+          <div class="mk-group lit">
+            <div class="mk-grouphd"><span class="gi">~</span><b>Mouvement de base</b><small>3 expressions · FREE</small></div>
+            <div class="mk-expr"><span class="nm">Wiggle doux</span><span class="prop">POSITION</span><span class="ap">Appliquer</span></div>
+          </div>
+          <div class="mk-group">
+            <div class="mk-grouphd"><span class="gi">B</span><b>Bounce &amp; Inertie</b><small>4 expressions</small><span class="tier">STARTER</span></div>
+            <div class="mk-expr" style="margin-bottom:8px"><span class="nm">Inertia Bounce</span><span class="prop">POSITION</span><span class="ap">Appliquer</span></div>
+            <div class="mk-expr"><span class="nm">Elastic overshoot</span><span class="prop">SCALE</span><span class="ap">Appliquer</span></div>
+          </div>
+          <div class="mk-collapsed">Texte &amp; Kinetic <span>＋</span></div>
+          <div class="mk-collapsed">Audio Reactif <span>＋</span></div>
+        </div>
+      </div>
     </div>
-    <div class="what-item">
-      <div class="what-icon">🤖</div>
-      <h3>AI Specialized in Motion</h3>
-      <p>Expressions, kinetic typography, precompose, beat markers, error detection, smart templates — all powered by Claude AI.</p>
+    <div class="showcase-text">
+      <span class="eyebrow">// Expressions library</span>
+      <h3>A curated library,<br>one click away.</h3>
+      <p>Ship your team a growing library of motion expressions — wiggle, inertia, elastic overshoot, kinetic text, audio-reactive. Preview the code, then apply it to the selected property instantly.</p>
+      <ul class="showcase-list">
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Organized by category &amp; tier</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>"Voir le code" before you apply</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Add your studio's own custom expressions</li>
+      </ul>
     </div>
-    <div class="what-item">
-      <div class="what-icon">🔒</div>
-      <h3>Secure & Private</h3>
-      <p>Each user gets a personal token. Usage is tracked per seat. You control who has access.</p>
+  </div>
+</section>
+
+<!-- WHATS NEW -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="version-badge">VERSION 3.0</div>
+    <span class="eyebrow">// What's new</span>
+    <h2 class="h2">Built for the next<br>generation of motion.</h2>
+    <p class="lead">Six new features that change how you work inside After Effects.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
+        <h3>3D Text Premium</h3>
+        <p>6 cinematic 3D text styles generated directly in your comp. No plugins required.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5"/></svg></div>
+        <h3>Textures &amp; Transitions</h3>
+        <p>AI-generated textures and smooth transitions adapted to your project's rhythm.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+        <h3>Voice Director</h3>
+        <p>Multi-action voice commands. Describe a scene and the AI builds it layer by layer.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 14h4M14 14h3M7 10h10"/></svg></div>
+        <h3>Auto Subtitles</h3>
+        <p>Automatic subtitle generation from your audio track, synced and styled to your comp.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h3l2-7 4 16 3-11 2 4h4"/></svg></div>
+        <h3>Beat Sync</h3>
+        <p>Detect drops, beats and silences. Auto-sync your animations to the music timeline.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.3-2A4.5 4.5 0 0 0 6 18h11z"/></svg></div>
+        <h3>Cloud Sync</h3>
+        <p>Your presets, templates and settings synced across all machines in your studio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLEANER / FREE TOOLS -->
+<section id="cleaner" style="padding-top:0">
+  <div class="wrap cleaner-wrap">
+    <div>
+      <div class="cleaner-badge">100% FREE</div>
+      <h3>Neyko FX Cleaner.<br>Free, forever.</h3>
+      <p>A free utility panel to clean and organize your After Effects projects in one click — straight inside AE.</p>
+      <ul class="cleaner-features">
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Remove empty layers, guides &amp; markers</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Sort layers by type or color</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Detect missing &amp; unused assets</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Project stats &amp; one-click flatten</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Native AE panel, no plugins</li>
+      </ul>
+      <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener" class="cleaner-cta">Download free on Payhip
+        <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#04121a"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <!-- Cleaner panel mockup -->
+    <div>
+      <div class="mockup">
+        <div class="mk-titlebar"><div class="mk-dots"><i></i><i></i><i></i></div><small>Neyko FX Cleaner</small></div>
+        <div class="mk-clhead">
+          <span class="lg"></span>
+          <div>
+            <div class="nm">Neyko FX Cleaner <span class="free">FREE</span></div>
+            <div class="ver">LOCAL AE TOOLKIT · V1.0</div>
+          </div>
+        </div>
+        <div class="mk-clbody">
+          <div class="mk-clsec">
+            <h5>CLEANUP</h5>
+            <div class="mk-clgrid">
+              <div class="mk-clbtn">Empty layers</div><div class="mk-clbtn">Disable solos</div>
+              <div class="mk-clbtn">Delete guides</div><div class="mk-clbtn">Delete markers</div>
+            </div>
+          </div>
+          <div class="mk-clsec">
+            <h5>ORGANIZATION</h5>
+            <div class="mk-clgrid">
+              <div class="mk-clbtn">Sort by type</div><div class="mk-clbtn">Sort by color</div>
+              <div class="mk-clbtn">Rename sequence</div><div class="mk-clbtn">Duplicate comp</div>
+            </div>
+          </div>
+          <div class="mk-clsec" style="margin-bottom:0">
+            <h5>DIAGNOSTIC</h5>
+            <div class="mk-clgrid">
+              <div class="mk-clbtn">Missing assets</div><div class="mk-clbtn">Project stats</div>
+            </div>
+          </div>
+        </div>
+        <div class="mk-clfoot">Upgrade to Neyko FX Pro →</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
 <section id="pricing">
-  <span class="section-tag">// PRICING</span>
-  <h2 class="section-title">Simple, transparent<br>studio pricing.</h2>
-  <p class="section-sub">All plans include full white labeling, onboarding and support.</p>
+  <div class="wrap">
+    <span class="eyebrow">// Pricing</span>
+    <h2 class="h2">Simple, transparent<br>studio pricing.</h2>
+    <p class="lead" style="margin-bottom:52px">All plans include full white labeling, onboarding and support.</p>
 
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <div class="plan-name">STARTER</div>
-      <div class="plan-seats">1 – 5 seats</div>
-      <div class="plan-price">99<span>€</span></div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
-        <li>Up to 5 users</li>
-        <li>Custom logo & name</li>
-        <li>200 messages/day/user</li>
-        <li>FR / EN bilingual</li>
-        <li>Email support</li>
-      </ul>
-      <a href="mailto:dartiguesthibaut0@gmail.com?subject=White Label Starter" class="plan-btn">Get started</a>
-      <p style="text-align:center;margin-top:24px;color:#6b7280;font-size:14px">
-Just you? Check out the 
-<a href="https://payhip.com/b/kvIW3" style="color:#8a5cf6">individual plan on Payhip →</a>
-</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">STARTER</div>
+        <div class="plan-seats">1 – 5 seats</div>
+        <div class="plan-price">99<span>€</span></div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Up to 5 users</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Custom logo &amp; name</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>200 messages/day/user</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Email support</li>
+        </ul>
+        <a href="mailto:contact@neykofx.com?subject=White Label Starter" class="plan-btn">Get started</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="featured-tag">MOST POPULAR</div>
+        <div class="plan-name">STUDIO</div>
+        <div class="plan-seats">6 – 15 seats</div>
+        <div class="plan-price">199<span>€</span></div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Up to 15 users</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full custom branding</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>500 messages/day/user</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Priority support</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Custom onboarding</li>
+        </ul>
+        <a href="mailto:contact@neykofx.com?subject=White Label Studio" class="plan-btn">Get started</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="plan-name">AGENCY</div>
+        <div class="plan-seats">16 – 50 seats</div>
+        <div class="plan-price">499<span>€</span></div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Up to 50 users</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full custom branding</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Unlimited messages</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Dedicated support</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Custom features on request</li>
+        </ul>
+        <a href="mailto:contact@neykofx.com?subject=White Label Agency" class="plan-btn">Get started</a>
+      </div>
     </div>
 
-    <div class="pricing-card featured">
-      <div class="featured-tag">MOST POPULAR</div>
-      <div class="plan-name">STUDIO</div>
-      <div class="plan-seats">6 – 15 seats</div>
-      <div class="plan-price">199<span>€</span></div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
-        <li>Up to 15 users</li>
-        <li>Full custom branding</li>
-        <li>500 messages/day/user</li>
-        <li>FR / EN bilingual</li>
-        <li>Priority support</li>
-        <li>Custom onboarding</li>
-      </ul>
-      <a href="mailto:dartiguesthibaut0@gmail.com?subject=White Label Studio" class="plan-btn">Get started</a>
-      <p style="text-align:center;margin-top:24px;color:#6b7280;font-size:14px">
-Just you? Check out the 
-<a href="https://payhip.com/b/kvIW3" style="color:#8a5cf6">individual plan on Payhip →</a>
-</p>
-    </div>
-
-    <div class="pricing-card">
-      <div class="plan-name">AGENCY</div>
-      <div class="plan-seats">16 – 50 seats</div>
-      <div class="plan-price">499<span>€</span></div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
-        <li>Up to 50 users</li>
-        <li>Full custom branding</li>
-        <li>Unlimited messages</li>
-        <li>FR / EN bilingual</li>
-        <li>Dedicated support</li>
-        <li>Custom features on request</li>
-      </ul>
-      <a href="mailto:dartiguesthibaut0@gmail.com?subject=White Label Agency" class="plan-btn">Get started</a>
-      <p style="text-align:center;margin-top:24px;color:#6b7280;font-size:14px">
-Just you? Check out the 
-<a href="https://payhip.com/b/kvIW3" style="color:#8a5cf6">individual plan on Payhip →</a>
-</p>
-    </div>
+    <p class="pricing-note">Just you? Check out the <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">individual plan on Payhip →</a></p>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section>
-  <span class="section-tag">// HOW IT WORKS</span>
-  <h2 class="section-title">Up and running<br>in 48 hours.</h2>
-  <p class="section-sub">We handle the technical setup. You focus on your team.</p>
+<section style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">// How it works</span>
+    <h2 class="h2">Up and running<br>in 48 hours.</h2>
+    <p class="lead" style="margin-bottom:30px">We handle the technical setup. You focus on your team.</p>
 
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <div class="step-tag">CONTACT</div>
-        <h3>Send us your brief</h3>
-        <p>Tell us your studio name, number of users, and send us your logo. We handle the rest. No technical knowledge required on your side.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-tag">CONTACT</div>
+          <h3>Send us your brief</h3>
+          <p>Tell us your studio name, number of users, and send us your logo. We handle the rest. No technical knowledge required on your side.</p>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <div class="step-tag">SETUP</div>
-        <h3>We customize your panel</h3>
-        <p>We brand the panel with your identity — logo, name, colors. We generate unique access tokens for each member of your team.</p>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-tag">SETUP</div>
+          <h3>We customize your panel</h3>
+          <p>We brand the panel with your identity — logo, name, colors. We generate unique access tokens for each member of your team.</p>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <div class="step-tag">DELIVER</div>
-        <h3>Your team installs in 5 minutes</h3>
-        <p>We send each user a personalized email with their token and a step-by-step installation guide. They're up and running in minutes.</p>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-tag">DELIVER</div>
+          <h3>Your team installs in 5 minutes</h3>
+          <p>We send each user a personalized email with their token and a step-by-step installation guide. They're up and running in minutes.</p>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <div class="step-tag">ONGOING</div>
-        <h3>We handle updates & support</h3>
-        <p>New features, bug fixes, support requests — we manage everything so you can focus on creating.</p>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-tag">ONGOING</div>
+          <h3>We handle updates &amp; support</h3>
+          <p>New features, bug fixes, support requests — we manage everything so you can focus on creating.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -739,51 +752,70 @@ Just you? Check out the
 
 <!-- CTA -->
 <div class="cta-section">
-  <h2>Ready to equip<br>your studio?</h2>
-  <p>Join the studios that are already using AI to create faster and better motion design.</p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScbNwkQRyhIusLxENxd_2jwFFn84fnAT579_bpk_yv4lF9Gkg/viewform — Demo Request" class="btn-primary">Request a free demo</a>
+  <div class="wrap">
+    <h2>Ready to equip<br>your studio?</h2>
+    <p>Join the studios that are already using AI to create faster and better motion design.</p>
+    <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX — Demo Request" class="btn-primary">Request a free demo</a>
+  </div>
 </div>
 
 <!-- FAQ -->
 <section>
-  <span class="section-tag">// FAQ</span>
-  <h2 class="section-title">Questions</h2>
-  <div class="faq">
-    <div class="faq-item">
-      <div class="faq-q">Is the panel compatible with all versions of After Effects?</div>
-      <div class="faq-a">Neyko FX is compatible with After Effects CC 2021 and later (version 18+), on both Windows and macOS.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Does the panel require an internet connection?</div>
-      <div class="faq-a">Yes, an internet connection is required to communicate with the AI. The panel itself is installed locally inside After Effects.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can we add or remove users at any time?</div>
-      <div class="faq-a">Yes. You can add seats or remove users at any time. Changes take effect immediately and billing is adjusted accordingly.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What languages does the AI speak?</div>
-      <div class="faq-a">The panel is fully bilingual — French and English. Users can switch between languages with a single click.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Is there a minimum commitment?</div>
-      <div class="faq-a">No long-term commitment. Plans are monthly and can be cancelled at any time. We offer a free demo before any purchase.</div>
+  <div class="wrap">
+    <span class="eyebrow">// FAQ</span>
+    <h2 class="h2" style="margin-bottom:40px">Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">Is the panel compatible with all versions of After Effects?</div>
+        <div class="faq-a">Neyko FX is compatible with After Effects CC 2021 and later (version 18+), on both Windows and macOS.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does the panel require an internet connection?</div>
+        <div class="faq-a">Yes, an internet connection is required to communicate with the AI. The panel itself is installed locally inside After Effects.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can we add or remove users at any time?</div>
+        <div class="faq-a">Yes. You can add seats or remove users at any time. Changes take effect immediately and billing is adjusted accordingly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What languages does the AI speak?</div>
+        <div class="faq-a">The panel is fully bilingual — French and English. Users can switch between languages with a single click.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a minimum commitment?</div>
+        <div class="faq-a">No long-term commitment. Plans are monthly and can be cancelled at any time. We offer a free demo before any purchase.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Neyko <span>FX</span></div>
+  <div class="brand">
+    <svg class="logo-mark" viewBox="0 0 40 40" width="32" height="32" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lgFoot" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#8a5cf6"/>
+          <stop offset="1" stop-color="#22d3ee"/>
+        </linearGradient>
+      </defs>
+      <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgFoot)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
+      <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="25" y="26" width="13" height="10" rx="3" fill="#22d3ee"/>
+      <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#04121a">FX</text>
+    </svg>
+    <span class="logo-text">Neyko <span>FX</span></span>
+  </div>
   <div class="footer-links">
-    <a href="https://payhip.com/b/kvIW3">Individual plan</a>
-    <a href="mailto:dartiguesthibaut0@gmail.com">Contact</a>
+    <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Individual plan</a>
+    <a href="#cleaner">Cleaner (Free)</a>
+    <a href="mailto:contact@neykofx.com">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Neyko FX. All rights reserved.</div>
 </footer>
 
 <script>
-  const burger = document.getElementById('navBurger');
+const burger = document.getElementById('navBurger');
 const navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => {
   burger.classList.toggle('open');
@@ -793,22 +825,6 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   burger.classList.remove('open');
   navLinks.classList.remove('open');
 }));
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.transform = `translate(${mx-4}px,${my-4}px)`;
-});
-
-function animRing(){
-  rx += (mx-rx-16)*0.12;
-  ry += (my-ry-16)*0.12;
-  ring.style.transform = `translate(${rx}px,${ry}px)`;
-  requestAnimationFrame(animRing);
-}
-animRing();
 </script>
 </body>
 </html>
