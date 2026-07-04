@@ -27,25 +27,38 @@
 }
 
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--white);
-  font-family:'Syne',sans-serif;
-  overflow-x:hidden;
-  line-height:1.5;
-}
+body{background:var(--bg);color:var(--white);font-family:'Syne',sans-serif;overflow-x:hidden;line-height:1.5}
 
 a{color:inherit}
 svg{display:block}
 .ic{width:22px;height:22px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== I18N ===== */
+.lang-fr{display:none}
+html.fr .lang-en{display:none}
+html.fr .lang-fr{display:revert}
+
+/* ===== LANG TOGGLE ===== */
+.lang-toggle{
+  display:flex;align-items:center;gap:0;
+  background:rgba(138,92,246,0.08);
+  border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+}
+.lang-toggle .tl{
+  padding:7px 11px;color:var(--muted);transition:background 0.2s,color 0.2s;
+  background:none;border:none;cursor:pointer;font:inherit;letter-spacing:inherit;
+}
+.lang-toggle .tl.active{background:var(--purple);color:#fff}
+.lang-toggle .tl-sep{color:var(--border);font-size:13px;pointer-events:none;padding:0 1px}
 
 /* ===== NAV ===== */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:16px 48px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(5,5,15,0.82);
-  backdrop-filter:blur(16px);
+  background:rgba(5,5,15,0.82);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border-soft);
 }
 .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
@@ -54,14 +67,10 @@ nav{
 @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.5px;color:var(--white)}
 .logo-text span{color:var(--purple)}
-.nav-links{
-  display:flex;align-items:center;gap:30px;
-  list-style:none;
-}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
 .nav-links a{
   color:var(--muted-light);text-decoration:none;
-  font-size:13px;font-weight:600;letter-spacing:0.2px;
-  transition:color 0.2s;display:inline-flex;align-items:center;
+  font-size:13px;font-weight:600;letter-spacing:0.2px;transition:color 0.2s;
 }
 .nav-links a:hover{color:var(--white)}
 .free-tag{
@@ -70,12 +79,10 @@ nav{
   font-family:'DM Mono',monospace;font-size:9px;font-weight:700;
   letter-spacing:1px;padding:2px 6px;border-radius:4px;margin-left:7px;
 }
-.nav-right{display:flex;align-items:center;gap:18px}
+.nav-right{display:flex;align-items:center;gap:14px}
 .nav-cta{
-  background:var(--purple);color:#fff;
-  padding:9px 20px;border-radius:7px;text-decoration:none;
-  font-size:13px;font-weight:700;letter-spacing:0.3px;
-  transition:background 0.2s;
+  background:var(--purple);color:#fff;padding:9px 20px;border-radius:7px;
+  text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.3px;transition:background 0.2s;
 }
 .nav-cta:hover{background:#7a4ce6}
 .nav-burger{
@@ -90,37 +97,21 @@ nav{
 /* ===== LAYOUT ===== */
 .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
 section{padding:110px 0}
-.eyebrow{
-  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;
-  color:var(--cyan);margin-bottom:18px;display:block;text-transform:uppercase;
-}
-.h2{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(30px,4vw,46px);line-height:1.12;margin-bottom:16px;
-}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan);margin-bottom:18px;display:block;text-transform:uppercase}
+.h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,4vw,46px);line-height:1.12;margin-bottom:16px}
 .lead{font-size:16px;color:var(--muted-light);max-width:520px;line-height:1.7}
 
 /* ===== HERO ===== */
-.hero{
-  position:relative;
-  padding:160px 0 90px;
-  border-bottom:1px solid var(--border-soft);
-  overflow:hidden;
-}
+.hero{position:relative;padding:160px 0 90px;border-bottom:1px solid var(--border-soft);overflow:hidden}
 .hero::before{
   content:'';position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(138,92,246,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(138,92,246,0.05) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(138,92,246,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(138,92,246,0.05) 1px,transparent 1px);
   background-size:46px 46px;
   -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
   mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
   pointer-events:none;
 }
-.hero-grid{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
-}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(138,92,246,0.08);border:1px solid rgba(138,92,246,0.25);
@@ -129,78 +120,40 @@ section{padding:110px 0}
   color:var(--purple-light);margin-bottom:26px;font-family:'DM Mono',monospace;
 }
 .badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%}
-.hero h1{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(38px,5vw,62px);line-height:1.06;
-  letter-spacing:-1px;margin-bottom:22px;
-}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(38px,5vw,62px);line-height:1.06;letter-spacing:-1px;margin-bottom:22px}
 .hero h1 em{font-style:italic;color:var(--purple-light)}
 .hero-sub{font-size:17px;color:var(--muted-light);max-width:480px;line-height:1.7;margin-bottom:34px}
 .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.btn-primary{
-  background:var(--purple);color:#fff;padding:13px 28px;border-radius:8px;
-  text-decoration:none;font-weight:700;font-size:14px;letter-spacing:0.3px;
-  transition:background 0.2s;
-}
+.btn-primary{background:var(--purple);color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:0.3px;transition:background 0.2s}
 .btn-primary:hover{background:#7a4ce6}
-.btn-secondary{
-  color:var(--white);padding:13px 26px;text-decoration:none;font-weight:600;
-  font-size:14px;border:1px solid var(--border);border-radius:8px;transition:border-color 0.2s,color 0.2s;
-}
+.btn-secondary{color:var(--white);padding:13px 26px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--border);border-radius:8px;transition:border-color 0.2s,color 0.2s}
 .btn-secondary:hover{border-color:var(--purple);color:var(--purple-light)}
-.hero-meta{
-  display:flex;gap:22px;margin-top:34px;flex-wrap:wrap;
-  font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;
-}
+.hero-meta{display:flex;gap:22px;margin-top:34px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
 .hero-meta span{display:inline-flex;align-items:center;gap:7px}
 .hero-meta i{width:5px;height:5px;background:var(--purple);border-radius:50%;display:inline-block}
 
 /* ===== PRODUCT MOCKUPS ===== */
-.mockup{
-  background:#0a0a18;border:1px solid var(--border);border-radius:12px;
-  overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,0.7);
-}
-.mk-titlebar{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 14px;background:#111122;border-bottom:1px solid var(--border-soft);
-}
+.mockup{background:#0a0a18;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,0.7)}
+.mk-titlebar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#111122;border-bottom:1px solid var(--border-soft)}
 .mk-dots{display:flex;gap:6px}
 .mk-dots i{width:10px;height:10px;border-radius:50%;background:#2a2a3d;display:block}
 .mk-titlebar small{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
-
-/* AI panel */
-.mk-aibar{
-  display:flex;align-items:center;gap:10px;
-  padding:12px 14px;border-bottom:1px solid var(--border-soft);
-}
-.mk-hex{width:18px;height:18px;background:linear-gradient(135deg,var(--purple),var(--cyan));border-radius:5px;flex-shrink:0}
+.mk-aibar{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border-soft)}
+.mk-hex{width:18px;height:18px;background:linear-gradient(135deg,var(--purple),#5b32cc);border-radius:5px;flex-shrink:0}
 .mk-brand{font-weight:800;font-size:14px}
 .mk-brand b{color:var(--purple);font-weight:800}
 .mk-online{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399}
-.mk-tab{
-  font-size:11px;font-weight:700;padding:4px 9px;border-radius:5px;
-  border:1px solid var(--border-soft);color:var(--muted-light);
-}
+.mk-tab{font-size:11px;font-weight:700;padding:4px 9px;border-radius:5px;border:1px solid var(--border-soft);color:var(--muted-light)}
 .mk-tab.on{color:var(--white);border-color:rgba(138,92,246,0.4);background:rgba(138,92,246,0.12)}
 .mk-credits{margin-left:auto;font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);border:1px solid var(--border-soft);padding:3px 8px;border-radius:11px}
 .mk-up{font-size:10px;font-weight:800;letter-spacing:0.5px;color:#fff;background:var(--purple);padding:4px 9px;border-radius:5px}
 .mk-ai-body{padding:34px 22px;text-align:center}
 .mk-spark{width:30px;height:30px;margin:0 auto 14px;color:var(--purple-light)}
 .mk-ai-lead{font-size:13px;color:var(--muted-light);line-height:1.6;margin-bottom:18px}
-.mk-chip{
-  background:#101024;border:1px solid var(--border-soft);border-radius:8px;
-  padding:11px 14px;font-size:12px;color:#c9c4e8;text-align:left;margin-bottom:8px;
-  transition:border-color 0.2s;
-}
-.mk-chip:hover{border-color:rgba(138,92,246,0.4)}
-.mk-ai-input{
-  display:flex;align-items:center;gap:10px;padding:12px 14px;
-  border-top:1px solid var(--border-soft);
-}
+.mk-chip{background:#101024;border:1px solid var(--border-soft);border-radius:8px;padding:11px 14px;font-size:12px;color:#c9c4e8;text-align:left;margin-bottom:8px}
+.mk-ai-input{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--border-soft)}
 .mk-ai-input .pill{flex:1;background:#101024;border:1px solid var(--border-soft);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted)}
 .mk-send{width:34px;height:34px;border-radius:8px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
-
-/* Expressions panel */
 .mk-exhead{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border-soft)}
 .mk-exhead .fx{width:24px;height:24px;border-radius:6px;background:rgba(138,92,246,0.15);color:var(--purple-light);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:700}
 .mk-exhead h4{font-size:15px;font-weight:700}
@@ -217,8 +170,6 @@ section{padding:110px 0}
 .mk-expr .prop{margin-left:auto;font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)}
 .mk-expr .ap{font-size:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--purple),#6d4ad8);padding:5px 11px;border-radius:6px}
 .mk-collapsed{display:flex;align-items:center;justify-content:space-between;background:#0c0c1c;border:1px solid var(--border-soft);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--muted-light)}
-
-/* Cleaner panel */
 .mk-clhead{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border-soft)}
 .mk-clhead .lg{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,var(--purple));flex-shrink:0}
 .mk-clhead .nm{font-weight:800;font-size:15px}
@@ -226,7 +177,7 @@ section{padding:110px 0}
 .mk-clhead .free{font-size:9px;font-weight:800;color:#34d399;border:1px solid rgba(52,211,153,0.3);padding:2px 7px;border-radius:4px;margin-left:6px}
 .mk-clbody{padding:14px 16px}
 .mk-clsec{margin-bottom:16px}
-.mk-clsec h5{font-size:10px;letter-spacing:2px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.mk-clsec h5{font-size:10px;letter-spacing:2px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:9px}
 .mk-clgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .mk-clbtn{background:#0c0c1c;border:1px solid var(--border-soft);border-radius:8px;padding:11px 13px;font-size:12px;font-weight:600;color:#d6d2ec;transition:border-color 0.2s,background 0.2s}
 .mk-clbtn:hover{border-color:rgba(138,92,246,0.4);background:rgba(138,92,246,0.06)}
@@ -241,20 +192,13 @@ section{padding:110px 0}
 
 /* ===== WHAT YOU GET ===== */
 .what-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.what-item{
-  background:var(--card);border:1px solid var(--border);border-radius:14px;
-  padding:32px;transition:border-color 0.2s,transform 0.2s;
-}
+.what-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px;transition:border-color 0.2s,transform 0.2s}
 .what-item:hover{border-color:rgba(138,92,246,0.35);transform:translateY(-3px)}
-.what-icon{
-  width:44px;height:44px;border-radius:10px;
-  background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.2);
-  display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:20px;
-}
+.what-icon{width:44px;height:44px;border-radius:10px;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.2);display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:20px}
 .what-item h3{font-size:18px;font-weight:700;margin-bottom:10px}
 .what-item p{font-size:14px;color:var(--muted-light);line-height:1.7}
 
-/* ===== SHOWCASE (alternating) ===== */
+/* ===== SHOWCASE ===== */
 .showcase{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .showcase.flip .showcase-media{order:2}
 .showcase-text h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,36px);line-height:1.15;margin-bottom:16px}
@@ -264,36 +208,20 @@ section{padding:110px 0}
 .showcase-list .ic{width:18px;height:18px;color:var(--cyan);flex-shrink:0;margin-top:1px}
 
 /* ===== WHATS NEW ===== */
-.version-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(34,211,238,0.07);border:1px solid rgba(34,211,238,0.22);
-  padding:5px 13px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:2px;
-  color:var(--cyan);margin-bottom:18px;font-family:'DM Mono',monospace;
-}
+.version-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(34,211,238,0.07);border:1px solid rgba(34,211,238,0.22);padding:5px 13px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--cyan);margin-bottom:18px;font-family:'DM Mono',monospace}
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
-.feature-card{
-  background:var(--card);border:1px solid var(--border);border-radius:13px;
-  padding:26px 24px;position:relative;transition:border-color 0.2s,transform 0.2s;
-}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:26px 24px;position:relative;transition:border-color 0.2s,transform 0.2s}
 .feature-card:hover{border-color:rgba(138,92,246,0.4);transform:translateY(-3px)}
-.feature-new{
-  position:absolute;top:16px;right:16px;background:rgba(34,211,238,0.09);
-  border:1px solid rgba(34,211,238,0.2);color:var(--cyan);
-  font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace;
-}
+.feature-new{position:absolute;top:16px;right:16px;background:rgba(34,211,238,0.09);border:1px solid rgba(34,211,238,0.2);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace}
 .feature-icon{width:40px;height:40px;border-radius:9px;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.18);display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:16px}
 .feature-card h3{font-size:16px;font-weight:700;margin-bottom:7px}
 .feature-card p{font-size:13px;color:var(--muted-light);line-height:1.6}
 
-/* ===== CLEANER / FREE TOOLS ===== */
+/* ===== CLEANER ===== */
 .cleaner-wrap{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
-.cleaner-badge{
-  display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,0.08);
-  border:1px solid rgba(52,211,153,0.25);color:#34d399;font-family:'DM Mono',monospace;
-  font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:6px;margin-bottom:18px;
-}
+.cleaner-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.25);color:#34d399;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:6px;margin-bottom:18px}
 .cleaner-wrap h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,36px);line-height:1.15;margin-bottom:16px}
-.cleaner-wrap > div > p{font-size:15px;color:var(--muted-light);line-height:1.7;margin-bottom:22px}
+.cleaner-wrap>div>p{font-size:15px;color:var(--muted-light);line-height:1.7;margin-bottom:22px}
 .cleaner-features{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px}
 .cleaner-features li{font-size:14px;color:#c9c4e8;display:flex;align-items:center;gap:11px}
 .cleaner-features .ic{width:18px;height:18px;color:var(--cyan);flex-shrink:0}
@@ -375,7 +303,8 @@ footer .logo-text{font-size:18px}
   }
   .nav-links.open{display:flex}
   .nav-links a{padding:13px 6px;font-size:15px}
-  .nav-right{gap:12px}
+  .nav-right{gap:10px}
+  .lang-toggle .tl{padding:6px 9px}
 }
 </style>
 </head>
@@ -387,24 +316,41 @@ footer .logo-text{font-size:18px}
     <svg class="logo-mark" viewBox="0 0 40 40" width="36" height="36" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="lgNav" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#8a5cf6"/>
-        <stop offset="1" stop-color="#5b32cc"/>
+          <stop offset="0" stop-color="#8a5cf6"/>
+          <stop offset="1" stop-color="#5b32cc"/>
         </linearGradient>
       </defs>
       <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgNav)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
       <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="25" y="26" width="13" height="10" rx="3" fill="#22d3ee"/>
+      <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
       <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
     </svg>
     <span class="logo-text">Neyko <span>FX</span></span>
   </a>
+
   <ul class="nav-links" id="navLinks">
-    <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Individual Plan</a></li>
+    <li>
+      <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">
+        <span class="lang-en">Individual Plan</span>
+        <span class="lang-fr">Plan individuel</span>
+      </a>
+    </li>
     <li><a href="#pricing">Studio / White Label</a></li>
-    <li><a href="#cleaner">Cleaner <span class="free-tag">FREE</span></a></li>
+    <li>
+      <a href="#cleaner">Cleaner <span class="free-tag">FREE</span></a>
+    </li>
   </ul>
+
   <div class="nav-right">
-    <a href="mailto:contact@neykofx.com" class="nav-cta">Contact us</a>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="tl active" id="btnEN" onclick="setLang('en')">EN</button>
+      <span class="tl-sep">|</span>
+      <button class="tl" id="btnFR" onclick="setLang('fr')">FR</button>
+    </div>
+    <a href="mailto:contact@neykofx.com" class="nav-cta">
+      <span class="lang-en">Contact us</span>
+      <span class="lang-fr">Nous contacter</span>
+    </a>
     <button class="nav-burger" id="navBurger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -413,21 +359,35 @@ footer .logo-text{font-size:18px}
 <header class="hero">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <div class="hero-badge"><span class="badge-dot"></span>WHITE LABEL PROGRAM</div>
-      <h1>Your studio's AI,<br><em>your brand.</em></h1>
-      <p class="hero-sub">Give your team or clients an AI panel inside After Effects — fully branded with your studio's identity. No code required.</p>
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="lang-en">WHITE LABEL PROGRAM</span>
+        <span class="lang-fr">PROGRAMME WHITE LABEL</span>
+      </div>
+      <h1>
+        <span class="lang-en">Your studio's AI,<br><em>your brand.</em></span>
+        <span class="lang-fr">L'IA de votre studio,<br><em>à votre image.</em></span>
+      </h1>
+      <p class="hero-sub lang-en">Give your team or clients an AI panel inside After Effects — fully branded with your studio's identity. No code required.</p>
+      <p class="hero-sub lang-fr">Donnez à votre équipe un panneau IA dans After Effects — entièrement aux couleurs de votre studio. Aucune compétence technique requise.</p>
       <div class="hero-actions">
-        <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX" class="btn-primary">Request a demo</a>
-        <a href="#pricing" class="btn-secondary">See pricing →</a>
+        <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX" class="btn-primary">
+          <span class="lang-en">Request a demo</span>
+          <span class="lang-fr">Demander une démo</span>
+        </a>
+        <a href="#pricing" class="btn-secondary">
+          <span class="lang-en">See pricing →</span>
+          <span class="lang-fr">Voir les tarifs →</span>
+        </a>
       </div>
       <div class="hero-meta">
-        <span><i></i>Native Adobe panel</span>
-        <span><i></i>Powered by Claude AI</span>
-        <span><i></i>FR / EN bilingual</span>
+        <span><i></i><span class="lang-en">Native Adobe panel</span><span class="lang-fr">Panneau Adobe natif</span></span>
+        <span><i></i><span class="lang-en">Powered by Claude AI</span><span class="lang-fr">Propulsé par Claude AI</span></span>
+        <span><i></i><span class="lang-en">FR / EN bilingual</span><span class="lang-fr">Bilingue FR / EN</span></span>
       </div>
     </div>
 
-    <!-- AI panel mockup -->
+    <!-- AI panel mockup — content follows site language -->
     <div class="hero-media">
       <div class="mockup mockup-ai">
         <div class="mk-titlebar">
@@ -447,13 +407,18 @@ footer .logo-text{font-size:18px}
           <div class="mk-spark">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg>
           </div>
-          <p class="mk-ai-lead">Describe what you want to create.<br>I can execute actions directly in AE.</p>
-          <div class="mk-chip">Create a text fade-in animation</div>
-          <div class="mk-chip">Add wiggle to layer 1</div>
-          <div class="mk-chip">Create a new 1920×1080 comp</div>
+          <p class="mk-ai-lead lang-en">Describe what you want to create.<br>I can execute actions directly in AE.</p>
+          <p class="mk-ai-lead lang-fr">Décrivez ce que vous voulez créer.<br>J'exécute les actions directement dans AE.</p>
+          <div class="mk-chip lang-en">Create a text fade-in animation</div>
+          <div class="mk-chip lang-fr">Créer une animation de fondu sur ce texte</div>
+          <div class="mk-chip lang-en">Add wiggle to layer 1</div>
+          <div class="mk-chip lang-fr">Ajouter un wiggle au calque 1</div>
+          <div class="mk-chip lang-en">Create a new 1920×1080 comp</div>
+          <div class="mk-chip lang-fr">Créer une nouvelle comp 1920×1080</div>
         </div>
         <div class="mk-ai-input">
-          <span class="pill">Describe what you want to create…</span>
+          <span class="pill lang-en">Describe what you want to create…</span>
+          <span class="pill lang-fr">Décrivez ce que vous voulez créer…</span>
           <span class="mk-send">
             <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </span>
@@ -466,40 +431,61 @@ footer .logo-text{font-size:18px}
 <!-- TRUST STRIP -->
 <div class="strip">
   <div class="wrap strip-inner">
-    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Native AE panel</div>
-    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Powered by Claude AI</div>
-    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>FR / EN bilingual</div>
-    <div class="strip-item"><svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Per-seat tokens</div>
+    <div class="strip-item">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <span class="lang-en">Native AE panel</span><span class="lang-fr">Panneau AE natif</span>
+    </div>
+    <div class="strip-item">
+      <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+      <span class="lang-en">Powered by Claude AI</span><span class="lang-fr">Propulsé par Claude AI</span>
+    </div>
+    <div class="strip-item">
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+      <span class="lang-en">FR / EN bilingual</span><span class="lang-fr">Bilingue FR / EN</span>
+    </div>
+    <div class="strip-item">
+      <svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      <span class="lang-en">Per-seat tokens</span><span class="lang-fr">Tokens par poste</span>
+    </div>
   </div>
 </div>
 
 <!-- WHAT YOU GET -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">// What you get</span>
-    <h2 class="h2">Everything your team<br>needs to move faster.</h2>
-    <p class="lead" style="margin-bottom:52px">A fully branded AI panel, integrated natively inside After Effects as a real Adobe panel.</p>
+    <span class="eyebrow lang-en">// What you get</span>
+    <span class="eyebrow lang-fr">// Ce que vous obtenez</span>
+    <h2 class="h2">
+      <span class="lang-en">Everything your team<br>needs to move faster.</span>
+      <span class="lang-fr">Tout ce qu'il faut à votre équipe<br>pour aller plus vite.</span>
+    </h2>
+    <p class="lead lang-en" style="margin-bottom:52px">A fully branded AI panel, integrated natively inside After Effects as a real Adobe panel.</p>
+    <p class="lead lang-fr" style="margin-bottom:52px">Un panneau IA aux couleurs de votre studio, intégré nativement dans After Effects comme un vrai panneau Adobe.</p>
 
     <div class="what-grid">
       <div class="what-item">
         <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="9.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="9.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="1.4" fill="currentColor" stroke="none"/><path d="M12 12a8 8 0 0 0 8 6"/></svg></div>
-        <h3>Your brand, your colors</h3>
-        <p>We customize the panel with your studio's logo, name and color palette. Your team sees your brand, not ours.</p>
+        <h3><span class="lang-en">Your brand, your colors</span><span class="lang-fr">Votre marque, vos couleurs</span></h3>
+        <p class="lang-en">We customize the panel with your studio's logo, name and color palette. Your team sees your brand, not ours.</p>
+        <p class="lang-fr">Nous personnalisons le panneau avec le logo, le nom et la palette de couleurs de votre studio. Votre équipe voit votre marque, pas la nôtre.</p>
       </div>
       <div class="what-item">
         <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <h3>Native AE integration</h3>
-        <p>Not a browser tab. A real Adobe panel that docks inside After Effects like any native tool — Lumetri, Essential Graphics, etc.</p>
+        <h3><span class="lang-en">Native AE integration</span><span class="lang-fr">Intégration AE native</span></h3>
+        <p class="lang-en">Not a browser tab. A real Adobe panel that docks inside After Effects like any native tool — Lumetri, Essential Graphics, etc.</p>
+        <p class="lang-fr">Pas un onglet de navigateur. Un vrai panneau Adobe qui s'ancre dans After Effects comme n'importe quel outil natif — Lumetri, Essential Graphics, etc.</p>
       </div>
       <div class="what-item">
         <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3M9 9h6v6H9z"/></svg></div>
-        <h3>AI specialized in motion</h3>
-        <p>Expressions, kinetic typography, precompose, beat markers, error detection, smart templates — all powered by Claude AI.</p>
+        <h3><span class="lang-en">AI specialized in motion</span><span class="lang-fr">IA spécialisée en motion</span></h3>
+        <p class="lang-en">Expressions, kinetic typography, precompose, beat markers, error detection, smart templates — all powered by Claude AI.</p>
+        <p class="lang-fr">Expressions, typographie cinétique, précomposition, marqueurs de beat, détection d'erreurs, templates intelligents — le tout propulsé par Claude AI.</p>
       </div>
       <div class="what-item">
         <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-        <h3>Secure &amp; private</h3>
-        <p>Each user gets a personal token. Usage is tracked per seat. You control who has access.</p>
+        <h3><span class="lang-en">Secure &amp; private</span><span class="lang-fr">Sécurisé &amp; privé</span></h3>
+        <p class="lang-en">Each user gets a personal token. Usage is tracked per seat. You control who has access.</p>
+        <p class="lang-fr">Chaque utilisateur dispose d'un token personnel. L'usage est suivi par poste. Vous contrôlez les accès.</p>
       </div>
     </div>
   </div>
@@ -510,31 +496,91 @@ footer .logo-text{font-size:18px}
   <div class="wrap showcase flip">
     <div class="showcase-media">
       <div class="mockup">
-        <div class="mk-titlebar"><div class="mk-dots"><i></i><i></i><i></i></div><small>Expressions Library</small></div>
-        <div class="mk-exhead"><span class="fx">fx</span><h4>Expressions</h4></div>
+        <div class="mk-titlebar">
+          <div class="mk-dots"><i></i><i></i><i></i></div>
+          <small class="lang-en">Expressions Library</small>
+          <small class="lang-fr">Bibliothèque d'expressions</small>
+        </div>
+        <div class="mk-exhead">
+          <span class="fx">fx</span>
+          <h4>Expressions</h4>
+        </div>
         <div class="mk-exbody">
           <div class="mk-group lit">
-            <div class="mk-grouphd"><span class="gi">~</span><b>Mouvement de base</b><small>3 expressions · FREE</small></div>
-            <div class="mk-expr"><span class="nm">Wiggle doux</span><span class="prop">POSITION</span><span class="ap">Appliquer</span></div>
+            <div class="mk-grouphd">
+              <span class="gi">~</span>
+              <b class="lang-en">Basic Motion</b>
+              <b class="lang-fr">Mouvement de base</b>
+              <small>3 expressions · FREE</small>
+            </div>
+            <div class="mk-expr">
+              <span class="nm lang-en">Smooth Wiggle</span>
+              <span class="nm lang-fr">Wiggle doux</span>
+              <span class="prop">POSITION</span>
+              <span class="ap lang-en">Apply</span>
+              <span class="ap lang-fr">Appliquer</span>
+            </div>
           </div>
           <div class="mk-group">
-            <div class="mk-grouphd"><span class="gi">B</span><b>Bounce &amp; Inertie</b><small>4 expressions</small><span class="tier">STARTER</span></div>
-            <div class="mk-expr" style="margin-bottom:8px"><span class="nm">Inertia Bounce</span><span class="prop">POSITION</span><span class="ap">Appliquer</span></div>
-            <div class="mk-expr"><span class="nm">Elastic overshoot</span><span class="prop">SCALE</span><span class="ap">Appliquer</span></div>
+            <div class="mk-grouphd">
+              <span class="gi">B</span>
+              <b class="lang-en">Bounce &amp; Inertia</b>
+              <b class="lang-fr">Bounce &amp; Inertie</b>
+              <small>4 expressions</small>
+              <span class="tier">STARTER</span>
+            </div>
+            <div class="mk-expr" style="margin-bottom:8px">
+              <span class="nm">Inertia Bounce</span>
+              <span class="prop">POSITION</span>
+              <span class="ap lang-en">Apply</span>
+              <span class="ap lang-fr">Appliquer</span>
+            </div>
+            <div class="mk-expr">
+              <span class="nm">Elastic Overshoot</span>
+              <span class="prop">SCALE</span>
+              <span class="ap lang-en">Apply</span>
+              <span class="ap lang-fr">Appliquer</span>
+            </div>
           </div>
-          <div class="mk-collapsed">Texte &amp; Kinetic <span>＋</span></div>
-          <div class="mk-collapsed">Audio Reactif <span>＋</span></div>
+          <div class="mk-collapsed">
+            <span class="lang-en">Text &amp; Kinetic</span>
+            <span class="lang-fr">Texte &amp; Cinétique</span>
+            <span>＋</span>
+          </div>
+          <div class="mk-collapsed">
+            <span class="lang-en">Reactive Audio</span>
+            <span class="lang-fr">Audio Réactif</span>
+            <span>＋</span>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="showcase-text">
-      <span class="eyebrow">// Expressions library</span>
-      <h3>A curated library,<br>one click away.</h3>
-      <p>Ship your team a growing library of motion expressions — wiggle, inertia, elastic overshoot, kinetic text, audio-reactive. Preview the code, then apply it to the selected property instantly.</p>
+      <span class="eyebrow lang-en">// Expressions library</span>
+      <span class="eyebrow lang-fr">// Bibliothèque d'expressions</span>
+      <h3>
+        <span class="lang-en">A curated library,<br>one click away.</span>
+        <span class="lang-fr">Une bibliothèque soignée,<br>en un clic.</span>
+      </h3>
+      <p class="lang-en">Ship your team a growing library of motion expressions — wiggle, inertia, elastic overshoot, kinetic text, audio-reactive. Preview the code, then apply it to the selected property instantly.</p>
+      <p class="lang-fr">Donnez à votre équipe une bibliothèque croissante d'expressions motion — wiggle, inertie, elastic overshoot, texte cinétique, audio-réactif. Prévisualisez le code, puis appliquez-le à la propriété sélectionnée en un clic.</p>
       <ul class="showcase-list">
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Organized by category &amp; tier</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>"Voir le code" before you apply</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Add your studio's own custom expressions</li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="lang-en">Organized by category &amp; tier</span>
+          <span class="lang-fr">Organisée par catégorie et niveau</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="lang-en">Preview the code before you apply</span>
+          <span class="lang-fr">Prévisualisez le code avant d'appliquer</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+          <span class="lang-en">Add your studio's own custom expressions</span>
+          <span class="lang-fr">Ajoutez vos propres expressions de studio</span>
+        </li>
       </ul>
     </div>
   </div>
@@ -544,46 +590,57 @@ footer .logo-text{font-size:18px}
 <section style="padding-top:0">
   <div class="wrap">
     <div class="version-badge">VERSION 3.0</div>
-    <span class="eyebrow">// What's new</span>
-    <h2 class="h2">Built for the next<br>generation of motion.</h2>
-    <p class="lead">Six new features that change how you work inside After Effects.</p>
+    <span class="eyebrow lang-en">// What's new</span>
+    <span class="eyebrow lang-fr">// Nouveautés</span>
+    <h2 class="h2">
+      <span class="lang-en">Built for the next<br>generation of motion.</span>
+      <span class="lang-fr">Conçu pour la prochaine<br>génération du motion.</span>
+    </h2>
+    <p class="lead lang-en">Six new features that change how you work inside After Effects.</p>
+    <p class="lead lang-fr">Six nouvelles fonctionnalités qui changent votre façon de travailler dans After Effects.</p>
 
     <div class="features-grid">
       <div class="feature-card">
         <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
         <h3>3D Text Premium</h3>
-        <p>6 cinematic 3D text styles generated directly in your comp. No plugins required.</p>
+        <p class="lang-en">6 cinematic 3D text styles generated directly in your comp. No plugins required.</p>
+        <p class="lang-fr">6 styles de texte 3D cinématiques générés directement dans votre comp. Aucun plugin requis.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5"/></svg></div>
-        <h3>Textures &amp; Transitions</h3>
-        <p>AI-generated textures and smooth transitions adapted to your project's rhythm.</p>
+        <h3><span class="lang-en">Textures &amp; Transitions</span><span class="lang-fr">Textures &amp; Transitions</span></h3>
+        <p class="lang-en">AI-generated textures and smooth transitions adapted to your project's rhythm.</p>
+        <p class="lang-fr">Textures générées par IA et transitions fluides adaptées au rythme de votre projet.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
         <h3>Voice Director</h3>
-        <p>Multi-action voice commands. Describe a scene and the AI builds it layer by layer.</p>
+        <p class="lang-en">Multi-action voice commands. Describe a scene and the AI builds it layer by layer.</p>
+        <p class="lang-fr">Commandes vocales multi-actions. Décrivez une scène et l'IA la construit calque par calque.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 14h4M14 14h3M7 10h10"/></svg></div>
-        <h3>Auto Subtitles</h3>
-        <p>Automatic subtitle generation from your audio track, synced and styled to your comp.</p>
+        <h3><span class="lang-en">Auto Subtitles</span><span class="lang-fr">Sous-titres automatiques</span></h3>
+        <p class="lang-en">Automatic subtitle generation from your audio track, synced and styled to your comp.</p>
+        <p class="lang-fr">Génération automatique de sous-titres depuis votre piste audio, synchronisée et stylisée selon votre comp.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h3l2-7 4 16 3-11 2 4h4"/></svg></div>
         <h3>Beat Sync</h3>
-        <p>Detect drops, beats and silences. Auto-sync your animations to the music timeline.</p>
+        <p class="lang-en">Detect drops, beats and silences. Auto-sync your animations to the music timeline.</p>
+        <p class="lang-fr">Détectez les drops, beats et silences. Synchronisez automatiquement vos animations sur la timeline musicale.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.3-2A4.5 4.5 0 0 0 6 18h11z"/></svg></div>
         <h3>Cloud Sync</h3>
-        <p>Your presets, templates and settings synced across all machines in your studio.</p>
+        <p class="lang-en">Your presets, templates and settings synced across all machines in your studio.</p>
+        <p class="lang-fr">Vos presets, templates et réglages synchronisés sur toutes les machines de votre studio.</p>
       </div>
     </div>
   </div>
@@ -594,16 +651,22 @@ footer .logo-text{font-size:18px}
   <div class="wrap cleaner-wrap">
     <div>
       <div class="cleaner-badge">100% FREE</div>
-      <h3>Neyko FX Cleaner.<br>Free, forever.</h3>
-      <p>A free utility panel to clean and organize your After Effects projects in one click — straight inside AE.</p>
+      <h3>
+        <span class="lang-en">Neyko FX Cleaner.<br>Free, forever.</span>
+        <span class="lang-fr">Neyko FX Cleaner.<br>Gratuit, pour toujours.</span>
+      </h3>
+      <p class="lang-en">A free utility panel to clean and organize your After Effects projects in one click — straight inside AE.</p>
+      <p class="lang-fr">Un panneau utilitaire gratuit pour nettoyer et organiser vos projets After Effects en un clic — directement dans AE.</p>
       <ul class="cleaner-features">
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Remove empty layers, guides &amp; markers</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Sort layers by type or color</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Detect missing &amp; unused assets</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Project stats &amp; one-click flatten</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Native AE panel, no plugins</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Remove empty layers, guides &amp; markers</span><span class="lang-fr">Supprime les calques vides, guides et marqueurs</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Sort layers by type or color</span><span class="lang-fr">Trie les calques par type ou couleur</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Detect missing &amp; unused assets</span><span class="lang-fr">Détecte les assets manquants et inutilisés</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Project stats &amp; one-click flatten</span><span class="lang-fr">Stats du projet et aplatissement en un clic</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Native AE panel, no plugins</span><span class="lang-fr">Panneau AE natif, sans plugins</span></li>
       </ul>
-      <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener" class="cleaner-cta">Download free on Payhip
+      <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener" class="cleaner-cta">
+        <span class="lang-en">Download free on Payhip</span>
+        <span class="lang-fr">Télécharger gratuitement sur Payhip</span>
         <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#04121a"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -621,27 +684,35 @@ footer .logo-text{font-size:18px}
         </div>
         <div class="mk-clbody">
           <div class="mk-clsec">
-            <h5>CLEANUP</h5>
+            <h5><span class="lang-en">CLEANUP</span><span class="lang-fr">NETTOYAGE</span></h5>
             <div class="mk-clgrid">
-              <div class="mk-clbtn">Empty layers</div><div class="mk-clbtn">Disable solos</div>
-              <div class="mk-clbtn">Delete guides</div><div class="mk-clbtn">Delete markers</div>
+              <div class="mk-clbtn"><span class="lang-en">Empty layers</span><span class="lang-fr">Calques vides</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Disable solos</span><span class="lang-fr">Désactiver solos</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Delete guides</span><span class="lang-fr">Suppr. guides</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Delete markers</span><span class="lang-fr">Suppr. marqueurs</span></div>
             </div>
           </div>
           <div class="mk-clsec">
-            <h5>ORGANIZATION</h5>
+            <h5><span class="lang-en">ORGANIZATION</span><span class="lang-fr">ORGANISATION</span></h5>
             <div class="mk-clgrid">
-              <div class="mk-clbtn">Sort by type</div><div class="mk-clbtn">Sort by color</div>
-              <div class="mk-clbtn">Rename sequence</div><div class="mk-clbtn">Duplicate comp</div>
+              <div class="mk-clbtn"><span class="lang-en">Sort by type</span><span class="lang-fr">Trier par type</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Sort by color</span><span class="lang-fr">Trier par couleur</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Rename sequence</span><span class="lang-fr">Renommer séq.</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Duplicate comp</span><span class="lang-fr">Dupliquer comp</span></div>
             </div>
           </div>
           <div class="mk-clsec" style="margin-bottom:0">
             <h5>DIAGNOSTIC</h5>
             <div class="mk-clgrid">
-              <div class="mk-clbtn">Missing assets</div><div class="mk-clbtn">Project stats</div>
+              <div class="mk-clbtn"><span class="lang-en">Missing assets</span><span class="lang-fr">Assets manquants</span></div>
+              <div class="mk-clbtn"><span class="lang-en">Project stats</span><span class="lang-fr">Stats projet</span></div>
             </div>
           </div>
         </div>
-        <a href="#pricing" class="mk-clfoot">Upgrade to Neyko FX Pro →</a>
+        <a href="#pricing" class="mk-clfoot">
+          <span class="lang-en">Upgrade to Neyko FX Pro →</span>
+          <span class="lang-fr">Passer à Neyko FX Pro →</span>
+        </a>
       </div>
     </div>
   </div>
@@ -650,102 +721,125 @@ footer .logo-text{font-size:18px}
 <!-- PRICING -->
 <section id="pricing">
   <div class="wrap">
-    <span class="eyebrow">// Pricing</span>
-    <h2 class="h2">Simple, transparent<br>studio pricing.</h2>
-    <p class="lead" style="margin-bottom:52px">All plans include full white labeling, onboarding and support.</p>
+    <span class="eyebrow lang-en">// Pricing</span>
+    <span class="eyebrow lang-fr">// Tarifs</span>
+    <h2 class="h2">
+      <span class="lang-en">Simple, transparent<br>studio pricing.</span>
+      <span class="lang-fr">Des tarifs simples<br>et transparents.</span>
+    </h2>
+    <p class="lead lang-en" style="margin-bottom:52px">All plans include full white labeling, onboarding and support.</p>
+    <p class="lead lang-fr" style="margin-bottom:52px">Tous les plans incluent le white labeling complet, l'onboarding et le support.</p>
 
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="plan-name">STARTER</div>
-        <div class="plan-seats">1 – 5 seats</div>
+        <div class="plan-seats">1 – 5 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
         <div class="plan-price">99<span>€</span></div>
-        <div class="plan-period">per month</div>
+        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
         <ul class="plan-features">
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Up to 5 users</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Custom logo &amp; name</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>200 messages/day/user</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 5 users</span><span class="lang-fr">Jusqu'à 5 utilisateurs</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom logo &amp; name</span><span class="lang-fr">Logo et nom personnalisés</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">200 messages/day/user</span><span class="lang-fr">200 messages/jour/utilisateur</span></li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Email support</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Email support</span><span class="lang-fr">Support email</span></li>
         </ul>
-        <a href="mailto:contact@neykofx.com?subject=White Label Starter" class="plan-btn">Get started</a>
+        <a href="mailto:contact@neykofx.com?subject=White Label Starter" class="plan-btn">
+          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
+        </a>
       </div>
 
       <div class="pricing-card featured">
-        <div class="featured-tag">MOST POPULAR</div>
+        <div class="featured-tag"><span class="lang-en">MOST POPULAR</span><span class="lang-fr">LE PLUS POPULAIRE</span></div>
         <div class="plan-name">STUDIO</div>
-        <div class="plan-seats">6 – 15 seats</div>
+        <div class="plan-seats">6 – 15 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
         <div class="plan-price">199<span>€</span></div>
-        <div class="plan-period">per month</div>
+        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
         <ul class="plan-features">
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Up to 15 users</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full custom branding</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>500 messages/day/user</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 15 users</span><span class="lang-fr">Jusqu'à 15 utilisateurs</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Full custom branding</span><span class="lang-fr">Branding entièrement personnalisé</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">500 messages/day/user</span><span class="lang-fr">500 messages/jour/utilisateur</span></li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Priority support</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Custom onboarding</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Priority support</span><span class="lang-fr">Support prioritaire</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom onboarding</span><span class="lang-fr">Onboarding personnalisé</span></li>
         </ul>
-        <a href="mailto:contact@neykofx.com?subject=White Label Studio" class="plan-btn">Get started</a>
+        <a href="mailto:contact@neykofx.com?subject=White Label Studio" class="plan-btn">
+          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
+        </a>
       </div>
 
       <div class="pricing-card">
-        <div class="plan-name">AGENCY</div>
-        <div class="plan-seats">16 – 50 seats</div>
+        <div class="plan-name"><span class="lang-en">AGENCY</span><span class="lang-fr">AGENCE</span></div>
+        <div class="plan-seats">16 – 50 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
         <div class="plan-price">499<span>€</span></div>
-        <div class="plan-period">per month</div>
+        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
         <ul class="plan-features">
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Up to 50 users</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full custom branding</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Unlimited messages</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 50 users</span><span class="lang-fr">Jusqu'à 50 utilisateurs</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Full custom branding</span><span class="lang-fr">Branding entièrement personnalisé</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Unlimited messages</span><span class="lang-fr">Messages illimités</span></li>
           <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Dedicated support</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Custom features on request</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Dedicated support</span><span class="lang-fr">Support dédié</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom features on request</span><span class="lang-fr">Fonctionnalités sur mesure</span></li>
         </ul>
-        <a href="mailto:contact@neykofx.com?subject=White Label Agency" class="plan-btn">Get started</a>
+        <a href="mailto:contact@neykofx.com?subject=White Label Agency" class="plan-btn">
+          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
+        </a>
       </div>
     </div>
 
-    <p class="pricing-note">Just you? Check out the <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">individual plan on Payhip →</a></p>
+    <p class="pricing-note">
+      <span class="lang-en">Just you? Check out the <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">individual plan on Payhip →</a></span>
+      <span class="lang-fr">Solo ? Découvrez le <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">plan individuel sur Payhip →</a></span>
+    </p>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
 <section style="padding-top:0">
   <div class="wrap">
-    <span class="eyebrow">// How it works</span>
-    <h2 class="h2">Up and running<br>in 48 hours.</h2>
-    <p class="lead" style="margin-bottom:30px">We handle the technical setup. You focus on your team.</p>
+    <span class="eyebrow lang-en">// How it works</span>
+    <span class="eyebrow lang-fr">// Comment ça marche</span>
+    <h2 class="h2">
+      <span class="lang-en">Up and running<br>in 48 hours.</span>
+      <span class="lang-fr">Opérationnel<br>en 48 heures.</span>
+    </h2>
+    <p class="lead lang-en" style="margin-bottom:30px">We handle the technical setup. You focus on your team.</p>
+    <p class="lead lang-fr" style="margin-bottom:30px">Nous gérons la partie technique. Vous vous concentrez sur votre équipe.</p>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-content">
           <div class="step-tag">CONTACT</div>
-          <h3>Send us your brief</h3>
-          <p>Tell us your studio name, number of users, and send us your logo. We handle the rest. No technical knowledge required on your side.</p>
+          <h3><span class="lang-en">Send us your brief</span><span class="lang-fr">Envoyez-nous votre brief</span></h3>
+          <p class="lang-en">Tell us your studio name, number of users, and send us your logo. We handle the rest. No technical knowledge required on your side.</p>
+          <p class="lang-fr">Dites-nous le nom de votre studio, le nombre d'utilisateurs, et envoyez-nous votre logo. Nous nous occupons du reste. Aucune compétence technique requise.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <div class="step-content">
           <div class="step-tag">SETUP</div>
-          <h3>We customize your panel</h3>
-          <p>We brand the panel with your identity — logo, name, colors. We generate unique access tokens for each member of your team.</p>
+          <h3><span class="lang-en">We customize your panel</span><span class="lang-fr">Nous personnalisons votre panneau</span></h3>
+          <p class="lang-en">We brand the panel with your identity — logo, name, colors. We generate unique access tokens for each member of your team.</p>
+          <p class="lang-fr">Nous habillons le panneau avec votre identité — logo, nom, couleurs. Nous générons des tokens d'accès uniques pour chaque membre de votre équipe.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-content">
           <div class="step-tag">DELIVER</div>
-          <h3>Your team installs in 5 minutes</h3>
-          <p>We send each user a personalized email with their token and a step-by-step installation guide. They're up and running in minutes.</p>
+          <h3><span class="lang-en">Your team installs in 5 minutes</span><span class="lang-fr">Votre équipe installe en 5 minutes</span></h3>
+          <p class="lang-en">We send each user a personalized email with their token and a step-by-step installation guide. They're up and running in minutes.</p>
+          <p class="lang-fr">Nous envoyons à chaque utilisateur un email personnalisé avec son token et un guide d'installation pas à pas. Ils sont opérationnels en quelques minutes.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
         <div class="step-content">
           <div class="step-tag">ONGOING</div>
-          <h3>We handle updates &amp; support</h3>
-          <p>New features, bug fixes, support requests — we manage everything so you can focus on creating.</p>
+          <h3><span class="lang-en">We handle updates &amp; support</span><span class="lang-fr">Nous gérons les mises à jour &amp; le support</span></h3>
+          <p class="lang-en">New features, bug fixes, support requests — we manage everything so you can focus on creating.</p>
+          <p class="lang-fr">Nouvelles fonctionnalités, corrections de bugs, demandes de support — nous gérons tout pour que vous puissiez vous concentrer sur la création.</p>
         </div>
       </div>
     </div>
@@ -755,9 +849,16 @@ footer .logo-text{font-size:18px}
 <!-- CTA -->
 <div class="cta-section">
   <div class="wrap">
-    <h2>Ready to equip<br>your studio?</h2>
-    <p>Join the studios that are already using AI to create faster and better motion design.</p>
-    <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX — Demo Request" class="btn-primary">Request a free demo</a>
+    <h2>
+      <span class="lang-en">Ready to equip<br>your studio?</span>
+      <span class="lang-fr">Prêt à équiper<br>votre studio ?</span>
+    </h2>
+    <p class="lang-en">Join the studios that are already using AI to create faster and better motion design.</p>
+    <p class="lang-fr">Rejoignez les studios qui utilisent déjà l'IA pour créer plus vite et mieux.</p>
+    <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX — Demo Request" class="btn-primary">
+      <span class="lang-en">Request a free demo</span>
+      <span class="lang-fr">Demander une démo gratuite</span>
+    </a>
   </div>
 </div>
 
@@ -765,27 +866,40 @@ footer .logo-text{font-size:18px}
 <section>
   <div class="wrap">
     <span class="eyebrow">// FAQ</span>
-    <h2 class="h2" style="margin-bottom:40px">Questions</h2>
+    <h2 class="h2" style="margin-bottom:40px">
+      <span class="lang-en">Questions</span>
+      <span class="lang-fr">Questions fréquentes</span>
+    </h2>
     <div class="faq">
       <div class="faq-item">
-        <div class="faq-q">Is the panel compatible with all versions of After Effects?</div>
-        <div class="faq-a">Neyko FX is compatible with After Effects CC 2021 and later (version 18+), on both Windows and macOS.</div>
+        <div class="faq-q lang-en">Is the panel compatible with all versions of After Effects?</div>
+        <div class="faq-q lang-fr">Le panneau est-il compatible avec toutes les versions d'After Effects ?</div>
+        <div class="faq-a lang-en">Neyko FX is compatible with After Effects CC 2021 and later (version 18+), on both Windows and macOS.</div>
+        <div class="faq-a lang-fr">Neyko FX est compatible avec After Effects CC 2021 et les versions ultérieures (v18+), sur Windows et macOS.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Does the panel require an internet connection?</div>
-        <div class="faq-a">Yes, an internet connection is required to communicate with the AI. The panel itself is installed locally inside After Effects.</div>
+        <div class="faq-q lang-en">Does the panel require an internet connection?</div>
+        <div class="faq-q lang-fr">Le panneau nécessite-t-il une connexion internet ?</div>
+        <div class="faq-a lang-en">Yes, an internet connection is required to communicate with the AI. The panel itself is installed locally inside After Effects.</div>
+        <div class="faq-a lang-fr">Oui, une connexion internet est nécessaire pour communiquer avec l'IA. Le panneau lui-même est installé localement dans After Effects.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Can we add or remove users at any time?</div>
-        <div class="faq-a">Yes. You can add seats or remove users at any time. Changes take effect immediately and billing is adjusted accordingly.</div>
+        <div class="faq-q lang-en">Can we add or remove users at any time?</div>
+        <div class="faq-q lang-fr">Peut-on ajouter ou supprimer des utilisateurs à tout moment ?</div>
+        <div class="faq-a lang-en">Yes. You can add seats or remove users at any time. Changes take effect immediately and billing is adjusted accordingly.</div>
+        <div class="faq-a lang-fr">Oui. Vous pouvez ajouter des postes ou supprimer des utilisateurs à tout moment. Les modifications prennent effet immédiatement et la facturation est ajustée en conséquence.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">What languages does the AI speak?</div>
-        <div class="faq-a">The panel is fully bilingual — French and English. Users can switch between languages with a single click.</div>
+        <div class="faq-q lang-en">What languages does the AI speak?</div>
+        <div class="faq-q lang-fr">Quelles langues parle l'IA ?</div>
+        <div class="faq-a lang-en">The panel is fully bilingual — French and English. Users can switch between languages with a single click.</div>
+        <div class="faq-a lang-fr">Le panneau est entièrement bilingue — français et anglais. Les utilisateurs peuvent basculer entre les deux langues en un clic.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Is there a minimum commitment?</div>
-        <div class="faq-a">No long-term commitment. Plans are monthly and can be cancelled at any time. We offer a free demo before any purchase.</div>
+        <div class="faq-q lang-en">Is there a minimum commitment?</div>
+        <div class="faq-q lang-fr">Y a-t-il un engagement minimum ?</div>
+        <div class="faq-a lang-en">No long-term commitment. Plans are monthly and can be cancelled at any time. We offer a free demo before any purchase.</div>
+        <div class="faq-a lang-fr">Pas d'engagement à long terme. Les plans sont mensuels et peuvent être annulés à tout moment. Nous proposons une démo gratuite avant tout achat.</div>
       </div>
     </div>
   </div>
@@ -797,26 +911,52 @@ footer .logo-text{font-size:18px}
     <svg class="logo-mark" viewBox="0 0 40 40" width="32" height="32" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="lgFoot" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#8a5cf6"/>
-        <stop offset="1" stop-color="#5b32cc"/>
+          <stop offset="0" stop-color="#8a5cf6"/>
+          <stop offset="1" stop-color="#5b32cc"/>
         </linearGradient>
       </defs>
       <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgFoot)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
       <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc"/>
-      <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#04121a">FX</text>
+      <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+      <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
     </svg>
     <span class="logo-text">Neyko <span>FX</span></span>
   </div>
   <div class="footer-links">
-    <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Individual plan</a>
-    <a href="#cleaner">Cleaner (Free)</a>
+    <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">
+      <span class="lang-en">Individual plan</span><span class="lang-fr">Plan individuel</span>
+    </a>
+    <a href="#cleaner">
+      <span class="lang-en">Cleaner (Free)</span><span class="lang-fr">Cleaner (Gratuit)</span>
+    </a>
     <a href="mailto:contact@neykofx.com">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Neyko FX. All rights reserved.</div>
 </footer>
 
 <script>
+function setLang(lang) {
+  const html = document.documentElement;
+  html.lang = lang;
+  if (lang === 'fr') {
+    html.classList.add('fr');
+    document.getElementById('btnEN').classList.remove('active');
+    document.getElementById('btnFR').classList.add('active');
+  } else {
+    html.classList.remove('fr');
+    document.getElementById('btnEN').classList.add('active');
+    document.getElementById('btnFR').classList.remove('active');
+  }
+  localStorage.setItem('nfx-lang', lang);
+}
+
+// Restore language on load
+(function() {
+  const saved = localStorage.getItem('nfx-lang');
+  if (saved === 'fr') setLang('fr');
+})();
+
+// Burger menu
 const burger = document.getElementById('navBurger');
 const navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => {
