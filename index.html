@@ -270,13 +270,47 @@ section{padding:110px 0}
 .faq-a{font-size:15px;color:var(--muted-light);line-height:1.7}
 
 /* ===== FOOTER ===== */
-footer{padding:44px 48px;border-top:1px solid var(--border-soft);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1180px;margin:0 auto}
+footer{padding:44px 48px;border-top:1px solid var(--border-soft);display:flex;flex-direction:column;gap:26px;max-width:1180px;margin:0 auto}
+.footer-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer .logo-mark{width:32px;height:32px}
 footer .logo-text{font-size:18px}
 .footer-links{display:flex;gap:24px}
 .footer-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color 0.2s}
 .footer-links a:hover{color:var(--purple-light)}
+.footer-products{display:flex;flex-wrap:wrap;gap:32px;padding:22px 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}
+.footer-product{display:flex;flex-direction:column;gap:5px}
+.footer-product .fp-name{font-size:13px;font-weight:700;color:var(--white)}
+.footer-product .fp-meta{font-size:12px;color:var(--muted)}
+.footer-product a{color:var(--purple-light);text-decoration:none;font-size:12px;font-weight:700;width:fit-content}
+.footer-product a:hover{color:#fff}
+.footer-guarantee{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:#34d399;text-align:center}
+.footer-guarantee .ic{width:15px;height:15px;color:#34d399}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-copy{font-size:12px;color:var(--muted)}
+
+/* ===== GUARANTEE ===== */
+.guarantee-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.22);color:#34d399;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.5px;padding:8px 16px;border-radius:6px;margin-top:24px}
+.guarantee-badge .ic{width:15px;height:15px;color:#34d399}
+.guarantee-wrap{text-align:center}
+
+/* ===== REFERRAL STRIP ===== */
+.referral-strip{border-bottom:1px solid var(--border-soft);background:rgba(138,92,246,0.04)}
+.referral-inner{display:flex;align-items:center;justify-content:center;gap:14px;padding:22px 0;flex-wrap:wrap;font-size:13px;color:var(--muted-light);text-align:center}
+.referral-inner .ic{width:18px;height:18px;color:var(--purple-light);flex-shrink:0}
+.referral-inner a{color:var(--purple-light);text-decoration:none;font-weight:700;border-bottom:1px solid rgba(176,143,255,0.3);padding-bottom:1px}
+.referral-inner a:hover{color:#fff}
+
+/* ===== PRODUCT CARD (Precomp etc.) ===== */
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px 32px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-top:56px;transition:border-color 0.2s,transform 0.2s}
+.product-card:hover{border-color:rgba(138,92,246,0.4);transform:translateY(-2px)}
+.product-badge{display:inline-block;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.25);color:var(--purple-light);font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 9px;border-radius:4px;margin-bottom:12px}
+.product-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.product-card p{font-size:14px;color:var(--muted-light);line-height:1.6;max-width:420px}
+.product-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0}
+.product-price{font-family:'DM Serif Display',serif;font-size:30px;text-align:right}
+.product-price span{font-size:13px;font-family:'Syne',sans-serif;color:var(--muted);display:block;margin-top:2px}
+.product-cta{display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;white-space:nowrap;transition:background 0.2s}
+.product-cta:hover{background:#7a4ce6}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:880px){
@@ -293,7 +327,12 @@ footer .logo-text{font-size:18px}
   .what-grid,.features-grid,.pricing-grid{grid-template-columns:1fr}
   .mk-clgrid{grid-template-columns:1fr}
   .strip-inner{gap:22px}
-  footer{padding:32px 22px;flex-direction:column;text-align:center}
+  footer{padding:32px 22px;text-align:center}
+  .footer-top,.footer-bottom{flex-direction:column;justify-content:center}
+  .footer-products{justify-content:center}
+  .product-card{flex-direction:column;text-align:center}
+  .product-card-right{align-items:center}
+  .product-price{text-align:center}
   .nav-burger{display:flex}
   .nav-links{
     display:none;position:absolute;top:100%;left:0;right:0;
@@ -330,7 +369,7 @@ footer .logo-text{font-size:18px}
 
   <ul class="nav-links" id="navLinks">
     <li>
-      <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">
+      <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">
         <span class="lang-en">Individual Plan</span>
         <span class="lang-fr">Plan individuel</span>
       </a>
@@ -589,58 +628,58 @@ footer .logo-text{font-size:18px}
 <!-- WHATS NEW -->
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="version-badge">VERSION 3.0</div>
+    <div class="version-badge">VERSION 3.1</div>
     <span class="eyebrow lang-en">// What's new</span>
     <span class="eyebrow lang-fr">// Nouveautés</span>
     <h2 class="h2">
-      <span class="lang-en">Built for the next<br>generation of motion.</span>
-      <span class="lang-fr">Conçu pour la prochaine<br>génération du motion.</span>
+      <span class="lang-en">Faster to install,<br>smoother to use.</span>
+      <span class="lang-fr">Plus rapide à installer,<br>plus fluide à utiliser.</span>
     </h2>
-    <p class="lead lang-en">Six new features that change how you work inside After Effects.</p>
-    <p class="lead lang-fr">Six nouvelles fonctionnalités qui changent votre façon de travailler dans After Effects.</p>
+    <p class="lead lang-en">Six improvements focused on setup speed and everyday precision.</p>
+    <p class="lead lang-fr">Six améliorations centrées sur la rapidité d'installation et la précision au quotidien.</p>
 
     <div class="features-grid">
       <div class="feature-card">
         <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6M9 12h6M12 16v4M9 16l3 4 3-4"/></svg></div>
+        <h3><span class="lang-en">Automatic installer</span><span class="lang-fr">Installateur automatique</span></h3>
+        <p class="lang-en">Run Install.bat (Windows) or Install.command (Mac) and you're ready — no manual configuration.</p>
+        <p class="lang-fr">Lancez Install.bat (Windows) ou Install.command (Mac) et c'est prêt — aucune configuration manuelle.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 21v-4h4v-4h4v-4h4v-4h4v16z"/></svg></div>
+        <h3><span class="lang-en">Auto-Align Staircase</span><span class="lang-fr">Alignement Escalier Auto</span></h3>
+        <p class="lang-en">Automatically stagger and align layers into a perfect staircase — ideal for text reveals and list animations.</p>
+        <p class="lang-fr">Alignez et décalez automatiquement vos calques en escalier parfait — idéal pour les reveals de texte et animations de listes.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
+        <h3><span class="lang-en">Corner Snap</span><span class="lang-fr">Corner Snap</span></h3>
+        <p class="lang-en">Snap shape layers and masks precisely to corners and edges — pixel-perfect alignment in one click.</p>
+        <p class="lang-fr">Alignez précisément vos shape layers et masques sur les coins et bords — un alignement au pixel près en un clic.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
         <h3>3D Text Premium</h3>
-        <p class="lang-en">6 cinematic 3D text styles generated directly in your comp. No plugins required.</p>
-        <p class="lang-fr">6 styles de texte 3D cinématiques générés directement dans votre comp. Aucun plugin requis.</p>
+        <p class="lang-en">Now with live preview and style shuffle — try every look before you commit.</p>
+        <p class="lang-fr">Désormais avec aperçu en direct et shuffle de styles — testez chaque rendu avant de valider.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
-        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5"/></svg></div>
-        <h3><span class="lang-en">Textures &amp; Transitions</span><span class="lang-fr">Textures &amp; Transitions</span></h3>
-        <p class="lang-en">AI-generated textures and smooth transitions adapted to your project's rhythm.</p>
-        <p class="lang-fr">Textures générées par IA et transitions fluides adaptées au rythme de votre projet.</p>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2.5 14.7 9.1 21.5 9.7 16.3 14.2 17.9 20.9 12 17.3 6.1 20.9 7.7 14.2 2.5 9.7 9.3 9.1z"/></svg></div>
+        <h3><span class="lang-en">Rating system</span><span class="lang-fr">Système de notation</span></h3>
+        <p class="lang-en">Rate the results directly inside the panel — help us fine-tune the AI to your studio's taste.</p>
+        <p class="lang-fr">Notez les résultats directement dans le panneau — aidez-nous à affiner l'IA selon les goûts de votre studio.</p>
       </div>
       <div class="feature-card">
         <span class="feature-new">NEW</span>
-        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
-        <h3>Voice Director</h3>
-        <p class="lang-en">Multi-action voice commands. Describe a scene and the AI builds it layer by layer.</p>
-        <p class="lang-fr">Commandes vocales multi-actions. Décrivez une scène et l'IA la construit calque par calque.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-new">NEW</span>
-        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 14h4M14 14h3M7 10h10"/></svg></div>
-        <h3><span class="lang-en">Auto Subtitles</span><span class="lang-fr">Sous-titres automatiques</span></h3>
-        <p class="lang-en">Automatic subtitle generation from your audio track, synced and styled to your comp.</p>
-        <p class="lang-fr">Génération automatique de sous-titres depuis votre piste audio, synchronisée et stylisée selon votre comp.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-new">NEW</span>
-        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h3l2-7 4 16 3-11 2 4h4"/></svg></div>
-        <h3>Beat Sync</h3>
-        <p class="lang-en">Detect drops, beats and silences. Auto-sync your animations to the music timeline.</p>
-        <p class="lang-fr">Détectez les drops, beats et silences. Synchronisez automatiquement vos animations sur la timeline musicale.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-new">NEW</span>
-        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.3-2A4.5 4.5 0 0 0 6 18h11z"/></svg></div>
-        <h3>Cloud Sync</h3>
-        <p class="lang-en">Your presets, templates and settings synced across all machines in your studio.</p>
-        <p class="lang-fr">Vos presets, templates et réglages synchronisés sur toutes les machines de votre studio.</p>
+        <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3><span class="lang-en">Simplified installation</span><span class="lang-fr">Installation simplifiée</span></h3>
+        <p class="lang-en">Fewer steps, clearer prompts. First-run setup now takes under two minutes, start to finish.</p>
+        <p class="lang-fr">Moins d'étapes, des instructions plus claires. La première installation prend désormais moins de deux minutes.</p>
       </div>
     </div>
   </div>
@@ -716,6 +755,28 @@ footer .logo-text{font-size:18px}
       </div>
     </div>
   </div>
+
+  <!-- Neyko Precomp product card -->
+  <div class="wrap">
+    <div class="product-card">
+      <div>
+        <span class="product-badge">
+          <span class="lang-en">ONE-TIME PURCHASE</span>
+          <span class="lang-fr">PAIEMENT UNIQUE</span>
+        </span>
+        <h3>Neyko Precomp</h3>
+        <p class="lang-en">Precompose in 1 click — 4 buttons, no subscription, yours forever.</p>
+        <p class="lang-fr">Précomposez en 1 clic — 4 boutons, sans abonnement, à vous pour toujours.</p>
+      </div>
+      <div class="product-card-right">
+        <div class="product-price">19€<span class="lang-en">one-time</span><span class="lang-fr">paiement unique</span></div>
+        <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener" class="product-cta">
+          <span class="lang-en">Get Neyko Precomp →</span>
+          <span class="lang-fr">Obtenir Neyko Precomp →</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PRICING -->
@@ -787,11 +848,32 @@ footer .logo-text{font-size:18px}
     </div>
 
     <p class="pricing-note">
-      <span class="lang-en">Just you? Check out the <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">individual plan on Payhip →</a></span>
-      <span class="lang-fr">Solo ? Découvrez le <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">plan individuel sur Payhip →</a></span>
+      <span class="lang-en">Just you? Check out the <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">individual plan on Payhip →</a></span>
+      <span class="lang-fr">Solo ? Découvrez le <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">plan individuel sur Payhip →</a></span>
     </p>
+
+    <div class="guarantee-wrap">
+      <div class="guarantee-badge">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span class="lang-en">30-day money back guarantee — no questions asked</span>
+        <span class="lang-fr">Garantie satisfait ou remboursé 30 jours — sans question</span>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- REFERRAL -->
+<div class="referral-strip">
+  <div class="wrap referral-inner">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <span class="lang-en">Invite a friend → get 1 month of Pro free.</span>
+    <span class="lang-fr">Invitez un ami → obtenez 1 mois de Pro offert.</span>
+    <a href="mailto:contact@neykofx.com?subject=Referral Program">
+      <span class="lang-en">Learn more →</span>
+      <span class="lang-fr">En savoir plus →</span>
+    </a>
+  </div>
+</div>
 
 <!-- HOW IT WORKS -->
 <section style="padding-top:0">
@@ -907,31 +989,59 @@ footer .logo-text{font-size:18px}
 
 <!-- FOOTER -->
 <footer>
-  <div class="brand">
-    <svg class="logo-mark" viewBox="0 0 40 40" width="32" height="32" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="lgFoot" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#8a5cf6"/>
-          <stop offset="1" stop-color="#5b32cc"/>
-        </linearGradient>
-      </defs>
-      <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgFoot)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
-      <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-      <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
-    </svg>
-    <span class="logo-text">Neyko <span>FX</span></span>
+  <div class="footer-top">
+    <div class="brand">
+      <svg class="logo-mark" viewBox="0 0 40 40" width="32" height="32" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lgFoot" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8a5cf6"/>
+            <stop offset="1" stop-color="#5b32cc"/>
+          </linearGradient>
+        </defs>
+        <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgFoot)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
+        <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+        <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
+      </svg>
+      <span class="logo-text">Neyko <span>FX</span></span>
+    </div>
+    <div class="footer-links">
+      <a href="#cleaner">
+        <span class="lang-en">Cleaner (Free)</span><span class="lang-fr">Cleaner (Gratuit)</span>
+      </a>
+      <a href="mailto:contact@neykofx.com">Contact</a>
+    </div>
   </div>
-  <div class="footer-links">
-    <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">
-      <span class="lang-en">Individual plan</span><span class="lang-fr">Plan individuel</span>
-    </a>
-    <a href="#cleaner">
-      <span class="lang-en">Cleaner (Free)</span><span class="lang-fr">Cleaner (Gratuit)</span>
-    </a>
-    <a href="mailto:contact@neykofx.com">Contact</a>
+
+  <div class="footer-products">
+    <div class="footer-product">
+      <span class="fp-name">Neyko FX Pro</span>
+      <span class="fp-meta lang-en">Subscription</span>
+      <span class="fp-meta lang-fr">Abonnement</span>
+      <a href="#pricing"><span class="lang-en">See plans →</span><span class="lang-fr">Voir les plans →</span></a>
+    </div>
+    <div class="footer-product">
+      <span class="fp-name">Neyko Precomp</span>
+      <span class="fp-meta">19€ <span class="lang-en">one-time</span><span class="lang-fr">paiement unique</span></span>
+      <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener"><span class="lang-en">Get it →</span><span class="lang-fr">Obtenir →</span></a>
+    </div>
+    <div class="footer-product">
+      <span class="fp-name">Neyko FX Cleaner</span>
+      <span class="fp-meta lang-en">Free</span>
+      <span class="fp-meta lang-fr">Gratuit</span>
+      <a href="#cleaner"><span class="lang-en">Download →</span><span class="lang-fr">Télécharger →</span></a>
+    </div>
   </div>
-  <div class="footer-copy">© 2026 Neyko FX. All rights reserved.</div>
+
+  <div class="footer-guarantee">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+    <span class="lang-en">30-day money back guarantee — no questions asked</span>
+    <span class="lang-fr">Garantie satisfait ou remboursé 30 jours — sans question</span>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Neyko FX. All rights reserved.</div>
+  </div>
 </footer>
 
 <script>
