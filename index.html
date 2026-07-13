@@ -3,363 +3,297 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neyko FX — White Label for Motion Design Studios</title>
-<meta property="og:title" content="Neyko FX — White Label for Motion Design Studios">
-<meta property="og:description" content="Give your team an AI panel inside After Effects — fully branded with your studio's identity. No code required.">
+<title>Neyko FX — AI Toolkit for After Effects</title>
+<meta property="og:title" content="Neyko FX — AI Toolkit for After Effects">
+<meta property="og:description" content="AI panel, precompose tools and free utilities for After Effects. White label available for studios.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238a5cf6'/%3E%3Cstop offset='1' stop-color='%235b32cc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M16 1.5 28.7 8.75 28.7 23.25 16 30.5 3.3 23.25 3.3 8.75Z' fill='url(%23g)'/%3E%3Cpath d='M10 22V10l12 12V10' fill='none' stroke='%23fff' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#05050f;
-  --surface:#0d0d1f;
-  --border:rgba(138,92,246,0.15);
-  --border-soft:rgba(255,255,255,0.06);
-  --purple:#8a5cf6;
-  --purple-light:#b08fff;
-  --cyan:#22d3ee;
-  --white:#f0eeff;
+  --bg:#ffffff;
+  --bg-soft:#f7f7fb;
+  --ink:#12121a;
   --muted:#6b7280;
-  --muted-light:#9ca3af;
-  --card:#0f0f22;
+  --violet:#7c3aed;
+  --violet-dark:#5b32cc;
+  --violet-soft:#f3efff;
+  --border:#e8e8f0;
+  --green:#059669;
 }
 
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--white);font-family:'Syne',sans-serif;overflow-x:hidden;line-height:1.5}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
 
 a{color:inherit}
 svg{display:block}
-.ic{width:22px;height:22px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ic{width:20px;height:20px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
 /* ===== I18N ===== */
-.lang-fr{display:none}
-html.fr .lang-en{display:none}
-html.fr .lang-fr{display:revert}
+/* !important so layout rules (.eyebrow, .p-price small, .hero-meta span…) can't override the hide */
+html:not(.fr) .lang-fr{display:none !important}
+html.fr .lang-en{display:none !important}
 
-/* ===== LANG TOGGLE ===== */
-.lang-toggle{
-  display:flex;align-items:center;gap:0;
-  background:rgba(138,92,246,0.08);
-  border:1px solid var(--border);
-  border-radius:6px;overflow:hidden;cursor:pointer;
-  font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
-}
-.lang-toggle .tl{
-  padding:7px 11px;color:var(--muted);transition:background 0.2s,color 0.2s;
-  background:none;border:none;cursor:pointer;font:inherit;letter-spacing:inherit;
-}
-.lang-toggle .tl.active{background:var(--purple);color:#fff}
-.lang-toggle .tl-sep{color:var(--border);font-size:13px;pointer-events:none;padding:0 1px}
+/* ===== ANNOUNCEMENT BAR ===== */
+.announce{background:var(--violet);color:#fff;text-align:center;font-size:12.5px;font-weight:600;padding:9px 20px;letter-spacing:0.2px}
 
 /* ===== NAV ===== */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:16px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(5,5,15,0.82);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border-soft);
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:14px 48px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
 }
-.brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none}
-.logo-mark{width:36px;height:36px;flex-shrink:0;transition:transform 0.3s;will-change:transform}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:34px;height:34px;flex-shrink:0;transition:transform 0.3s}
 .brand:hover .logo-mark{animation:logoFloat 1.6s ease-in-out infinite}
 @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.5px;color:var(--white)}
-.logo-text span{color:var(--purple)}
-.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
-.nav-links a{
-  color:var(--muted-light);text-decoration:none;
-  font-size:13px;font-weight:600;letter-spacing:0.2px;transition:color 0.2s;
-}
-.nav-links a:hover{color:var(--white)}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.5px;color:var(--ink)}
+.logo-text span{color:var(--violet)}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:#3f3f50;text-decoration:none;font-size:13.5px;font-weight:600;transition:color 0.2s}
+.nav-links a:hover{color:var(--violet)}
 .free-tag{
-  display:inline-block;background:rgba(34,211,238,0.1);
-  border:1px solid rgba(34,211,238,0.25);color:var(--cyan);
+  display:inline-block;background:#ecfdf5;border:1px solid #a7f3d0;color:var(--green);
   font-family:'DM Mono',monospace;font-size:9px;font-weight:700;
-  letter-spacing:1px;padding:2px 6px;border-radius:4px;margin-left:7px;
+  letter-spacing:1px;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:1px;
 }
-.nav-right{display:flex;align-items:center;gap:14px}
-.nav-cta{
-  background:var(--purple);color:#fff;padding:9px 20px;border-radius:7px;
-  text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.3px;transition:background 0.2s;
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-toggle{
+  display:flex;align-items:center;
+  background:var(--bg-soft);border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
 }
-.nav-cta:hover{background:#7a4ce6}
-.nav-burger{
-  display:none;flex-direction:column;gap:5px;
-  background:none;border:none;cursor:pointer;padding:6px;
-}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--white);transition:transform 0.3s,opacity 0.3s}
+.lang-toggle .tl{padding:7px 11px;color:var(--muted);transition:background 0.2s,color 0.2s;background:none;border:none;cursor:pointer;font:inherit;letter-spacing:inherit}
+.lang-toggle .tl.active{background:var(--violet);color:#fff}
+.lang-toggle .tl-sep{color:var(--border);font-size:13px;pointer-events:none}
+.nav-cta{background:var(--ink);color:#fff;padding:9px 19px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:700;transition:background 0.2s}
+.nav-cta:hover{background:var(--violet)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink);transition:transform 0.3s,opacity 0.3s}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ===== LAYOUT ===== */
 .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
-section{padding:110px 0}
-.eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan);margin-bottom:18px;display:block;text-transform:uppercase}
-.h2{font-family:'DM Serif Display',serif;font-size:clamp(30px,4vw,46px);line-height:1.12;margin-bottom:16px}
-.lead{font-size:16px;color:var(--muted-light);max-width:520px;line-height:1.7}
+section{padding:84px 0}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--violet);margin-bottom:14px;display:block;text-transform:uppercase}
+.h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.15;letter-spacing:-0.5px;margin-bottom:14px}
+.lead{font-size:15.5px;color:var(--muted);max-width:560px}
+.center{text-align:center}
+.center .lead{margin:0 auto}
 
 /* ===== HERO ===== */
-.hero{position:relative;padding:160px 0 90px;border-bottom:1px solid var(--border-soft);overflow:hidden}
-.hero::before{
-  content:'';position:absolute;inset:0;z-index:0;
-  background-image:linear-gradient(rgba(138,92,246,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(138,92,246,0.05) 1px,transparent 1px);
-  background-size:46px 46px;
-  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
-  pointer-events:none;
-}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero{padding:88px 0 72px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#faf9ff 0%,#fff 100%)}
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(138,92,246,0.08);border:1px solid rgba(138,92,246,0.25);
-  padding:6px 14px;border-radius:6px;
-  font-size:11px;font-weight:600;letter-spacing:2px;
-  color:var(--purple-light);margin-bottom:26px;font-family:'DM Mono',monospace;
+  background:var(--violet-soft);border:1px solid #ded1ff;
+  padding:6px 14px;border-radius:100px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;
+  color:var(--violet-dark);margin-bottom:24px;font-family:'DM Mono',monospace;
 }
-.badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%}
-.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(38px,5vw,62px);line-height:1.06;letter-spacing:-1px;margin-bottom:22px}
-.hero h1 em{font-style:italic;color:var(--purple-light)}
-.hero-sub{font-size:17px;color:var(--muted-light);max-width:480px;line-height:1.7;margin-bottom:34px}
-.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.btn-primary{background:var(--purple);color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:0.3px;transition:background 0.2s}
-.btn-primary:hover{background:#7a4ce6}
-.btn-secondary{color:var(--white);padding:13px 26px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--border);border-radius:8px;transition:border-color 0.2s,color 0.2s}
-.btn-secondary:hover{border-color:var(--purple);color:var(--purple-light)}
-.hero-meta{display:flex;gap:22px;margin-top:34px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
+.badge-dot{width:6px;height:6px;background:var(--violet);border-radius:50%}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-1.5px;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--violet)}
+.hero-sub{font-size:16.5px;color:var(--muted);max-width:540px;margin:0 auto 32px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--violet);color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:background 0.2s}
+.btn-primary:hover{background:var(--violet-dark)}
+.btn-secondary{color:var(--ink);padding:13px 26px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #d4d4e0;border-radius:8px;transition:border-color 0.2s,color 0.2s;background:#fff}
+.btn-secondary:hover{border-color:var(--violet);color:var(--violet)}
+.hero-meta{display:flex;gap:26px;justify-content:center;margin-top:34px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-family:'DM Mono',monospace}
 .hero-meta span{display:inline-flex;align-items:center;gap:7px}
-.hero-meta i{width:5px;height:5px;background:var(--purple);border-radius:50%;display:inline-block}
+.hero-meta i{width:5px;height:5px;background:var(--violet);border-radius:50%;display:inline-block}
 
-/* ===== PRODUCT MOCKUPS ===== */
-.mockup{background:#0a0a18;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,0.7)}
-.mk-titlebar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#111122;border-bottom:1px solid var(--border-soft)}
+/* ===== PRODUCTS GRID ===== */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px}
+.product{
+  display:flex;flex-direction:column;text-align:center;
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;
+  transition:box-shadow 0.25s,transform 0.25s,border-color 0.25s;position:relative;
+}
+.product:hover{transform:translateY(-4px);box-shadow:0 18px 44px -18px rgba(91,50,204,0.22);border-color:#d5c8ff}
+.p-badge{
+  position:absolute;top:16px;left:16px;z-index:2;
+  font-family:'DM Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:1px;
+  padding:4px 10px;border-radius:100px;
+}
+.p-badge.best{background:var(--violet);color:#fff}
+.p-badge.once{background:#fff7ed;border:1px solid #fed7aa;color:#c2410c}
+.p-badge.free{background:#ecfdf5;border:1px solid #a7f3d0;color:var(--green)}
+.p-visual{
+  height:210px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#f4f0ff 0%,#ece4ff 55%,#e3d6ff 100%);
+  border-bottom:1px solid var(--border);
+}
+.p-visual svg{width:84px;height:84px}
+.p-body{padding:24px 24px 28px;display:flex;flex-direction:column;gap:8px;flex:1}
+.p-name{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.3px}
+.p-desc{font-size:13.5px;color:var(--muted);line-height:1.6;flex:1}
+.p-price{font-size:16px;font-weight:800;margin-top:6px}
+.p-price small{font-size:12px;font-weight:500;color:var(--muted);display:block;margin-top:1px}
+.p-price .strike{color:#b3b3c2;text-decoration:line-through;font-weight:500;font-size:13px;margin-left:7px}
+.p-cta{
+  margin-top:14px;display:block;background:var(--ink);color:#fff;
+  padding:12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13.5px;
+  transition:background 0.2s;
+}
+.p-cta:hover{background:var(--violet)}
+.product.featured-p .p-cta{background:var(--violet)}
+.product.featured-p .p-cta:hover{background:var(--violet-dark)}
+.p-sub{font-size:12px;color:var(--muted);margin-top:10px}
+.p-sub a{color:var(--violet);font-weight:600;text-decoration:none}
+.p-sub a:hover{text-decoration:underline}
+
+/* ===== WHATS NEW ===== */
+.section-soft{background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.version-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);padding:5px 13px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--violet);margin-bottom:16px;font-family:'DM Mono',monospace}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.feature-card{background:#fff;border:1px solid var(--border);border-radius:13px;padding:24px;transition:border-color 0.2s,box-shadow 0.2s}
+.feature-card:hover{border-color:#d5c8ff;box-shadow:0 10px 30px -14px rgba(91,50,204,0.18)}
+.feature-icon{width:40px;height:40px;border-radius:9px;background:var(--violet-soft);display:flex;align-items:center;justify-content:center;color:var(--violet);margin-bottom:14px}
+.feature-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.feature-card p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ===== WHITE LABEL / PRICING ===== */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+.pricing-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;transition:border-color 0.25s,box-shadow 0.25s}
+.pricing-card:hover{border-color:#d5c8ff;box-shadow:0 14px 36px -16px rgba(91,50,204,0.2)}
+.pricing-card.featured{border-color:var(--violet);box-shadow:0 14px 40px -16px rgba(124,58,237,0.28)}
+.featured-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--violet);color:#fff;padding:4px 16px;border-radius:100px;font-size:10.5px;font-weight:700;letter-spacing:1px;white-space:nowrap}
+.plan-name{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:10px;font-family:'DM Mono',monospace}
+.plan-seats{font-size:13.5px;color:var(--violet);font-weight:600;margin-bottom:18px}
+.plan-price{font-family:'Syne',sans-serif;font-weight:800;font-size:40px;line-height:1;margin-bottom:4px;letter-spacing:-1px}
+.plan-price span{font-size:17px;color:var(--muted);font-weight:600}
+.plan-period{font-size:13px;color:var(--muted);margin-bottom:26px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
+.plan-features li{font-size:13.5px;display:flex;align-items:center;gap:10px;color:#3f3f50}
+.plan-features .ic{width:15px;height:15px;color:var(--violet);flex-shrink:0}
+.plan-btn{display:block;text-align:center;background:#fff;border:1px solid #d4d4e0;color:var(--ink);padding:12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;transition:all 0.2s}
+.plan-btn:hover{background:var(--violet);color:#fff;border-color:var(--violet)}
+.pricing-card.featured .plan-btn{background:var(--violet);color:#fff;border-color:var(--violet)}
+.pricing-card.featured .plan-btn:hover{background:var(--violet-dark)}
+
+/* ===== GUARANTEE ===== */
+.guarantee-badge{display:inline-flex;align-items:center;gap:9px;background:#ecfdf5;border:1px solid #a7f3d0;color:var(--green);font-size:13px;font-weight:600;padding:10px 18px;border-radius:100px;margin-top:34px}
+.guarantee-badge .ic{width:16px;height:16px;color:var(--green)}
+
+/* ===== CLEANER ===== */
+.cleaner-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.cleaner-badge{display:inline-flex;align-items:center;gap:7px;background:#ecfdf5;border:1px solid #a7f3d0;color:var(--green);font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:100px;margin-bottom:16px}
+.cleaner-wrap h3{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,3vw,32px);line-height:1.15;margin-bottom:14px;letter-spacing:-0.5px}
+.cleaner-wrap>div>p{font-size:15px;color:var(--muted);margin-bottom:22px}
+.cleaner-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.cleaner-features li{font-size:14px;color:#3f3f50;display:flex;align-items:center;gap:10px}
+.cleaner-features .ic{width:17px;height:17px;color:var(--violet);flex-shrink:0}
+
+/* Cleaner dark panel mockup (AE is dark — kept dark on purpose) */
+.mockup{background:#0d0d1a;border:1px solid #23233a;border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -24px rgba(18,18,26,0.4);color:#e8e6f5;font-family:'Inter',sans-serif}
+.mk-titlebar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#141426;border-bottom:1px solid #23233a}
 .mk-dots{display:flex;gap:6px}
-.mk-dots i{width:10px;height:10px;border-radius:50%;background:#2a2a3d;display:block}
-.mk-titlebar small{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
-.mk-aibar{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border-soft)}
-.mk-hex{width:18px;height:18px;background:linear-gradient(135deg,var(--purple),#5b32cc);border-radius:5px;flex-shrink:0}
-.mk-brand{font-weight:800;font-size:14px}
-.mk-brand b{color:var(--purple);font-weight:800}
-.mk-online{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399}
-.mk-tab{font-size:11px;font-weight:700;padding:4px 9px;border-radius:5px;border:1px solid var(--border-soft);color:var(--muted-light)}
-.mk-tab.on{color:var(--white);border-color:rgba(138,92,246,0.4);background:rgba(138,92,246,0.12)}
-.mk-credits{margin-left:auto;font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);border:1px solid var(--border-soft);padding:3px 8px;border-radius:11px}
-.mk-up{font-size:10px;font-weight:800;letter-spacing:0.5px;color:#fff;background:var(--purple);padding:4px 9px;border-radius:5px}
-.mk-ai-body{padding:34px 22px;text-align:center}
-.mk-spark{width:30px;height:30px;margin:0 auto 14px;color:var(--purple-light)}
-.mk-ai-lead{font-size:13px;color:var(--muted-light);line-height:1.6;margin-bottom:18px}
-.mk-chip{background:#101024;border:1px solid var(--border-soft);border-radius:8px;padding:11px 14px;font-size:12px;color:#c9c4e8;text-align:left;margin-bottom:8px}
-.mk-ai-input{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--border-soft)}
-.mk-ai-input .pill{flex:1;background:#101024;border:1px solid var(--border-soft);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted)}
-.mk-send{width:34px;height:34px;border-radius:8px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
-.mk-exhead{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border-soft)}
-.mk-exhead .fx{width:24px;height:24px;border-radius:6px;background:rgba(138,92,246,0.15);color:var(--purple-light);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:700}
-.mk-exhead h4{font-size:15px;font-weight:700}
-.mk-exbody{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
-.mk-group{border:1px solid var(--border);border-radius:10px;padding:14px;background:#0c0c1c}
-.mk-group.lit{border-color:rgba(138,92,246,0.35);background:rgba(138,92,246,0.05)}
-.mk-grouphd{display:flex;align-items:center;gap:9px;margin-bottom:12px}
-.mk-grouphd .gi{width:24px;height:24px;border-radius:6px;background:rgba(138,92,246,0.12);color:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.mk-grouphd b{font-size:13px}
-.mk-grouphd small{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace}
-.mk-grouphd .tier{margin-left:auto;font-size:9px;font-family:'DM Mono',monospace;color:var(--cyan);border:1px solid rgba(34,211,238,0.25);padding:2px 6px;border-radius:4px}
-.mk-expr{display:flex;align-items:center;gap:10px;background:#0a0a18;border:1px solid var(--border-soft);border-radius:8px;padding:10px 12px}
-.mk-expr .nm{font-size:12px;font-weight:600}
-.mk-expr .prop{margin-left:auto;font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)}
-.mk-expr .ap{font-size:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--purple),#6d4ad8);padding:5px 11px;border-radius:6px}
-.mk-collapsed{display:flex;align-items:center;justify-content:space-between;background:#0c0c1c;border:1px solid var(--border-soft);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--muted-light)}
-.mk-clhead{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border-soft)}
-.mk-clhead .lg{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,var(--purple));flex-shrink:0}
-.mk-clhead .nm{font-weight:800;font-size:15px}
-.mk-clhead .ver{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px}
+.mk-dots i{width:10px;height:10px;border-radius:50%;background:#2c2c44;display:block}
+.mk-titlebar small{font-size:11px;color:#8b8ba3;font-family:'DM Mono',monospace}
+.mk-clhead{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid #23233a}
+.mk-clhead .lg{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,#8a5cf6);flex-shrink:0}
+.mk-clhead .nm{font-weight:800;font-size:14px}
+.mk-clhead .ver{font-size:10px;color:#8b8ba3;font-family:'DM Mono',monospace;letter-spacing:1px}
 .mk-clhead .free{font-size:9px;font-weight:800;color:#34d399;border:1px solid rgba(52,211,153,0.3);padding:2px 7px;border-radius:4px;margin-left:6px}
 .mk-clbody{padding:14px 16px}
 .mk-clsec{margin-bottom:16px}
-.mk-clsec h5{font-size:10px;letter-spacing:2px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:9px}
+.mk-clsec h5{font-size:10px;letter-spacing:2px;color:#8b8ba3;font-family:'DM Mono',monospace;margin-bottom:9px}
 .mk-clgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mk-clbtn{background:#0c0c1c;border:1px solid var(--border-soft);border-radius:8px;padding:11px 13px;font-size:12px;font-weight:600;color:#d6d2ec;transition:border-color 0.2s,background 0.2s}
-.mk-clbtn:hover{border-color:rgba(138,92,246,0.4);background:rgba(138,92,246,0.06)}
-.mk-clfoot{display:block;text-align:center;padding:14px;border-top:1px solid var(--border-soft);font-size:12px;font-weight:700;color:var(--purple-light);text-decoration:none;transition:color 0.2s}
+.mk-clbtn{background:#16162a;border:1px solid #26263e;border-radius:8px;padding:10px 13px;font-size:12px;font-weight:600;color:#cfcbe8}
+.mk-clfoot{display:block;text-align:center;padding:13px;border-top:1px solid #23233a;font-size:12px;font-weight:700;color:#b08fff;text-decoration:none;transition:color 0.2s}
 .mk-clfoot:hover{color:#fff}
 
-/* ===== TRUST STRIP ===== */
-.strip{border-bottom:1px solid var(--border-soft);background:var(--surface)}
-.strip-inner{display:flex;flex-wrap:wrap;justify-content:center;gap:46px;padding:26px 0}
-.strip-item{display:flex;align-items:center;gap:10px;color:var(--muted-light);font-size:13px;font-weight:600}
-.strip-item .ic{width:18px;height:18px;color:var(--purple-light)}
-
-/* ===== WHAT YOU GET ===== */
-.what-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.what-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px;transition:border-color 0.2s,transform 0.2s}
-.what-item:hover{border-color:rgba(138,92,246,0.35);transform:translateY(-3px)}
-.what-icon{width:44px;height:44px;border-radius:10px;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.2);display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:20px}
-.what-item h3{font-size:18px;font-weight:700;margin-bottom:10px}
-.what-item p{font-size:14px;color:var(--muted-light);line-height:1.7}
-
-/* ===== SHOWCASE ===== */
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.showcase.flip .showcase-media{order:2}
-.showcase-text h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,36px);line-height:1.15;margin-bottom:16px}
-.showcase-text p{font-size:15px;color:var(--muted-light);line-height:1.7;margin-bottom:22px}
-.showcase-list{list-style:none;display:flex;flex-direction:column;gap:12px}
-.showcase-list li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#c9c4e8}
-.showcase-list .ic{width:18px;height:18px;color:var(--cyan);flex-shrink:0;margin-top:1px}
-
-/* ===== WHATS NEW ===== */
-.version-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(34,211,238,0.07);border:1px solid rgba(34,211,238,0.22);padding:5px 13px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--cyan);margin-bottom:18px;font-family:'DM Mono',monospace}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
-.feature-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:26px 24px;position:relative;transition:border-color 0.2s,transform 0.2s}
-.feature-card:hover{border-color:rgba(138,92,246,0.4);transform:translateY(-3px)}
-.feature-new{position:absolute;top:16px;right:16px;background:rgba(34,211,238,0.09);border:1px solid rgba(34,211,238,0.2);color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace}
-.feature-icon{width:40px;height:40px;border-radius:9px;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.18);display:flex;align-items:center;justify-content:center;color:var(--purple-light);margin-bottom:16px}
-.feature-card h3{font-size:16px;font-weight:700;margin-bottom:7px}
-.feature-card p{font-size:13px;color:var(--muted-light);line-height:1.6}
-
-/* ===== CLEANER ===== */
-.cleaner-wrap{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
-.cleaner-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.25);color:#34d399;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:6px;margin-bottom:18px}
-.cleaner-wrap h3{font-family:'DM Serif Display',serif;font-size:clamp(26px,3vw,36px);line-height:1.15;margin-bottom:16px}
-.cleaner-wrap>div>p{font-size:15px;color:var(--muted-light);line-height:1.7;margin-bottom:22px}
-.cleaner-features{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px}
-.cleaner-features li{font-size:14px;color:#c9c4e8;display:flex;align-items:center;gap:11px}
-.cleaner-features .ic{width:18px;height:18px;color:var(--cyan);flex-shrink:0}
-.cleaner-cta{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#04121a;padding:13px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:opacity 0.2s}
-.cleaner-cta:hover{opacity:0.88}
-
-/* ===== PRICING ===== */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.pricing-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:34px 30px;position:relative;transition:border-color 0.25s,transform 0.25s}
-.pricing-card:hover{transform:translateY(-4px);border-color:var(--purple)}
-.pricing-card.featured{border-color:var(--purple);background:#11102a}
-.featured-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;padding:4px 16px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap}
-.plan-name{font-size:13px;font-weight:600;letter-spacing:2px;color:var(--muted);margin-bottom:12px;font-family:'DM Mono',monospace}
-.plan-seats{font-size:14px;color:var(--purple-light);margin-bottom:20px}
-.plan-price{font-family:'DM Serif Display',serif;font-size:46px;line-height:1;margin-bottom:4px}
-.plan-price span{font-size:18px;font-family:'Syne',sans-serif;color:var(--muted)}
-.plan-period{font-size:13px;color:var(--muted);margin-bottom:30px}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
-.plan-features li{font-size:14px;display:flex;align-items:center;gap:10px;color:#c4b5fd}
-.plan-features .ic{width:15px;height:15px;color:var(--cyan);flex-shrink:0}
-.plan-btn{display:block;text-align:center;background:rgba(138,92,246,0.12);border:1px solid rgba(138,92,246,0.3);color:var(--purple-light);padding:12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;transition:background 0.2s,color 0.2s}
-.plan-btn:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
-.pricing-card.featured .plan-btn{background:var(--purple);color:#fff;border-color:var(--purple)}
-.pricing-note{text-align:center;margin-top:36px;font-size:14px;color:var(--muted)}
-.pricing-note a{color:var(--purple-light);text-decoration:none;border-bottom:1px solid rgba(176,143,255,0.3);padding-bottom:1px}
-.pricing-note a:hover{border-color:var(--purple-light)}
-
-/* ===== STEPS ===== */
-.steps{display:flex;flex-direction:column}
-.step{display:grid;grid-template-columns:64px 1fr;gap:28px;align-items:start;padding:34px 0;border-bottom:1px solid var(--border-soft)}
-.step:last-child{border-bottom:none}
-.step-num{font-family:'DM Serif Display',serif;font-size:46px;color:rgba(138,92,246,0.25);line-height:1}
-.step-content h3{font-size:21px;font-weight:700;margin-bottom:9px}
-.step-content p{font-size:15px;color:var(--muted-light);line-height:1.7}
-.step-tag{display:inline-block;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);color:var(--cyan);padding:3px 10px;border-radius:4px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:10px}
-
-/* ===== CTA ===== */
-.cta-section{text-align:center;padding:100px 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);background:var(--surface)}
-.cta-section h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,4.5vw,52px);margin-bottom:18px}
-.cta-section p{font-size:16px;color:var(--muted-light);margin:0 auto 36px;max-width:460px;line-height:1.7}
+/* ===== REFERRAL ===== */
+.referral-strip{background:var(--violet-soft);border-top:1px solid #e4d9ff;border-bottom:1px solid #e4d9ff}
+.referral-inner{display:flex;align-items:center;justify-content:center;gap:14px;padding:22px 0;flex-wrap:wrap;font-size:14px;color:#3f3050;text-align:center;font-weight:500}
+.referral-inner .ic{width:18px;height:18px;color:var(--violet);flex-shrink:0}
+.referral-inner a{color:var(--violet);text-decoration:none;font-weight:700}
+.referral-inner a:hover{text-decoration:underline}
 
 /* ===== FAQ ===== */
-.faq{display:flex;flex-direction:column}
-.faq-item{border-bottom:1px solid var(--border-soft);padding:26px 0}
-.faq-q{font-size:17px;font-weight:700;margin-bottom:11px}
-.faq-a{font-size:15px;color:var(--muted-light);line-height:1.7}
+.faq{display:flex;flex-direction:column;max-width:760px}
+.faq-item{border-bottom:1px solid var(--border);padding:24px 0}
+.faq-q{font-size:16px;font-weight:700;margin-bottom:9px}
+.faq-a{font-size:14.5px;color:var(--muted);line-height:1.7}
 
 /* ===== FOOTER ===== */
-footer{padding:44px 48px;border-top:1px solid var(--border-soft);display:flex;flex-direction:column;gap:26px;max-width:1180px;margin:0 auto}
-.footer-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-footer .logo-mark{width:32px;height:32px}
-footer .logo-text{font-size:18px}
-.footer-links{display:flex;gap:24px}
-.footer-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color 0.2s}
-.footer-links a:hover{color:var(--purple-light)}
-.footer-products{display:flex;flex-wrap:wrap;gap:32px;padding:22px 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}
-.footer-product{display:flex;flex-direction:column;gap:5px}
-.footer-product .fp-name{font-size:13px;font-weight:700;color:var(--white)}
-.footer-product .fp-meta{font-size:12px;color:var(--muted)}
-.footer-product a{color:var(--purple-light);text-decoration:none;font-size:12px;font-weight:700;width:fit-content}
-.footer-product a:hover{color:#fff}
-.footer-guarantee{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:#34d399;text-align:center}
-.footer-guarantee .ic{width:15px;height:15px;color:#34d399}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.footer-copy{font-size:12px;color:var(--muted)}
-
-/* ===== GUARANTEE ===== */
-.guarantee-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.22);color:#34d399;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.5px;padding:8px 16px;border-radius:6px;margin-top:24px}
-.guarantee-badge .ic{width:15px;height:15px;color:#34d399}
-.guarantee-wrap{text-align:center}
-
-/* ===== REFERRAL STRIP ===== */
-.referral-strip{border-bottom:1px solid var(--border-soft);background:rgba(138,92,246,0.04)}
-.referral-inner{display:flex;align-items:center;justify-content:center;gap:14px;padding:22px 0;flex-wrap:wrap;font-size:13px;color:var(--muted-light);text-align:center}
-.referral-inner .ic{width:18px;height:18px;color:var(--purple-light);flex-shrink:0}
-.referral-inner a{color:var(--purple-light);text-decoration:none;font-weight:700;border-bottom:1px solid rgba(176,143,255,0.3);padding-bottom:1px}
-.referral-inner a:hover{color:#fff}
-
-/* ===== PRODUCT CARD (Precomp etc.) ===== */
-.product-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px 32px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-top:56px;transition:border-color 0.2s,transform 0.2s}
-.product-card:hover{border-color:rgba(138,92,246,0.4);transform:translateY(-2px)}
-.product-badge{display:inline-block;background:rgba(138,92,246,0.1);border:1px solid rgba(138,92,246,0.25);color:var(--purple-light);font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 9px;border-radius:4px;margin-bottom:12px}
-.product-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
-.product-card p{font-size:14px;color:var(--muted-light);line-height:1.6;max-width:420px}
-.product-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0}
-.product-price{font-family:'DM Serif Display',serif;font-size:30px;text-align:right}
-.product-price span{font-size:13px;font-family:'Syne',sans-serif;color:var(--muted);display:block;margin-top:2px}
-.product-cta{display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;white-space:nowrap;transition:background 0.2s}
-.product-cta:hover{background:#7a4ce6}
+footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:60px 48px 32px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:1px solid var(--border)}
+.footer-brand-col p{font-size:13.5px;color:var(--muted);margin-top:14px;max-width:300px;line-height:1.7}
+.footer-guarantee{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--green);font-weight:600;margin-top:16px}
+.footer-guarantee .ic{width:15px;height:15px}
+.footer-h{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--ink);margin-bottom:18px;text-transform:uppercase}
+.footer-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.footer-list a{color:var(--muted);text-decoration:none;font-size:13.5px;transition:color 0.2s}
+.footer-list a:hover{color:var(--violet)}
+.footer-list .fp-price{color:#a3a3b8;font-size:12px;margin-left:6px}
+.footer-list .fp-free{color:var(--green);font-size:11px;font-weight:700;margin-left:6px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px}
+.footer-copy{font-size:12.5px;color:var(--muted)}
+.footer-mail{font-size:12.5px;color:var(--muted);text-decoration:none}
+.footer-mail:hover{color:var(--violet)}
+footer .logo-mark{width:30px;height:30px}
+footer .logo-text{font-size:17px}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:880px){
-  .hero-grid,.showcase,.cleaner-wrap{grid-template-columns:1fr;gap:40px}
-  .showcase.flip .showcase-media{order:0}
+  .products-grid,.pricing-grid{grid-template-columns:1fr}
   .features-grid{grid-template-columns:1fr 1fr}
-  .what-grid{grid-template-columns:1fr 1fr}
+  .cleaner-wrap{grid-template-columns:1fr;gap:40px}
+  .footer-cols{grid-template-columns:1fr;gap:36px}
 }
 @media(max-width:680px){
-  nav{padding:14px 22px}
+  nav{padding:12px 22px}
   .wrap{padding:0 22px}
-  section{padding:72px 0}
-  .hero{padding:130px 0 70px}
-  .what-grid,.features-grid,.pricing-grid{grid-template-columns:1fr}
+  section{padding:62px 0}
+  .hero{padding:64px 0 56px}
+  .features-grid{grid-template-columns:1fr}
   .mk-clgrid{grid-template-columns:1fr}
-  .strip-inner{gap:22px}
-  footer{padding:32px 22px;text-align:center}
-  .footer-top,.footer-bottom{flex-direction:column;justify-content:center}
-  .footer-products{justify-content:center}
-  .product-card{flex-direction:column;text-align:center}
-  .product-card-right{align-items:center}
-  .product-price{text-align:center}
+  footer{padding:44px 22px 28px}
+  .footer-bottom{flex-direction:column;text-align:center}
   .nav-burger{display:flex}
   .nav-links{
     display:none;position:absolute;top:100%;left:0;right:0;
     flex-direction:column;align-items:stretch;
-    background:rgba(5,5,15,0.98);backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border);padding:14px 22px;gap:2px;
+    background:#fff;border-bottom:1px solid var(--border);
+    padding:14px 22px;gap:2px;box-shadow:0 20px 40px -20px rgba(18,18,26,0.15);
   }
   .nav-links.open{display:flex}
   .nav-links a{padding:13px 6px;font-size:15px}
-  .nav-right{gap:10px}
+  .nav-right{gap:8px}
   .lang-toggle .tl{padding:6px 9px}
+  .nav-cta{padding:8px 14px}
 }
 </style>
 </head>
 <body>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  <span class="lang-en">✓ 30-day money back guarantee — no questions asked</span>
+  <span class="lang-fr">✓ Garantie satisfait ou remboursé 30 jours — sans question</span>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="brand" aria-label="Neyko FX — home">
-    <svg class="logo-mark" viewBox="0 0 40 40" width="36" height="36" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
+    <svg class="logo-mark" viewBox="0 0 40 40" width="34" height="34" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="lgNav" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stop-color="#8a5cf6"/>
           <stop offset="1" stop-color="#5b32cc"/>
         </linearGradient>
       </defs>
-      <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgNav)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
+      <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgNav)" stroke="rgba(0,0,0,0.06)" stroke-width="0.6" stroke-linejoin="round"/>
       <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
       <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
@@ -368,16 +302,10 @@ footer .logo-text{font-size:18px}
   </a>
 
   <ul class="nav-links" id="navLinks">
-    <li>
-      <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">
-        <span class="lang-en">Individual Plan</span>
-        <span class="lang-fr">Plan individuel</span>
-      </a>
-    </li>
-    <li><a href="#pricing">Studio / White Label</a></li>
-    <li>
-      <a href="#cleaner">Cleaner <span class="free-tag">FREE</span></a>
-    </li>
+    <li><a href="#products"><span class="lang-en">Products</span><span class="lang-fr">Produits</span></a></li>
+    <li><a href="#whitelabel"><span class="lang-en">Studio / White Label</span><span class="lang-fr">Studio / White Label</span></a></li>
+    <li><a href="#cleaner">Cleaner <span class="free-tag">FREE</span></a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ul>
 
   <div class="nav-right">
@@ -387,8 +315,8 @@ footer .logo-text{font-size:18px}
       <button class="tl" id="btnFR" onclick="setLang('fr')">FR</button>
     </div>
     <a href="mailto:contact@neykofx.com" class="nav-cta">
-      <span class="lang-en">Contact us</span>
-      <span class="lang-fr">Nous contacter</span>
+      <span class="lang-en">Contact</span>
+      <span class="lang-fr">Contact</span>
     </a>
     <button class="nav-burger" id="navBurger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -396,286 +324,196 @@ footer .logo-text{font-size:18px}
 
 <!-- HERO -->
 <header class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        <span class="lang-en">WHITE LABEL PROGRAM</span>
-        <span class="lang-fr">PROGRAMME WHITE LABEL</span>
-      </div>
-      <h1>
-        <span class="lang-en">Your studio's AI,<br><em>your brand.</em></span>
-        <span class="lang-fr">L'IA de votre studio,<br><em>à votre image.</em></span>
-      </h1>
-      <p class="hero-sub lang-en">Give your team or clients an AI panel inside After Effects — fully branded with your studio's identity. No code required.</p>
-      <p class="hero-sub lang-fr">Donnez à votre équipe un panneau IA dans After Effects — entièrement aux couleurs de votre studio. Aucune compétence technique requise.</p>
-      <div class="hero-actions">
-        <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX" class="btn-primary">
-          <span class="lang-en">Request a demo</span>
-          <span class="lang-fr">Demander une démo</span>
-        </a>
-        <a href="#pricing" class="btn-secondary">
-          <span class="lang-en">See pricing →</span>
-          <span class="lang-fr">Voir les tarifs →</span>
-        </a>
-      </div>
-      <div class="hero-meta">
-        <span><i></i><span class="lang-en">Native Adobe panel</span><span class="lang-fr">Panneau Adobe natif</span></span>
-        <span><i></i><span class="lang-en">Powered by Claude AI</span><span class="lang-fr">Propulsé par Claude AI</span></span>
-        <span><i></i><span class="lang-en">FR / EN bilingual</span><span class="lang-fr">Bilingue FR / EN</span></span>
-      </div>
+  <div class="wrap">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span class="lang-en">AI TOOLKIT FOR AFTER EFFECTS</span>
+      <span class="lang-fr">OUTILS IA POUR AFTER EFFECTS</span>
     </div>
-
-    <!-- AI panel mockup — content follows site language -->
-    <div class="hero-media">
-      <div class="mockup mockup-ai">
-        <div class="mk-titlebar">
-          <div class="mk-dots"><i></i><i></i><i></i></div>
-          <small>Neyko FX — After Effects</small>
-        </div>
-        <div class="mk-aibar">
-          <span class="mk-hex"></span>
-          <span class="mk-brand">Neyko <b>FX</b></span>
-          <span class="mk-online"></span>
-          <span class="mk-tab on">⚡ Actions</span>
-          <span class="mk-tab">Expr</span>
-          <span class="mk-credits">1 / ∞</span>
-          <span class="mk-up">UPGRADE</span>
-        </div>
-        <div class="mk-ai-body">
-          <div class="mk-spark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg>
-          </div>
-          <p class="mk-ai-lead lang-en">Describe what you want to create.<br>I can execute actions directly in AE.</p>
-          <p class="mk-ai-lead lang-fr">Décrivez ce que vous voulez créer.<br>J'exécute les actions directement dans AE.</p>
-          <div class="mk-chip lang-en">Create a text fade-in animation</div>
-          <div class="mk-chip lang-fr">Créer une animation de fondu sur ce texte</div>
-          <div class="mk-chip lang-en">Add wiggle to layer 1</div>
-          <div class="mk-chip lang-fr">Ajouter un wiggle au calque 1</div>
-          <div class="mk-chip lang-en">Create a new 1920×1080 comp</div>
-          <div class="mk-chip lang-fr">Créer une nouvelle comp 1920×1080</div>
-        </div>
-        <div class="mk-ai-input">
-          <span class="pill lang-en">Describe what you want to create…</span>
-          <span class="pill lang-fr">Décrivez ce que vous voulez créer…</span>
-          <span class="mk-send">
-            <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          </span>
-        </div>
-      </div>
+    <h1>
+      <span class="lang-en">Motion design,<br><em>accelerated by AI.</em></span>
+      <span class="lang-fr">Le motion design,<br><em>accéléré par l'IA.</em></span>
+    </h1>
+    <p class="hero-sub lang-en">An AI panel, precompose tools and free utilities — built natively for After Effects. White label available for studios.</p>
+    <p class="hero-sub lang-fr">Un panneau IA, des outils de précomposition et des utilitaires gratuits — conçus nativement pour After Effects. White label disponible pour les studios.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">
+        <span class="lang-en">See products</span>
+        <span class="lang-fr">Voir les produits</span>
+      </a>
+      <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX" class="btn-secondary">
+        <span class="lang-en">Request a demo</span>
+        <span class="lang-fr">Demander une démo</span>
+      </a>
+    </div>
+    <div class="hero-meta">
+      <span><i></i><span class="lang-en">Native Adobe panel</span><span class="lang-fr">Panneau Adobe natif</span></span>
+      <span><i></i><span class="lang-en">Powered by Claude AI</span><span class="lang-fr">Propulsé par Claude AI</span></span>
+      <span><i></i><span class="lang-en">FR / EN bilingual</span><span class="lang-fr">Bilingue FR / EN</span></span>
     </div>
   </div>
 </header>
 
-<!-- TRUST STRIP -->
-<div class="strip">
-  <div class="wrap strip-inner">
-    <div class="strip-item">
-      <svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <span class="lang-en">Native AE panel</span><span class="lang-fr">Panneau AE natif</span>
-    </div>
-    <div class="strip-item">
-      <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
-      <span class="lang-en">Powered by Claude AI</span><span class="lang-fr">Propulsé par Claude AI</span>
-    </div>
-    <div class="strip-item">
-      <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
-      <span class="lang-en">FR / EN bilingual</span><span class="lang-fr">Bilingue FR / EN</span>
-    </div>
-    <div class="strip-item">
-      <svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-      <span class="lang-en">Per-seat tokens</span><span class="lang-fr">Tokens par poste</span>
-    </div>
-  </div>
-</div>
-
-<!-- WHAT YOU GET -->
-<section>
-  <div class="wrap">
-    <span class="eyebrow lang-en">// What you get</span>
-    <span class="eyebrow lang-fr">// Ce que vous obtenez</span>
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="wrap center">
+    <span class="eyebrow lang-en">// Our products</span>
+    <span class="eyebrow lang-fr">// Nos produits</span>
     <h2 class="h2">
-      <span class="lang-en">Everything your team<br>needs to move faster.</span>
-      <span class="lang-fr">Tout ce qu'il faut à votre équipe<br>pour aller plus vite.</span>
+      <span class="lang-en">Three tools. One workflow.</span>
+      <span class="lang-fr">Trois outils. Un seul workflow.</span>
     </h2>
-    <p class="lead lang-en" style="margin-bottom:52px">A fully branded AI panel, integrated natively inside After Effects as a real Adobe panel.</p>
-    <p class="lead lang-fr" style="margin-bottom:52px">Un panneau IA aux couleurs de votre studio, intégré nativement dans After Effects comme un vrai panneau Adobe.</p>
+    <p class="lead lang-en">From the full AI panel to free utilities — pick what your workflow needs.</p>
+    <p class="lead lang-fr">Du panneau IA complet aux utilitaires gratuits — choisissez ce dont votre workflow a besoin.</p>
 
-    <div class="what-grid">
-      <div class="what-item">
-        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="9.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="9.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="1.4" fill="currentColor" stroke="none"/><path d="M12 12a8 8 0 0 0 8 6"/></svg></div>
-        <h3><span class="lang-en">Your brand, your colors</span><span class="lang-fr">Votre marque, vos couleurs</span></h3>
-        <p class="lang-en">We customize the panel with your studio's logo, name and color palette. Your team sees your brand, not ours.</p>
-        <p class="lang-fr">Nous personnalisons le panneau avec le logo, le nom et la palette de couleurs de votre studio. Votre équipe voit votre marque, pas la nôtre.</p>
-      </div>
-      <div class="what-item">
-        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <h3><span class="lang-en">Native AE integration</span><span class="lang-fr">Intégration AE native</span></h3>
-        <p class="lang-en">Not a browser tab. A real Adobe panel that docks inside After Effects like any native tool — Lumetri, Essential Graphics, etc.</p>
-        <p class="lang-fr">Pas un onglet de navigateur. Un vrai panneau Adobe qui s'ancre dans After Effects comme n'importe quel outil natif — Lumetri, Essential Graphics, etc.</p>
-      </div>
-      <div class="what-item">
-        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3M9 9h6v6H9z"/></svg></div>
-        <h3><span class="lang-en">AI specialized in motion</span><span class="lang-fr">IA spécialisée en motion</span></h3>
-        <p class="lang-en">Expressions, kinetic typography, precompose, beat markers, error detection, smart templates — all powered by Claude AI.</p>
-        <p class="lang-fr">Expressions, typographie cinétique, précomposition, marqueurs de beat, détection d'erreurs, templates intelligents — le tout propulsé par Claude AI.</p>
-      </div>
-      <div class="what-item">
-        <div class="what-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-        <h3><span class="lang-en">Secure &amp; private</span><span class="lang-fr">Sécurisé &amp; privé</span></h3>
-        <p class="lang-en">Each user gets a personal token. Usage is tracked per seat. You control who has access.</p>
-        <p class="lang-fr">Chaque utilisateur dispose d'un token personnel. L'usage est suivi par poste. Vous contrôlez les accès.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="products-grid">
 
-<!-- SHOWCASE: Expressions -->
-<section style="padding-top:0">
-  <div class="wrap showcase flip">
-    <div class="showcase-media">
-      <div class="mockup">
-        <div class="mk-titlebar">
-          <div class="mk-dots"><i></i><i></i><i></i></div>
-          <small class="lang-en">Expressions Library</small>
-          <small class="lang-fr">Bibliothèque d'expressions</small>
+      <!-- Neyko FX Pro -->
+      <div class="product featured-p">
+        <span class="p-badge best">BEST SELLER</span>
+        <div class="p-visual">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lgP1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a5cf6"/>
+                <stop offset="1" stop-color="#5b32cc"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgP1)"/>
+            <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-        <div class="mk-exhead">
-          <span class="fx">fx</span>
-          <h4>Expressions</h4>
-        </div>
-        <div class="mk-exbody">
-          <div class="mk-group lit">
-            <div class="mk-grouphd">
-              <span class="gi">~</span>
-              <b class="lang-en">Basic Motion</b>
-              <b class="lang-fr">Mouvement de base</b>
-              <small>3 expressions · FREE</small>
-            </div>
-            <div class="mk-expr">
-              <span class="nm lang-en">Smooth Wiggle</span>
-              <span class="nm lang-fr">Wiggle doux</span>
-              <span class="prop">POSITION</span>
-              <span class="ap lang-en">Apply</span>
-              <span class="ap lang-fr">Appliquer</span>
-            </div>
+        <div class="p-body">
+          <div class="p-name">Neyko FX Pro</div>
+          <p class="p-desc lang-en">The full AI panel inside After Effects — actions, expressions, 3D text, beat sync and more.</p>
+          <p class="p-desc lang-fr">Le panneau IA complet dans After Effects — actions, expressions, texte 3D, beat sync et plus.</p>
+          <div class="p-price">
+            <span class="lang-en">Subscription</span><span class="lang-fr">Abonnement</span>
+            <small class="lang-en">cancel anytime</small>
+            <small class="lang-fr">annulable à tout moment</small>
           </div>
-          <div class="mk-group">
-            <div class="mk-grouphd">
-              <span class="gi">B</span>
-              <b class="lang-en">Bounce &amp; Inertia</b>
-              <b class="lang-fr">Bounce &amp; Inertie</b>
-              <small>4 expressions</small>
-              <span class="tier">STARTER</span>
-            </div>
-            <div class="mk-expr" style="margin-bottom:8px">
-              <span class="nm">Inertia Bounce</span>
-              <span class="prop">POSITION</span>
-              <span class="ap lang-en">Apply</span>
-              <span class="ap lang-fr">Appliquer</span>
-            </div>
-            <div class="mk-expr">
-              <span class="nm">Elastic Overshoot</span>
-              <span class="prop">SCALE</span>
-              <span class="ap lang-en">Apply</span>
-              <span class="ap lang-fr">Appliquer</span>
-            </div>
-          </div>
-          <div class="mk-collapsed">
-            <span class="lang-en">Text &amp; Kinetic</span>
-            <span class="lang-fr">Texte &amp; Cinétique</span>
-            <span>＋</span>
-          </div>
-          <div class="mk-collapsed">
-            <span class="lang-en">Reactive Audio</span>
-            <span class="lang-fr">Audio Réactif</span>
-            <span>＋</span>
+          <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener" class="p-cta">
+            <span class="lang-en">Get Neyko FX Pro →</span>
+            <span class="lang-fr">Obtenir Neyko FX Pro →</span>
+          </a>
+          <div class="p-sub">
+            <span class="lang-en">A studio? <a href="#whitelabel">See White Label plans</a></span>
+            <span class="lang-fr">Un studio ? <a href="#whitelabel">Voir les plans White Label</a></span>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="showcase-text">
-      <span class="eyebrow lang-en">// Expressions library</span>
-      <span class="eyebrow lang-fr">// Bibliothèque d'expressions</span>
-      <h3>
-        <span class="lang-en">A curated library,<br>one click away.</span>
-        <span class="lang-fr">Une bibliothèque soignée,<br>en un clic.</span>
-      </h3>
-      <p class="lang-en">Ship your team a growing library of motion expressions — wiggle, inertia, elastic overshoot, kinetic text, audio-reactive. Preview the code, then apply it to the selected property instantly.</p>
-      <p class="lang-fr">Donnez à votre équipe une bibliothèque croissante d'expressions motion — wiggle, inertie, elastic overshoot, texte cinétique, audio-réactif. Prévisualisez le code, puis appliquez-le à la propriété sélectionnée en un clic.</p>
-      <ul class="showcase-list">
-        <li>
-          <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
-          <span class="lang-en">Organized by category &amp; tier</span>
-          <span class="lang-fr">Organisée par catégorie et niveau</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
-          <span class="lang-en">Preview the code before you apply</span>
-          <span class="lang-fr">Prévisualisez le code avant d'appliquer</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
-          <span class="lang-en">Add your studio's own custom expressions</span>
-          <span class="lang-fr">Ajoutez vos propres expressions de studio</span>
-        </li>
-      </ul>
+      <!-- Neyko Precomp -->
+      <div class="product">
+        <span class="p-badge once"><span class="lang-en">ONE-TIME PURCHASE</span><span class="lang-fr">PAIEMENT UNIQUE</span></span>
+        <div class="p-visual">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lgP2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a5cf6"/>
+                <stop offset="1" stop-color="#5b32cc"/>
+              </linearGradient>
+            </defs>
+            <rect x="4" y="4" width="20" height="20" rx="4" fill="none" stroke="url(#lgP2)" stroke-width="2.5"/>
+            <rect x="16" y="16" width="20" height="20" rx="4" fill="url(#lgP2)"/>
+            <path d="M26 22v8M22 26h8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-name">Neyko Precomp</div>
+          <p class="p-desc lang-en">Precompose in 1 click — 4 buttons, no subscription, yours forever.</p>
+          <p class="p-desc lang-fr">Précomposez en 1 clic — 4 boutons, sans abonnement, à vous pour toujours.</p>
+          <div class="p-price">
+            19€
+            <small class="lang-en">one-time payment</small>
+            <small class="lang-fr">paiement unique</small>
+          </div>
+          <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener" class="p-cta">
+            <span class="lang-en">Get Neyko Precomp →</span>
+            <span class="lang-fr">Obtenir Neyko Precomp →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Neyko FX Cleaner -->
+      <div class="product">
+        <span class="p-badge free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span>
+        <div class="p-visual">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lgP3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a5cf6"/>
+                <stop offset="1" stop-color="#5b32cc"/>
+              </linearGradient>
+            </defs>
+            <path d="M22 4 10 22h8l-2 14 12-18h-8l2-14z" fill="url(#lgP3)"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-name">Neyko FX Cleaner</div>
+          <p class="p-desc lang-en">Clean and organize your AE projects in one click. Free, forever.</p>
+          <p class="p-desc lang-fr">Nettoyez et organisez vos projets AE en un clic. Gratuit, pour toujours.</p>
+          <div class="p-price">
+            0€
+            <small class="lang-en">no account required</small>
+            <small class="lang-fr">aucun compte requis</small>
+          </div>
+          <a href="#cleaner" class="p-cta">
+            <span class="lang-en">Discover Cleaner →</span>
+            <span class="lang-fr">Découvrir Cleaner →</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- WHATS NEW -->
-<section style="padding-top:0">
-  <div class="wrap">
+<section class="section-soft">
+  <div class="wrap center">
     <div class="version-badge">VERSION 3.1</div>
     <span class="eyebrow lang-en">// What's new</span>
     <span class="eyebrow lang-fr">// Nouveautés</span>
     <h2 class="h2">
-      <span class="lang-en">Faster to install,<br>smoother to use.</span>
-      <span class="lang-fr">Plus rapide à installer,<br>plus fluide à utiliser.</span>
+      <span class="lang-en">Faster to install, smoother to use.</span>
+      <span class="lang-fr">Plus rapide à installer, plus fluide à utiliser.</span>
     </h2>
     <p class="lead lang-en">Six improvements focused on setup speed and everyday precision.</p>
     <p class="lead lang-fr">Six améliorations centrées sur la rapidité d'installation et la précision au quotidien.</p>
 
-    <div class="features-grid">
+    <div class="features-grid" style="text-align:left">
       <div class="feature-card">
-        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6M9 12h6M12 16v4M9 16l3 4 3-4"/></svg></div>
         <h3><span class="lang-en">Automatic installer</span><span class="lang-fr">Installateur automatique</span></h3>
         <p class="lang-en">Run Install.bat (Windows) or Install.command (Mac) and you're ready — no manual configuration.</p>
         <p class="lang-fr">Lancez Install.bat (Windows) ou Install.command (Mac) et c'est prêt — aucune configuration manuelle.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 21v-4h4v-4h4v-4h4v-4h4v16z"/></svg></div>
         <h3><span class="lang-en">Auto-Align Staircase</span><span class="lang-fr">Alignement Escalier Auto</span></h3>
         <p class="lang-en">Automatically stagger and align layers into a perfect staircase — ideal for text reveals and list animations.</p>
         <p class="lang-fr">Alignez et décalez automatiquement vos calques en escalier parfait — idéal pour les reveals de texte et animations de listes.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
-        <h3><span class="lang-en">Corner Snap</span><span class="lang-fr">Corner Snap</span></h3>
+        <h3>Corner Snap</h3>
         <p class="lang-en">Snap shape layers and masks precisely to corners and edges — pixel-perfect alignment in one click.</p>
         <p class="lang-fr">Alignez précisément vos shape layers et masques sur les coins et bords — un alignement au pixel près en un clic.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
         <h3>3D Text Premium</h3>
         <p class="lang-en">Now with live preview and style shuffle — try every look before you commit.</p>
         <p class="lang-fr">Désormais avec aperçu en direct et shuffle de styles — testez chaque rendu avant de valider.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2.5 14.7 9.1 21.5 9.7 16.3 14.2 17.9 20.9 12 17.3 6.1 20.9 7.7 14.2 2.5 9.7 9.3 9.1z"/></svg></div>
         <h3><span class="lang-en">Rating system</span><span class="lang-fr">Système de notation</span></h3>
         <p class="lang-en">Rate the results directly inside the panel — help us fine-tune the AI to your studio's taste.</p>
         <p class="lang-fr">Notez les résultats directement dans le panneau — aidez-nous à affiner l'IA selon les goûts de votre studio.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-new">NEW</span>
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h3><span class="lang-en">Simplified installation</span><span class="lang-fr">Installation simplifiée</span></h3>
         <p class="lang-en">Fewer steps, clearer prompts. First-run setup now takes under two minutes, start to finish.</p>
@@ -685,11 +523,11 @@ footer .logo-text{font-size:18px}
   </div>
 </section>
 
-<!-- CLEANER / FREE TOOLS -->
-<section id="cleaner" style="padding-top:0">
+<!-- CLEANER -->
+<section id="cleaner">
   <div class="wrap cleaner-wrap">
     <div>
-      <div class="cleaner-badge">100% FREE</div>
+      <div class="cleaner-badge">100% <span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></div>
       <h3>
         <span class="lang-en">Neyko FX Cleaner.<br>Free, forever.</span>
         <span class="lang-fr">Neyko FX Cleaner.<br>Gratuit, pour toujours.</span>
@@ -703,14 +541,13 @@ footer .logo-text{font-size:18px}
         <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Project stats &amp; one-click flatten</span><span class="lang-fr">Stats du projet et aplatissement en un clic</span></li>
         <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Native AE panel, no plugins</span><span class="lang-fr">Panneau AE natif, sans plugins</span></li>
       </ul>
-      <a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener" class="cleaner-cta">
+      <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener" class="btn-primary">
         <span class="lang-en">Download free on Payhip</span>
         <span class="lang-fr">Télécharger gratuitement sur Payhip</span>
-        <svg class="ic" viewBox="0 0 24 24" style="width:16px;height:16px;stroke:#04121a"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
 
-    <!-- Cleaner panel mockup -->
+    <!-- Cleaner panel mockup (AE panels are dark) -->
     <div>
       <div class="mockup">
         <div class="mk-titlebar"><div class="mk-dots"><i></i><i></i><i></i></div><small>Neyko FX Cleaner</small></div>
@@ -748,115 +585,10 @@ footer .logo-text{font-size:18px}
             </div>
           </div>
         </div>
-        <a href="#pricing" class="mk-clfoot">
+        <a href="#whitelabel" class="mk-clfoot">
           <span class="lang-en">Upgrade to Neyko FX Pro →</span>
           <span class="lang-fr">Passer à Neyko FX Pro →</span>
         </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Neyko Precomp product card -->
-  <div class="wrap">
-    <div class="product-card">
-      <div>
-        <span class="product-badge">
-          <span class="lang-en">ONE-TIME PURCHASE</span>
-          <span class="lang-fr">PAIEMENT UNIQUE</span>
-        </span>
-        <h3>Neyko Precomp</h3>
-        <p class="lang-en">Precompose in 1 click — 4 buttons, no subscription, yours forever.</p>
-        <p class="lang-fr">Précomposez en 1 clic — 4 boutons, sans abonnement, à vous pour toujours.</p>
-      </div>
-      <div class="product-card-right">
-        <div class="product-price">19€<span class="lang-en">one-time</span><span class="lang-fr">paiement unique</span></div>
-        <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener" class="product-cta">
-          <span class="lang-en">Get Neyko Precomp →</span>
-          <span class="lang-fr">Obtenir Neyko Precomp →</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="wrap">
-    <span class="eyebrow lang-en">// Pricing</span>
-    <span class="eyebrow lang-fr">// Tarifs</span>
-    <h2 class="h2">
-      <span class="lang-en">Simple, transparent<br>studio pricing.</span>
-      <span class="lang-fr">Des tarifs simples<br>et transparents.</span>
-    </h2>
-    <p class="lead lang-en" style="margin-bottom:52px">All plans include full white labeling, onboarding and support.</p>
-    <p class="lead lang-fr" style="margin-bottom:52px">Tous les plans incluent le white labeling complet, l'onboarding et le support.</p>
-
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="plan-name">STARTER</div>
-        <div class="plan-seats">1 – 5 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
-        <div class="plan-price">99<span>€</span></div>
-        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
-        <ul class="plan-features">
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 5 users</span><span class="lang-fr">Jusqu'à 5 utilisateurs</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom logo &amp; name</span><span class="lang-fr">Logo et nom personnalisés</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">200 messages/day/user</span><span class="lang-fr">200 messages/jour/utilisateur</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Email support</span><span class="lang-fr">Support email</span></li>
-        </ul>
-        <a href="mailto:contact@neykofx.com?subject=White Label Starter" class="plan-btn">
-          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
-        </a>
-      </div>
-
-      <div class="pricing-card featured">
-        <div class="featured-tag"><span class="lang-en">MOST POPULAR</span><span class="lang-fr">LE PLUS POPULAIRE</span></div>
-        <div class="plan-name">STUDIO</div>
-        <div class="plan-seats">6 – 15 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
-        <div class="plan-price">199<span>€</span></div>
-        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
-        <ul class="plan-features">
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 15 users</span><span class="lang-fr">Jusqu'à 15 utilisateurs</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Full custom branding</span><span class="lang-fr">Branding entièrement personnalisé</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">500 messages/day/user</span><span class="lang-fr">500 messages/jour/utilisateur</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Priority support</span><span class="lang-fr">Support prioritaire</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom onboarding</span><span class="lang-fr">Onboarding personnalisé</span></li>
-        </ul>
-        <a href="mailto:contact@neykofx.com?subject=White Label Studio" class="plan-btn">
-          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
-        </a>
-      </div>
-
-      <div class="pricing-card">
-        <div class="plan-name"><span class="lang-en">AGENCY</span><span class="lang-fr">AGENCE</span></div>
-        <div class="plan-seats">16 – 50 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
-        <div class="plan-price">499<span>€</span></div>
-        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
-        <ul class="plan-features">
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 50 users</span><span class="lang-fr">Jusqu'à 50 utilisateurs</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Full custom branding</span><span class="lang-fr">Branding entièrement personnalisé</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Unlimited messages</span><span class="lang-fr">Messages illimités</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN bilingual</li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Dedicated support</span><span class="lang-fr">Support dédié</span></li>
-          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom features on request</span><span class="lang-fr">Fonctionnalités sur mesure</span></li>
-        </ul>
-        <a href="mailto:contact@neykofx.com?subject=White Label Agency" class="plan-btn">
-          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
-        </a>
-      </div>
-    </div>
-
-    <p class="pricing-note">
-      <span class="lang-en">Just you? Check out the <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">individual plan on Payhip →</a></span>
-      <span class="lang-fr">Solo ? Découvrez le <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">plan individuel sur Payhip →</a></span>
-    </p>
-
-    <div class="guarantee-wrap">
-      <div class="guarantee-badge">
-        <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="lang-en">30-day money back guarantee — no questions asked</span>
-        <span class="lang-fr">Garantie satisfait ou remboursé 30 jours — sans question</span>
       </div>
     </div>
   </div>
@@ -875,80 +607,87 @@ footer .logo-text{font-size:18px}
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section style="padding-top:0">
-  <div class="wrap">
-    <span class="eyebrow lang-en">// How it works</span>
-    <span class="eyebrow lang-fr">// Comment ça marche</span>
+<!-- WHITE LABEL / PRICING -->
+<section id="whitelabel">
+  <div class="wrap center">
+    <span class="eyebrow lang-en">// Studios &amp; agencies</span>
+    <span class="eyebrow lang-fr">// Studios &amp; agences</span>
     <h2 class="h2">
-      <span class="lang-en">Up and running<br>in 48 hours.</span>
-      <span class="lang-fr">Opérationnel<br>en 48 heures.</span>
+      <span class="lang-en">White Label for your studio.</span>
+      <span class="lang-fr">White Label pour votre studio.</span>
     </h2>
-    <p class="lead lang-en" style="margin-bottom:30px">We handle the technical setup. You focus on your team.</p>
-    <p class="lead lang-fr" style="margin-bottom:30px">Nous gérons la partie technique. Vous vous concentrez sur votre équipe.</p>
+    <p class="lead lang-en">The AI panel fully branded with your studio's identity — logo, name, colors. All plans include onboarding and support.</p>
+    <p class="lead lang-fr">Le panneau IA entièrement aux couleurs de votre studio — logo, nom, couleurs. Tous les plans incluent l'onboarding et le support.</p>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-content">
-          <div class="step-tag">CONTACT</div>
-          <h3><span class="lang-en">Send us your brief</span><span class="lang-fr">Envoyez-nous votre brief</span></h3>
-          <p class="lang-en">Tell us your studio name, number of users, and send us your logo. We handle the rest. No technical knowledge required on your side.</p>
-          <p class="lang-fr">Dites-nous le nom de votre studio, le nombre d'utilisateurs, et envoyez-nous votre logo. Nous nous occupons du reste. Aucune compétence technique requise.</p>
-        </div>
+    <div class="pricing-grid" style="text-align:left">
+      <div class="pricing-card">
+        <div class="plan-name">STARTER</div>
+        <div class="plan-seats">1 – 5 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
+        <div class="plan-price">99<span>€</span></div>
+        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
+        <ul class="plan-features">
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 5 users</span><span class="lang-fr">Jusqu'à 5 utilisateurs</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom logo &amp; name</span><span class="lang-fr">Logo et nom personnalisés</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">200 messages/day/user</span><span class="lang-fr">200 messages/jour/utilisateur</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Email support</span><span class="lang-fr">Support email</span></li>
+        </ul>
+        <a href="mailto:contact@neykofx.com?subject=White Label Starter" class="plan-btn">
+          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
+        </a>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-content">
-          <div class="step-tag">SETUP</div>
-          <h3><span class="lang-en">We customize your panel</span><span class="lang-fr">Nous personnalisons votre panneau</span></h3>
-          <p class="lang-en">We brand the panel with your identity — logo, name, colors. We generate unique access tokens for each member of your team.</p>
-          <p class="lang-fr">Nous habillons le panneau avec votre identité — logo, nom, couleurs. Nous générons des tokens d'accès uniques pour chaque membre de votre équipe.</p>
-        </div>
+
+      <div class="pricing-card featured">
+        <div class="featured-tag"><span class="lang-en">MOST POPULAR</span><span class="lang-fr">LE PLUS POPULAIRE</span></div>
+        <div class="plan-name">STUDIO</div>
+        <div class="plan-seats">6 – 15 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
+        <div class="plan-price">199<span>€</span></div>
+        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
+        <ul class="plan-features">
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 15 users</span><span class="lang-fr">Jusqu'à 15 utilisateurs</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Full custom branding</span><span class="lang-fr">Branding entièrement personnalisé</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">500 messages/day/user</span><span class="lang-fr">500 messages/jour/utilisateur</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Priority support</span><span class="lang-fr">Support prioritaire</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom onboarding</span><span class="lang-fr">Onboarding personnalisé</span></li>
+        </ul>
+        <a href="mailto:contact@neykofx.com?subject=White Label Studio" class="plan-btn">
+          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
+        </a>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-content">
-          <div class="step-tag">DELIVER</div>
-          <h3><span class="lang-en">Your team installs in 5 minutes</span><span class="lang-fr">Votre équipe installe en 5 minutes</span></h3>
-          <p class="lang-en">We send each user a personalized email with their token and a step-by-step installation guide. They're up and running in minutes.</p>
-          <p class="lang-fr">Nous envoyons à chaque utilisateur un email personnalisé avec son token et un guide d'installation pas à pas. Ils sont opérationnels en quelques minutes.</p>
-        </div>
+
+      <div class="pricing-card">
+        <div class="plan-name"><span class="lang-en">AGENCY</span><span class="lang-fr">AGENCE</span></div>
+        <div class="plan-seats">16 – 50 <span class="lang-en">seats</span><span class="lang-fr">postes</span></div>
+        <div class="plan-price">499<span>€</span></div>
+        <div class="plan-period"><span class="lang-en">per month</span><span class="lang-fr">par mois</span></div>
+        <ul class="plan-features">
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Up to 50 users</span><span class="lang-fr">Jusqu'à 50 utilisateurs</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Full custom branding</span><span class="lang-fr">Branding entièrement personnalisé</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Unlimited messages</span><span class="lang-fr">Messages illimités</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FR / EN</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Dedicated support</span><span class="lang-fr">Support dédié</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Custom features on request</span><span class="lang-fr">Fonctionnalités sur mesure</span></li>
+        </ul>
+        <a href="mailto:contact@neykofx.com?subject=White Label Agency" class="plan-btn">
+          <span class="lang-en">Get started</span><span class="lang-fr">Démarrer</span>
+        </a>
       </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <div class="step-tag">ONGOING</div>
-          <h3><span class="lang-en">We handle updates &amp; support</span><span class="lang-fr">Nous gérons les mises à jour &amp; le support</span></h3>
-          <p class="lang-en">New features, bug fixes, support requests — we manage everything so you can focus on creating.</p>
-          <p class="lang-fr">Nouvelles fonctionnalités, corrections de bugs, demandes de support — nous gérons tout pour que vous puissiez vous concentrer sur la création.</p>
-        </div>
-      </div>
+    </div>
+
+    <div class="guarantee-badge">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span class="lang-en">30-day money back guarantee — no questions asked</span>
+      <span class="lang-fr">Garantie satisfait ou remboursé 30 jours — sans question</span>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<div class="cta-section">
-  <div class="wrap">
-    <h2>
-      <span class="lang-en">Ready to equip<br>your studio?</span>
-      <span class="lang-fr">Prêt à équiper<br>votre studio ?</span>
-    </h2>
-    <p class="lang-en">Join the studios that are already using AI to create faster and better motion design.</p>
-    <p class="lang-fr">Rejoignez les studios qui utilisent déjà l'IA pour créer plus vite et mieux.</p>
-    <a href="mailto:contact@neykofx.com?subject=White Label Neyko FX — Demo Request" class="btn-primary">
-      <span class="lang-en">Request a free demo</span>
-      <span class="lang-fr">Demander une démo gratuite</span>
-    </a>
-  </div>
-</div>
-
 <!-- FAQ -->
-<section>
+<section id="faq" class="section-soft">
   <div class="wrap">
     <span class="eyebrow">// FAQ</span>
-    <h2 class="h2" style="margin-bottom:40px">
+    <h2 class="h2" style="margin-bottom:36px">
       <span class="lang-en">Questions</span>
       <span class="lang-fr">Questions fréquentes</span>
     </h2>
@@ -966,10 +705,10 @@ footer .logo-text{font-size:18px}
         <div class="faq-a lang-fr">Oui, une connexion internet est nécessaire pour communiquer avec l'IA. Le panneau lui-même est installé localement dans After Effects.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q lang-en">Can we add or remove users at any time?</div>
-        <div class="faq-q lang-fr">Peut-on ajouter ou supprimer des utilisateurs à tout moment ?</div>
-        <div class="faq-a lang-en">Yes. You can add seats or remove users at any time. Changes take effect immediately and billing is adjusted accordingly.</div>
-        <div class="faq-a lang-fr">Oui. Vous pouvez ajouter des postes ou supprimer des utilisateurs à tout moment. Les modifications prennent effet immédiatement et la facturation est ajustée en conséquence.</div>
+        <div class="faq-q lang-en">What's the difference between Pro and Precomp?</div>
+        <div class="faq-q lang-fr">Quelle est la différence entre Pro et Precomp ?</div>
+        <div class="faq-a lang-en">Neyko FX Pro is the full AI panel (subscription). Neyko Precomp is a standalone one-time-purchase tool focused on precomposing — 4 buttons, no subscription, yours forever.</div>
+        <div class="faq-a lang-fr">Neyko FX Pro est le panneau IA complet (abonnement). Neyko Precomp est un outil autonome en paiement unique, dédié à la précomposition — 4 boutons, sans abonnement, à vous pour toujours.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q lang-en">What languages does the AI speak?</div>
@@ -980,8 +719,8 @@ footer .logo-text{font-size:18px}
       <div class="faq-item">
         <div class="faq-q lang-en">Is there a minimum commitment?</div>
         <div class="faq-q lang-fr">Y a-t-il un engagement minimum ?</div>
-        <div class="faq-a lang-en">No long-term commitment. Plans are monthly and can be cancelled at any time. We offer a free demo before any purchase.</div>
-        <div class="faq-a lang-fr">Pas d'engagement à long terme. Les plans sont mensuels et peuvent être annulés à tout moment. Nous proposons une démo gratuite avant tout achat.</div>
+        <div class="faq-a lang-en">No long-term commitment. Plans are monthly and can be cancelled at any time. Every purchase is covered by our 30-day money back guarantee.</div>
+        <div class="faq-a lang-fr">Pas d'engagement à long terme. Les plans sont mensuels et peuvent être annulés à tout moment. Chaque achat est couvert par notre garantie satisfait ou remboursé de 30 jours.</div>
       </div>
     </div>
   </div>
@@ -989,58 +728,58 @@ footer .logo-text{font-size:18px}
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="brand">
-      <svg class="logo-mark" viewBox="0 0 40 40" width="32" height="32" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lgFoot" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#8a5cf6"/>
-            <stop offset="1" stop-color="#5b32cc"/>
-          </linearGradient>
-        </defs>
-        <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgFoot)" stroke="rgba(255,255,255,0.14)" stroke-width="0.6" stroke-linejoin="round"/>
-        <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-        <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
-      </svg>
-      <span class="logo-text">Neyko <span>FX</span></span>
-    </div>
-    <div class="footer-links">
-      <a href="#cleaner">
-        <span class="lang-en">Cleaner (Free)</span><span class="lang-fr">Cleaner (Gratuit)</span>
-      </a>
-      <a href="mailto:contact@neykofx.com">Contact</a>
-    </div>
-  </div>
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="footer-brand-col">
+        <div class="brand">
+          <svg class="logo-mark" viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lgFoot" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a5cf6"/>
+                <stop offset="1" stop-color="#5b32cc"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 2 35.6 11 35.6 29 20 38 4.4 29 4.4 11Z" fill="url(#lgFoot)" stroke="rgba(0,0,0,0.06)" stroke-width="0.6" stroke-linejoin="round"/>
+            <path d="M13 26 V14 L25 26 V14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="25" y="26" width="13" height="10" rx="3" fill="#5b32cc" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+            <text x="31.5" y="33.4" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" font-weight="700" fill="#fff">FX</text>
+          </svg>
+          <span class="logo-text">Neyko <span>FX</span></span>
+        </div>
+        <p class="lang-en">AI tools built natively for After Effects. Made for motion designers, studios and agencies.</p>
+        <p class="lang-fr">Des outils IA conçus nativement pour After Effects. Pensés pour les motion designers, studios et agences.</p>
+        <div class="footer-guarantee">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span class="lang-en">30-day money back guarantee</span>
+          <span class="lang-fr">Garantie 30 jours satisfait ou remboursé</span>
+        </div>
+      </div>
 
-  <div class="footer-products">
-    <div class="footer-product">
-      <span class="fp-name">Neyko FX Pro</span>
-      <span class="fp-meta lang-en">Subscription</span>
-      <span class="fp-meta lang-fr">Abonnement</span>
-      <a href="#pricing"><span class="lang-en">See plans →</span><span class="lang-fr">Voir les plans →</span></a>
-    </div>
-    <div class="footer-product">
-      <span class="fp-name">Neyko Precomp</span>
-      <span class="fp-meta">19€ <span class="lang-en">one-time</span><span class="lang-fr">paiement unique</span></span>
-      <a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener"><span class="lang-en">Get it →</span><span class="lang-fr">Obtenir →</span></a>
-    </div>
-    <div class="footer-product">
-      <span class="fp-name">Neyko FX Cleaner</span>
-      <span class="fp-meta lang-en">Free</span>
-      <span class="fp-meta lang-fr">Gratuit</span>
-      <a href="#cleaner"><span class="lang-en">Download →</span><span class="lang-fr">Télécharger →</span></a>
-    </div>
-  </div>
+      <div>
+        <div class="footer-h"><span class="lang-en">Best sellers</span><span class="lang-fr">Meilleurs produits</span></div>
+        <ul class="footer-list">
+          <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Neyko FX Pro<span class="fp-price"><span class="lang-en">subscription</span><span class="lang-fr">abonnement</span></span></a></li>
+          <li><a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener">Neyko Precomp<span class="fp-price">19€</span></a></li>
+          <li><a href="#cleaner">Neyko FX Cleaner<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
+          <li><a href="https://payhip.com/NeykoFX" target="_blank" rel="noopener"><span class="lang-en">See the full store →</span><span class="lang-fr">Voir tout le store →</span></a></li>
+        </ul>
+      </div>
 
-  <div class="footer-guarantee">
-    <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-    <span class="lang-en">30-day money back guarantee — no questions asked</span>
-    <span class="lang-fr">Garantie satisfait ou remboursé 30 jours — sans question</span>
-  </div>
+      <div>
+        <div class="footer-h"><span class="lang-en">Links</span><span class="lang-fr">Liens</span></div>
+        <ul class="footer-list">
+          <li><a href="#whitelabel"><span class="lang-en">Studio / White Label</span><span class="lang-fr">Studio / White Label</span></a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:contact@neykofx.com?subject=Referral Program"><span class="lang-en">Referral program</span><span class="lang-fr">Programme de parrainage</span></a></li>
+          <li><a href="mailto:contact@neykofx.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
 
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Neyko FX. All rights reserved.</div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Neyko FX. <span class="lang-en">All rights reserved.</span><span class="lang-fr">Tous droits réservés.</span></div>
+      <a href="mailto:contact@neykofx.com" class="footer-mail">contact@neykofx.com</a>
+    </div>
   </div>
 </footer>
 
