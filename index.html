@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neyko FX — AI Toolkit for After Effects</title>
-<meta property="og:title" content="Neyko FX — AI Toolkit for After Effects">
+<title>Neyko FX, AI Toolkit for After Effects</title>
+<meta property="og:title" content="Neyko FX, AI Toolkit for After Effects">
 <meta property="og:description" content="AI panel, precompose tools and free utilities for After Effects. White label available for studios.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238a5cf6'/%3E%3Cstop offset='1' stop-color='%235b32cc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M16 1.5 28.7 8.75 28.7 23.25 16 30.5 3.3 23.25 3.3 8.75Z' fill='url(%23g)'/%3E%3Cpath d='M10 22V10l12 12V10' fill='none' stroke='%23fff' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -199,7 +199,7 @@ section{padding:84px 0}
 .cleaner-features li{font-size:14px;color:#3f3f50;display:flex;align-items:center;gap:10px}
 .cleaner-features .ic{width:17px;height:17px;color:var(--violet);flex-shrink:0}
 
-/* Cleaner dark panel mockup (AE is dark — kept dark on purpose) */
+/* Cleaner dark panel mockup (AE is dark, kept dark on purpose) */
 .mockup{background:#0d0d1a;border:1px solid #23233a;border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -24px rgba(18,18,26,0.4);color:#e8e6f5;font-family:'Inter',sans-serif}
 .mk-titlebar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#141426;border-bottom:1px solid #23233a}
 .mk-dots{display:flex;gap:6px}
@@ -251,12 +251,67 @@ footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:60px
 footer .logo-mark{width:30px;height:30px}
 footer .logo-text{font-size:17px}
 
+/* ===== EDITING PACK (creative / personal product) ===== */
+.editpack{background:linear-gradient(180deg,#fff8f3 0%,#fdf4ff 100%);border-top:1px solid #f0e4dc;border-bottom:1px solid #f0e4dc}
+.editpack-card{
+  background:#fff;border:1px solid rgba(138,92,246,0.3);border-radius:20px;overflow:hidden;
+  box-shadow:0 24px 60px -28px rgba(194,65,12,0.22);
+  display:grid;grid-template-columns:1.05fr 1fr;
+}
+.ep-left{padding:44px 44px 40px}
+.ep-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.35);color:#0e7490;
+  font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  padding:5px 13px;border-radius:100px;margin-bottom:18px;
+}
+.ep-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan,#22d3ee)}
+.ep-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.6px;line-height:1.12;margin-bottom:8px}
+.ep-sub{font-size:15px;color:#a15b2d;font-weight:600;margin-bottom:16px}
+.ep-desc{font-size:14.5px;color:var(--muted);line-height:1.65;margin-bottom:26px;max-width:440px}
+.ep-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin-bottom:28px}
+.ep-list li{display:flex;align-items:center;gap:11px;font-size:14px;color:#3f3f50;font-weight:500}
+.ep-list .ep-emo{font-size:17px;width:24px;text-align:center;flex-shrink:0}
+.ep-list b{font-weight:700;color:var(--ink)}
+.ep-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#8a5cf6,#5b32cc);color:#fff;
+  padding:14px 30px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;
+  box-shadow:0 12px 26px -10px rgba(91,50,204,0.5);transition:transform 0.2s,box-shadow 0.2s;
+}
+.ep-cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(91,50,204,0.6)}
+.ep-notes{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.ep-notes li{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.ep-notes .ok{color:var(--green);font-weight:800}
+/* right column: preview thumbnails recreated in CSS */
+.ep-right{position:relative;padding:26px;background:linear-gradient(160deg,#1a1526 0%,#0d0d1a 100%);display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:12px}
+.ep-thumb{position:relative;border-radius:12px;overflow:hidden;min-height:104px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.08)}
+.ep-thumb span{position:relative;z-index:2;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:12.5px;letter-spacing:0.5px;text-align:center;padding:0 8px;line-height:1.2}
+.ep-thumb::before{content:'';position:absolute;inset:0;z-index:1;opacity:0.9}
+/* textured yellow */
+.ep-t1{background:radial-gradient(120% 120% at 50% 120%,#4a3d0a 0%,#141018 70%)}
+.ep-t1 span{color:#e6ff2e;text-shadow:0 0 12px rgba(200,220,0,0.7)}
+/* shake, white blur */
+.ep-t2{background:linear-gradient(135deg,#3a3f45,#0e1114)}
+.ep-t2 span{color:#f4f6f8;text-shadow:0 0 10px rgba(255,255,255,0.55)}
+/* matrix green */
+.ep-t3{background:radial-gradient(120% 120% at 50% 50%,#0a2f14 0%,#05070a 75%)}
+.ep-t3 span{color:#39ff8a;text-shadow:0 0 12px rgba(40,255,120,0.7)}
+/* glow green wide */
+.ep-t4{background:radial-gradient(130% 100% at 50% 60%,#0d3b1e 0%,#060a0c 78%)}
+.ep-t4 span{color:#4dff9e;text-shadow:0 0 16px rgba(60,255,140,0.8)}
+/* zooms, outlined white on grain */
+.ep-t5{grid-column:span 2;background:linear-gradient(135deg,#2a2622,#101014);min-height:88px}
+.ep-t5 span{color:#fff;-webkit-text-stroke:1px rgba(255,120,120,0.5);text-shadow:0 0 8px rgba(0,0,0,0.6);font-size:14px;letter-spacing:1px}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:880px){
   .products-grid,.pricing-grid{grid-template-columns:1fr}
   .features-grid{grid-template-columns:1fr 1fr}
   .cleaner-wrap{grid-template-columns:1fr;gap:40px}
   .footer-cols{grid-template-columns:1fr;gap:36px}
+  .editpack-card{grid-template-columns:1fr}
+  .ep-right{order:-1}
 }
 @media(max-width:680px){
   nav{padding:12px 22px}
@@ -265,6 +320,8 @@ footer .logo-text{font-size:17px}
   .hero{padding:64px 0 56px}
   .features-grid{grid-template-columns:1fr}
   .mk-clgrid{grid-template-columns:1fr}
+  .ep-list{grid-template-columns:1fr}
+  .ep-left{padding:32px 24px}
   footer{padding:44px 22px 28px}
   .footer-bottom{flex-direction:column;text-align:center}
   .nav-burger{display:flex}
@@ -286,13 +343,13 @@ footer .logo-text{font-size:17px}
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce">
-  <span class="lang-en">✓ Neyko FX is free — 15 AI requests / month included. No payment required.</span>
-  <span class="lang-fr">✓ Neyko FX est gratuit — 15 requêtes IA / mois incluses. Aucun paiement requis.</span>
+  <span class="lang-en">✓ Neyko FX is free, 15 AI requests / month included. No payment required.</span>
+  <span class="lang-fr">✓ Neyko FX est gratuit, 15 requêtes IA / mois incluses. Aucun paiement requis.</span>
 </div>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="brand" aria-label="Neyko FX — home">
+  <a href="#" class="brand" aria-label="Neyko FX, home">
     <svg class="logo-mark" viewBox="0 0 40 40" width="34" height="34" role="img" aria-label="Neyko FX logo" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="lgNav" x1="0" y1="0" x2="1" y2="1">
@@ -341,8 +398,8 @@ footer .logo-text{font-size:17px}
       <span class="lang-en">Motion design,<br><em>accelerated by AI.</em></span>
       <span class="lang-fr">Le motion design,<br><em>accéléré par l'IA.</em></span>
     </h1>
-    <p class="hero-sub lang-en">An AI panel, precompose tools and free utilities — built natively for After Effects. White label available for studios.</p>
-    <p class="hero-sub lang-fr">Un panneau IA, des outils de précomposition et des utilitaires gratuits — conçus nativement pour After Effects. White label disponible pour les studios.</p>
+    <p class="hero-sub lang-en">An AI panel, precompose tools and free utilities, built natively for After Effects. White label available for studios.</p>
+    <p class="hero-sub lang-fr">Un panneau IA, des outils de précomposition et des utilitaires gratuits, conçus nativement pour After Effects. White label disponible pour les studios.</p>
     <div class="hero-actions">
       <a href="#products" class="btn-primary">
         <span class="lang-en">See products</span>
@@ -370,8 +427,8 @@ footer .logo-text{font-size:17px}
       <span class="lang-en">Three tools. One workflow.</span>
       <span class="lang-fr">Trois outils. Un seul workflow.</span>
     </h2>
-    <p class="lead lang-en">From the full AI panel to free utilities — pick what your workflow needs.</p>
-    <p class="lead lang-fr">Du panneau IA complet aux utilitaires gratuits — choisissez ce dont votre workflow a besoin.</p>
+    <p class="lead lang-en">From the full AI panel to free utilities, pick what your workflow needs.</p>
+    <p class="lead lang-fr">Du panneau IA complet aux utilitaires gratuits, choisissez ce dont votre workflow a besoin.</p>
 
     <div class="products-grid">
 
@@ -392,8 +449,8 @@ footer .logo-text{font-size:17px}
         </div>
         <div class="p-body">
           <div class="p-name">Neyko FX</div>
-          <p class="p-desc lang-en">The full AI panel inside After Effects — actions, expressions, 3D text, beat sync and more.</p>
-          <p class="p-desc lang-fr">Le panneau IA complet dans After Effects — actions, expressions, texte 3D, beat sync et plus.</p>
+          <p class="p-desc lang-en">The full AI panel inside After Effects, actions, expressions, 3D text, beat sync and more.</p>
+          <p class="p-desc lang-fr">Le panneau IA complet dans After Effects, actions, expressions, texte 3D, beat sync et plus.</p>
           <div class="p-price">
             <span class="lang-en">Free</span><span class="lang-fr">Gratuit</span>
             <small class="lang-en">15 AI requests / month included</small>
@@ -434,8 +491,8 @@ footer .logo-text{font-size:17px}
         </div>
         <div class="p-body">
           <div class="p-name">Neyko Precomp</div>
-          <p class="p-desc lang-en">Precompose in 1 click — 5 buttons, no subscription, yours forever.</p>
-          <p class="p-desc lang-fr">Précomposez en 1 clic — 5 boutons, sans abonnement, à vous pour toujours.</p>
+          <p class="p-desc lang-en">Precompose in 1 click, 5 buttons, no subscription, yours forever.</p>
+          <p class="p-desc lang-fr">Précomposez en 1 clic, 5 boutons, sans abonnement, à vous pour toujours.</p>
           <div class="p-price">
             4,99€
             <small class="lang-en">one-time payment</small>
@@ -464,8 +521,8 @@ footer .logo-text{font-size:17px}
         </div>
         <div class="p-body">
           <div class="p-name">Neyko FX Cleaner</div>
-          <p class="p-desc lang-en">Clean and organize your AE projects in one click. Free, forever — no limits, no account required.</p>
-          <p class="p-desc lang-fr">Nettoyez et organisez vos projets AE en un clic. Gratuit, pour toujours — sans limite, sans compte requis.</p>
+          <p class="p-desc lang-en">Clean and organize your AE projects in one click. Free, forever, no limits, no account required.</p>
+          <p class="p-desc lang-fr">Nettoyez et organisez vos projets AE en un clic. Gratuit, pour toujours, sans limite, sans compte requis.</p>
           <div class="p-price">
             0€
             <small class="lang-en">no account required</small>
@@ -499,32 +556,32 @@ footer .logo-text{font-size:17px}
       <div class="feature-card">
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6M9 12h6M12 16v4M9 16l3 4 3-4"/></svg></div>
         <h3><span class="lang-en">Automatic installer</span><span class="lang-fr">Installateur automatique</span></h3>
-        <p class="lang-en">Run Install.bat (Windows) or Install.command (Mac) and you're ready — no manual configuration.</p>
-        <p class="lang-fr">Lancez Install.bat (Windows) ou Install.command (Mac) et c'est prêt — aucune configuration manuelle.</p>
+        <p class="lang-en">Run Install.bat (Windows) or Install.command (Mac) and you're ready, no manual configuration.</p>
+        <p class="lang-fr">Lancez Install.bat (Windows) ou Install.command (Mac) et c'est prêt, aucune configuration manuelle.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M3 21v-4h4v-4h4v-4h4v-4h4v16z"/></svg></div>
         <h3><span class="lang-en">Auto-Align Staircase</span><span class="lang-fr">Alignement Escalier Auto</span></h3>
-        <p class="lang-en">Automatically stagger and align layers into a perfect staircase — ideal for text reveals and list animations.</p>
-        <p class="lang-fr">Alignez et décalez automatiquement vos calques en escalier parfait — idéal pour les reveals de texte et animations de listes.</p>
+        <p class="lang-en">Automatically stagger and align layers into a perfect staircase, ideal for text reveals and list animations.</p>
+        <p class="lang-fr">Alignez et décalez automatiquement vos calques en escalier parfait, idéal pour les reveals de texte et animations de listes.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
         <h3>Corner Snap</h3>
-        <p class="lang-en">Snap shape layers and masks precisely to corners and edges — pixel-perfect alignment in one click.</p>
-        <p class="lang-fr">Alignez précisément vos shape layers et masques sur les coins et bords — un alignement au pixel près en un clic.</p>
+        <p class="lang-en">Snap shape layers and masks precisely to corners and edges, pixel-perfect alignment in one click.</p>
+        <p class="lang-fr">Alignez précisément vos shape layers et masques sur les coins et bords, un alignement au pixel près en un clic.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
         <h3>3D Text Premium</h3>
-        <p class="lang-en">Now with live preview and style shuffle — try every look before you commit.</p>
-        <p class="lang-fr">Désormais avec aperçu en direct et shuffle de styles — testez chaque rendu avant de valider.</p>
+        <p class="lang-en">Now with live preview and style shuffle, try every look before you commit.</p>
+        <p class="lang-fr">Désormais avec aperçu en direct et shuffle de styles, testez chaque rendu avant de valider.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2.5 14.7 9.1 21.5 9.7 16.3 14.2 17.9 20.9 12 17.3 6.1 20.9 7.7 14.2 2.5 9.7 9.3 9.1z"/></svg></div>
         <h3><span class="lang-en">Rating system</span><span class="lang-fr">Système de notation</span></h3>
-        <p class="lang-en">Rate the results directly inside the panel — help us fine-tune the AI to your studio's taste.</p>
-        <p class="lang-fr">Notez les résultats directement dans le panneau — aidez-nous à affiner l'IA selon les goûts de votre studio.</p>
+        <p class="lang-en">Rate the results directly inside the panel, help us fine-tune the AI to your studio's taste.</p>
+        <p class="lang-fr">Notez les résultats directement dans le panneau, aidez-nous à affiner l'IA selon les goûts de votre studio.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
@@ -545,8 +602,8 @@ footer .logo-text{font-size:17px}
         <span class="lang-en">Neyko FX Cleaner.<br>Free, forever.</span>
         <span class="lang-fr">Neyko FX Cleaner.<br>Gratuit, pour toujours.</span>
       </h3>
-      <p class="lang-en">A free utility panel to clean and organize your After Effects projects in one click — straight inside AE.</p>
-      <p class="lang-fr">Un panneau utilitaire gratuit pour nettoyer et organiser vos projets After Effects en un clic — directement dans AE.</p>
+      <p class="lang-en">A free utility panel to clean and organize your After Effects projects in one click, straight inside AE.</p>
+      <p class="lang-fr">Un panneau utilitaire gratuit pour nettoyer et organiser vos projets After Effects en un clic, directement dans AE.</p>
       <ul class="cleaner-features">
         <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Remove empty layers, guides &amp; markers</span><span class="lang-fr">Supprime les calques vides, guides et marqueurs</span></li>
         <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lang-en">Sort layers by type or color</span><span class="lang-fr">Trie les calques par type ou couleur</span></li>
@@ -629,8 +686,8 @@ footer .logo-text{font-size:17px}
       <span class="lang-en">White Label for your studio.</span>
       <span class="lang-fr">White Label pour votre studio.</span>
     </h2>
-    <p class="lead lang-en">The AI panel fully branded with your studio's identity — logo, name, colors. All plans include onboarding and support.</p>
-    <p class="lead lang-fr">Le panneau IA entièrement aux couleurs de votre studio — logo, nom, couleurs. Tous les plans incluent l'onboarding et le support.</p>
+    <p class="lead lang-en">The AI panel fully branded with your studio's identity, logo, name, colors. All plans include onboarding and support.</p>
+    <p class="lead lang-fr">Le panneau IA entièrement aux couleurs de votre studio, logo, nom, couleurs. Tous les plans incluent l'onboarding et le support.</p>
 
     <div class="pricing-grid" style="text-align:left">
       <div class="pricing-card">
@@ -690,8 +747,8 @@ footer .logo-text{font-size:17px}
 
     <div class="guarantee-badge">
       <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-      <span class="lang-en">30-day money back guarantee — no questions asked</span>
-      <span class="lang-fr">Garantie satisfait ou remboursé 30 jours — sans question</span>
+      <span class="lang-en">30-day money back guarantee, no questions asked</span>
+      <span class="lang-fr">Garantie satisfait ou remboursé 30 jours, sans question</span>
     </div>
   </div>
 </section>
@@ -720,20 +777,72 @@ footer .logo-text{font-size:17px}
       <div class="faq-item">
         <div class="faq-q lang-en">What's the difference between Neyko FX and Precomp?</div>
         <div class="faq-q lang-fr">Quelle est la différence entre Neyko FX et Precomp ?</div>
-        <div class="faq-a lang-en">Neyko FX is the AI panel — free to download with 15 AI requests per month. Paid plans (Starter 3,49€, Pro 9€, Unlimited 14,99€ / month) unlock more requests. Neyko Precomp is a standalone one-time-purchase tool focused on precomposing — 5 buttons, no subscription, yours forever.</div>
-        <div class="faq-a lang-fr">Neyko FX est le panneau IA — gratuit au téléchargement avec 15 requêtes IA par mois. Les plans payants (Starter 3,49€, Pro 9€, Unlimited 14,99€ / mois) débloquent plus de requêtes. Neyko Precomp est un outil autonome en paiement unique, dédié à la précomposition — 5 boutons, sans abonnement, à vous pour toujours.</div>
+        <div class="faq-a lang-en">Neyko FX is the AI panel, free to download with 15 AI requests per month. Paid plans (Starter 3,49€, Pro 9€, Unlimited 14,99€ / month) unlock more requests. Neyko Precomp is a standalone one-time-purchase tool focused on precomposing, 5 buttons, no subscription, yours forever.</div>
+        <div class="faq-a lang-fr">Neyko FX est le panneau IA, gratuit au téléchargement avec 15 requêtes IA par mois. Les plans payants (Starter 3,49€, Pro 9€, Unlimited 14,99€ / mois) débloquent plus de requêtes. Neyko Precomp est un outil autonome en paiement unique, dédié à la précomposition, 5 boutons, sans abonnement, à vous pour toujours.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q lang-en">What languages does the AI speak?</div>
         <div class="faq-q lang-fr">Quelles langues parle l'IA ?</div>
-        <div class="faq-a lang-en">The panel is fully bilingual — French and English. Users can switch between languages with a single click.</div>
-        <div class="faq-a lang-fr">Le panneau est entièrement bilingue — français et anglais. Les utilisateurs peuvent basculer entre les deux langues en un clic.</div>
+        <div class="faq-a lang-en">The panel is fully bilingual, French and English. Users can switch between languages with a single click.</div>
+        <div class="faq-a lang-fr">Le panneau est entièrement bilingue, français et anglais. Les utilisateurs peuvent basculer entre les deux langues en un clic.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q lang-en">Is there a minimum commitment?</div>
         <div class="faq-q lang-fr">Y a-t-il un engagement minimum ?</div>
-        <div class="faq-a lang-en">Neyko FX is free to download and use with 15 AI requests per month — no payment required. If you want more, paid plans are monthly and can be cancelled at any time, and every purchase is covered by our 30-day money back guarantee.</div>
-        <div class="faq-a lang-fr">Neyko FX est gratuit au téléchargement et à l'usage avec 15 requêtes IA par mois — aucun paiement requis. Si vous voulez plus, les plans payants sont mensuels et annulables à tout moment, et chaque achat est couvert par notre garantie satisfait ou remboursé de 30 jours.</div>
+        <div class="faq-a lang-en">Neyko FX is free to download and use with 15 AI requests per month, no payment required. If you want more, paid plans are monthly and can be cancelled at any time, and every purchase is covered by our 30-day money back guarantee.</div>
+        <div class="faq-a lang-fr">Neyko FX est gratuit au téléchargement et à l'usage avec 15 requêtes IA par mois, aucun paiement requis. Si vous voulez plus, les plans payants sont mensuels et annulables à tout moment, et chaque achat est couvert par notre garantie satisfait ou remboursé de 30 jours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITING PACK -->
+<section class="editpack" id="editing-pack">
+  <div class="wrap">
+    <div class="editpack-card">
+      <div class="ep-left">
+        <div class="ep-badge">
+          <span class="dot"></span>
+          <span class="lang-en">ONE-TIME PURCHASE · 9€</span>
+          <span class="lang-fr">PAIEMENT UNIQUE · 9€</span>
+        </div>
+        <h2 class="ep-title">🎬 Thibaut's Editing Pack</h2>
+        <p class="ep-sub">
+          <span class="lang-en">All my editing assets in one pack</span>
+          <span class="lang-fr">Tous mes assets d'editing dans un seul pack</span>
+        </p>
+        <p class="ep-desc">
+          <span class="lang-en">Everything I use in my own edits, ready to drag and drop into your timeline.</span>
+          <span class="lang-fr">Tout ce que j'utilise dans mes propres edits, prêt à glisser dans votre timeline.</span>
+        </p>
+
+        <ul class="ep-list">
+          <li><span class="ep-emo">📁</span><span><b>2</b> <span class="lang-en">Project Files</span><span class="lang-fr">Project Files</span></span></li>
+          <li><span class="ep-emo">🎨</span><span><b>4</b> <span class="lang-en">Color Corrections</span><span class="lang-fr">Color Corrections</span></span></li>
+          <li><span class="ep-emo">✍️</span><span><b>3</b> <span class="lang-en">Text Effects</span><span class="lang-fr">Text Effects</span></span></li>
+          <li><span class="ep-emo">📷</span><span><b>7</b> Shakes</span></li>
+          <li><span class="ep-emo">🔍</span><span><b>4</b> Zooms</span></li>
+          <li><span class="ep-emo">⚡</span><span><b>5</b> One Framers</span></li>
+        </ul>
+
+        <a href="https://payhip.com/b/JVgcy" target="_blank" rel="noopener" class="ep-cta">
+          <span class="lang-en">Get the Pack, 9€ →</span>
+          <span class="lang-fr">Obtenir le Pack, 9€ →</span>
+        </a>
+
+        <ul class="ep-notes">
+          <li><span class="ok">✅</span><span class="lang-en">One-time purchase, yours forever</span><span class="lang-fr">Paiement unique, à vous pour toujours</span></li>
+          <li><span class="ok">✅</span><span class="lang-en">Instant download after payment</span><span class="lang-fr">Téléchargement instantané après paiement</span></li>
+        </ul>
+      </div>
+
+      <!-- Preview thumbnails (recreated in CSS to match the site DA) -->
+      <div class="ep-right" aria-hidden="true">
+        <div class="ep-thumb ep-t1"><span>TEXTURED<br>TEXT</span></div>
+        <div class="ep-thumb ep-t2"><span>SHAKE<br>PACK</span></div>
+        <div class="ep-thumb ep-t3"><span>MATRIX<br>PROJECT</span></div>
+        <div class="ep-thumb ep-t4"><span>GLOW<br>TEXT</span></div>
+        <div class="ep-thumb ep-t5"><span>ZOOMS PRESETS</span></div>
       </div>
     </div>
   </div>
@@ -773,6 +882,7 @@ footer .logo-text{font-size:17px}
         <ul class="footer-list">
           <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Neyko FX<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
           <li><a href="https://payhip.com/b/PeV5w" target="_blank" rel="noopener">Neyko Precomp<span class="fp-price">4,99€</span></a></li>
+          <li><a href="https://payhip.com/b/JVgcy" target="_blank" rel="noopener">Editing Pack<span class="fp-price">9€</span></a></li>
           <li><a href="#cleaner">Neyko FX Cleaner<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
           <li><a href="https://payhip.com/444Neyko" target="_blank" rel="noopener"><span class="lang-en">See the full store →</span><span class="lang-fr">Voir tout le store →</span></a></li>
         </ul>
