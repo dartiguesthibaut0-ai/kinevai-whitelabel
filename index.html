@@ -251,6 +251,28 @@ footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:60px
 footer .logo-mark{width:30px;height:30px}
 footer .logo-text{font-size:17px}
 
+/* ===== STATS ===== */
+.stats-strip{padding:0 0 70px}
+.stats-card{
+  position:relative;overflow:hidden;
+  background:var(--bg-soft);border:1px solid var(--border);border-radius:20px;
+  display:flex;align-items:center;justify-content:center;gap:80px;
+  padding:44px 40px;flex-wrap:wrap;
+}
+.stats-dots{
+  position:absolute;left:-30px;bottom:-26px;width:220px;height:150px;z-index:0;
+  background-image:radial-gradient(#d6d6e6 1.5px,transparent 1.5px);
+  background-size:16px 16px;
+  -webkit-mask-image:linear-gradient(135deg,#000 25%,transparent 75%);
+  mask-image:linear-gradient(135deg,#000 25%,transparent 75%);
+  pointer-events:none;
+}
+.stat{text-align:center;position:relative;z-index:1}
+.stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(32px,4vw,44px);letter-spacing:-1px;color:var(--ink);line-height:1}
+.stat-label{font-size:13.5px;color:var(--muted);margin-top:8px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.stat-pulse{width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:statPulse 1.8s ease-in-out infinite}
+@keyframes statPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.7)}}
+
 /* ===== EDITING PACK (creative / personal product) ===== */
 .editpack{background:linear-gradient(180deg,#fff8f3 0%,#fdf4ff 100%);border-top:1px solid #f0e4dc;border-bottom:1px solid #f0e4dc}
 .editpack-card{
@@ -417,6 +439,26 @@ footer .logo-text{font-size:17px}
     </div>
   </div>
 </header>
+
+<!-- STATS -->
+<section class="stats-strip">
+  <div class="wrap">
+    <div class="stats-card">
+      <div class="stats-dots" aria-hidden="true"></div>
+      <div class="stat">
+        <div class="stat-num" id="statTools">4</div>
+        <div class="stat-label"><span class="lang-en">Tools</span><span class="lang-fr">Outils</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statUsers">0</div>
+        <div class="stat-label">
+          <span class="stat-pulse" aria-hidden="true"></span>
+          <span class="lang-en">Users</span><span class="lang-fr">Utilisateurs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PRODUCTS -->
 <section id="products">
@@ -939,6 +981,47 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   burger.classList.remove('open');
   navLinks.classList.remove('open');
 }));
+</script>
+
+<!-- Live user counter (Supabase) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+(function () {
+  var SUPABASE_URL = 'https://mjipivpjlxoiwtybuycv.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaXBpdnBqbHhvaXd0eWJ1eWN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNzk2NDcsImV4cCI6MjA5NDg1NTY0N30.v1mVwLFLOh6ebSzCc_7uOq1ng06bpH-1PC75lAuonXo';
+  var elUsers = document.getElementById('statUsers');
+  if (!elUsers || !window.supabase) return;
+
+  var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function render(value) {
+    if (typeof value !== 'number') return;
+    elUsers.textContent = value.toLocaleString('en-US');
+  }
+
+  // Initial load
+  client
+    .from('stats')
+    .select('value')
+    .eq('key', 'users')
+    .single()
+    .then(function (res) {
+      if (res.data) render(res.data.value);
+    })
+    .catch(function () { /* table not set up yet: keep fallback value */ });
+
+  // Live updates: fires instantly whenever the webhook increments the row
+  client
+    .channel('stats-users')
+    .on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'stats', filter: 'key=eq.users' },
+      function (payload) {
+        if (payload.new) render(payload.new.value);
+      }
+    )
+    .subscribe();
+})();
 </script>
 </body>
 </html>
