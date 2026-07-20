@@ -251,6 +251,58 @@ footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:60px
 footer .logo-mark{width:30px;height:30px}
 footer .logo-text{font-size:17px}
 
+/* ===== NEYKO IMPACT (native plugin) ===== */
+.impact{background:linear-gradient(180deg,#eefbfd 0%,#f5f2ff 100%);border-top:1px solid #dbeef2;border-bottom:1px solid #dbeef2}
+.impact-card{
+  background:#fff;border:1px solid rgba(34,211,238,0.4);border-radius:20px;overflow:hidden;
+  box-shadow:0 24px 60px -28px rgba(8,145,178,0.28);
+  display:grid;grid-template-columns:1.05fr 1fr;
+}
+.ip-left{padding:44px 44px 40px}
+.ip-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.35);color:#0e7490;
+  font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  padding:5px 13px 5px 6px;border-radius:100px;margin-bottom:18px;
+}
+.ip-new{background:#ef4444;color:#fff;font-size:10px;font-weight:800;letter-spacing:0.8px;padding:3px 9px;border-radius:100px}
+.ip-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.6px;line-height:1.12;margin-bottom:8px}
+.ip-sub{font-size:15px;color:#0e7490;font-weight:600;margin-bottom:16px}
+.ip-desc{font-size:14.5px;color:var(--muted);line-height:1.65;margin-bottom:24px;max-width:450px}
+.ip-effects{list-style:none;display:flex;flex-direction:column;gap:15px;margin-bottom:24px}
+.ip-effects li{display:flex;gap:13px;align-items:flex-start}
+.ip-effects .ip-emo{font-size:19px;width:26px;text-align:center;flex-shrink:0;line-height:1.35}
+.ip-effects b{display:block;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.ip-effects .ip-fxdesc{font-size:12.5px;color:var(--muted);line-height:1.5}
+.ip-specs{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px}
+.ip-specs li{font-size:12.5px;color:#3f3f50;display:flex;align-items:center;gap:9px}
+.ip-specs .ic{width:15px;height:15px;color:#0891b2;flex-shrink:0}
+.ip-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#22d3ee,#0891b2);color:#04242b;
+  padding:14px 30px;border-radius:10px;text-decoration:none;font-weight:800;font-size:15px;
+  box-shadow:0 12px 26px -10px rgba(8,145,178,0.55);transition:transform 0.2s,box-shadow 0.2s;
+}
+.ip-cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(8,145,178,0.65)}
+.ip-notes{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.ip-notes li{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.ip-notes .ok{color:var(--green);font-weight:800}
+.ip-notes .warn{color:#d97706;font-weight:800}
+/* right column: dark native "Effects menu" mockup */
+.ip-right{position:relative;padding:26px;background:linear-gradient(160deg,#0e1b24 0%,#0a1016 100%);display:flex;align-items:center;justify-content:center}
+.ip-panel{width:100%;background:#0d0d1a;border:1px solid #1e2b33;border-radius:12px;overflow:hidden;box-shadow:0 20px 44px -22px rgba(0,0,0,0.7)}
+.ip-panel-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#111a20;border-bottom:1px solid #1e2b33}
+.ip-panel-hd .dot3{display:flex;gap:6px}
+.ip-panel-hd .dot3 i{width:10px;height:10px;border-radius:50%;background:#2a3a42;display:block}
+.ip-panel-hd small{font-size:11px;color:#7a97a3}
+.ip-menu{padding:14px}
+.ip-menu-lbl{font-size:9.5px;letter-spacing:1.5px;color:#5e7c88;text-transform:uppercase;margin:2px 4px 11px;font-weight:700}
+.ip-fx{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:9px;background:#121e26;border:1px solid #1e2b33;margin-bottom:9px}
+.ip-fx:last-child{margin-bottom:0}
+.ip-fx .fxi{width:28px;height:28px;border-radius:7px;background:rgba(34,211,238,0.14);color:#22d3ee;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ip-fx .fxn{font-size:12.5px;font-weight:600;color:#e6f6fa}
+.ip-fx .fxtag{margin-left:auto;font-size:8.5px;font-weight:700;letter-spacing:0.5px;color:#22d3ee;border:1px solid rgba(34,211,238,0.3);padding:2px 7px;border-radius:5px}
+
 /* ===== STATS ===== */
 .stats-strip{padding:0 0 70px}
 .stats-card{
@@ -334,6 +386,8 @@ footer .logo-text{font-size:17px}
   .footer-cols{grid-template-columns:1fr;gap:36px}
   .editpack-card{grid-template-columns:1fr}
   .ep-right{order:-1}
+  .impact-card{grid-template-columns:1fr}
+  .ip-right{order:-1}
 }
 @media(max-width:680px){
   nav{padding:12px 22px}
@@ -344,6 +398,7 @@ footer .logo-text{font-size:17px}
   .mk-clgrid{grid-template-columns:1fr}
   .ep-list{grid-template-columns:1fr}
   .ep-left{padding:32px 24px}
+  .ip-left{padding:32px 24px}
   footer{padding:44px 22px 28px}
   .footer-bottom{flex-direction:column;text-align:center}
   .nav-burger{display:flex}
@@ -577,6 +632,102 @@ footer .logo-text{font-size:17px}
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- NEYKO IMPACT -->
+<section class="impact" id="neyko-impact">
+  <div class="wrap">
+    <div class="impact-card">
+      <div class="ip-left">
+        <div class="ip-badge">
+          <span class="ip-new">NEW</span>
+          <span class="lang-en">NATIVE PLUGIN</span>
+          <span class="lang-fr">PLUGIN NATIF</span>
+        </div>
+        <h2 class="ip-title">⚡ Neyko Impact</h2>
+        <p class="ip-sub">
+          <span class="lang-en">Professional manga &amp; anime effects, native to After Effects</span>
+          <span class="lang-fr">Effets manga &amp; anime pro, natifs dans After Effects</span>
+        </p>
+        <p class="ip-desc">
+          <span class="lang-en">Not a panel. Not a script. A real native plugin that lives directly in your Effects menu.</span>
+          <span class="lang-fr">Pas un panneau. Pas un script. Un vrai plugin natif qui vit directement dans votre menu Effets.</span>
+        </p>
+
+        <ul class="ip-effects">
+          <li>
+            <span class="ip-emo">🎬</span>
+            <div>
+              <b>NK Impact Frame</b>
+              <span class="ip-fxdesc lang-en">Manga freeze-frame, B&amp;W, speed lines, paper texture</span>
+              <span class="ip-fxdesc lang-fr">Freeze-frame manga, N&amp;B, lignes de vitesse, texture papier</span>
+            </div>
+          </li>
+          <li>
+            <span class="ip-emo">⚡</span>
+            <div>
+              <b>NK Speed Lines</b>
+              <span class="ip-fxdesc lang-en">Radial &amp; linear with direction control</span>
+              <span class="ip-fxdesc lang-fr">Radiales &amp; linéaires avec contrôle de direction</span>
+            </div>
+          </li>
+          <li>
+            <span class="ip-emo">✨</span>
+            <div>
+              <b>NK Anime Flash</b>
+              <span class="ip-fxdesc lang-en">White, RGB &amp; Boom flash types</span>
+              <span class="ip-fxdesc lang-fr">Types de flash White, RGB &amp; Boom</span>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="ip-specs">
+          <li>
+            <svg class="ic" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            <span class="lang-en">Compiled in C++, same technology as Video Copilot &amp; Sapphire</span>
+            <span class="lang-fr">Compilé en C++, même technologie que Video Copilot &amp; Sapphire</span>
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            <span class="lang-en">Compatible: AE 2022, 2023, 2024, 2025+</span>
+            <span class="lang-fr">Compatible : AE 2022, 2023, 2024, 2025+</span>
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+            <span class="lang-en">Windows 10/11, Mac coming soon</span>
+            <span class="lang-fr">Windows 10/11, version Mac bientôt</span>
+          </li>
+        </ul>
+
+        <a href="https://payhip.com/b/LOA3u" target="_blank" rel="noopener" class="ip-cta">
+          <span class="lang-en">Get Neyko Impact, €29 →</span>
+          <span class="lang-fr">Obtenir Neyko Impact, 29€ →</span>
+        </a>
+
+        <ul class="ip-notes">
+          <li><span class="ok">✅</span><span class="lang-en">One-time purchase, yours forever</span><span class="lang-fr">Paiement unique, à vous pour toujours</span></li>
+          <li><span class="ok">✅</span><span class="lang-en">30-day money back guarantee</span><span class="lang-fr">Garantie satisfait ou remboursé 30 jours</span></li>
+          <li><span class="warn">⚠️</span><span class="lang-en">Windows only, Mac version coming soon</span><span class="lang-fr">Windows uniquement, version Mac bientôt</span></li>
+        </ul>
+      </div>
+
+      <!-- Native "Effects menu" mockup -->
+      <div class="ip-right" aria-hidden="true">
+        <div class="ip-panel">
+          <div class="ip-panel-hd">
+            <span class="dot3"><i></i><i></i><i></i></span>
+            <small>Effects &amp; Presets</small>
+          </div>
+          <div class="ip-menu">
+            <div class="ip-menu-lbl">▸ Neyko Impact</div>
+            <div class="ip-fx"><span class="fxi">🎬</span><span class="fxn">NK Impact Frame</span><span class="fxtag">NATIVE</span></div>
+            <div class="ip-fx"><span class="fxi">⚡</span><span class="fxn">NK Speed Lines</span><span class="fxtag">NATIVE</span></div>
+            <div class="ip-fx"><span class="fxi">✨</span><span class="fxn">NK Anime Flash</span><span class="fxtag">NATIVE</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -923,6 +1074,7 @@ footer .logo-text{font-size:17px}
         <div class="footer-h"><span class="lang-en">Best sellers</span><span class="lang-fr">Meilleurs produits</span></div>
         <ul class="footer-list">
           <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Neyko FX<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
+          <li><a href="https://payhip.com/b/LOA3u" target="_blank" rel="noopener">Neyko Impact<span class="fp-price">29€</span></a></li>
           <li><a href="https://payhip.com/b/PeV5w" target="_blank" rel="noopener">Neyko Precomp<span class="fp-price">4,99€</span></a></li>
           <li><a href="https://payhip.com/b/JVgcy" target="_blank" rel="noopener">Neyko Editing Pack<span class="fp-price">9€</span></a></li>
           <li><a href="#cleaner">Neyko FX Cleaner<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
