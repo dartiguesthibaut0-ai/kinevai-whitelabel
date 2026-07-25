@@ -114,6 +114,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "@id": "https://neykofx.com/#neyko-fx-preview",
+      "name": "Neyko FX Preview",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Windows, macOS",
+      "description": "Professional keyframe curves and easing tools for After Effects. Custom curves, Time Remap controls, live preview, one-click apply.",
+      "url": "https://neykofx.com/#products",
+      "image": "https://neykofx.com/og-image.png",
+      "author": { "@type": "Person", "name": "Thibaut Dartigues" },
+      "offers": {"@type":"Offer","price":"9","priceCurrency":"EUR","url":"https://payhip.com/b/BeEkP","availability":"https://schema.org/InStock"}
+    },
+    {
+      "@type": "SoftwareApplication",
       "@id": "https://neykofx.com/#neyko-editing-pack",
       "name": "Neyko Editing Pack",
       "applicationCategory": "MultimediaApplication",
@@ -251,8 +263,39 @@ section{padding:84px 0}
 .hero-meta span{display:inline-flex;align-items:center;gap:7px}
 .hero-meta i{width:5px;height:5px;background:var(--violet);border-radius:50%;display:inline-block}
 
-/* ===== PRODUCTS GRID ===== */
-.products-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:50px}
+/* ===== PRODUCTS CAROUSEL ===== */
+.products-carousel{position:relative;margin-top:50px}
+.products-grid{
+  display:grid;grid-auto-flow:column;grid-auto-columns:260px;gap:16px;
+  overflow-x:auto;overflow-y:visible;
+  scroll-snap-type:x mandatory;scroll-padding:4px;
+  padding:8px 4px 16px;
+  scrollbar-width:none;-ms-overflow-style:none;
+  scroll-behavior:smooth;
+}
+.products-grid::-webkit-scrollbar{display:none}
+.products-grid > .product{scroll-snap-align:start}
+.pc-arrow{
+  position:absolute;top:calc(50% - 20px);transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(138,92,246,0.85);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px -8px rgba(91,50,204,0.5);
+  z-index:5;transition:background 0.2s,opacity 0.25s,transform 0.15s;
+  backdrop-filter:blur(4px);
+}
+.pc-arrow:hover{background:var(--violet);transform:translateY(-50%) scale(1.07)}
+.pc-arrow:disabled{opacity:0;pointer-events:none}
+.pc-arrow.prev{left:-14px}
+.pc-arrow.next{right:-14px}
+.pc-arrow svg{width:20px;height:20px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pc-dots{display:flex;justify-content:center;gap:7px;margin-top:6px}
+.pc-dot{width:7px;height:7px;border-radius:50%;background:#d5d5e0;border:none;cursor:pointer;padding:0;transition:background 0.2s,transform 0.2s}
+.pc-dot.active{background:var(--violet);transform:scale(1.3)}
+.pc-dot:hover{background:var(--violet-dark)}
+@media(hover:none) and (pointer:coarse){
+  .pc-arrow{display:none}
+}
 .product{
   display:flex;flex-direction:column;text-align:center;
   border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;
@@ -525,11 +568,7 @@ footer .logo-text{font-size:17px}
 .ep-t5 span{color:#fff;-webkit-text-stroke:1px rgba(255,120,120,0.5);text-shadow:0 0 8px rgba(0,0,0,0.6);font-size:14px;letter-spacing:1px}
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:1100px){
-  .products-grid{grid-template-columns:repeat(3,1fr);gap:20px}
-}
 @media(max-width:880px){
-  .products-grid{grid-template-columns:repeat(2,1fr);gap:18px}
   .pricing-grid{grid-template-columns:1fr}
   .features-grid{grid-template-columns:1fr 1fr}
   .cleaner-wrap{grid-template-columns:1fr;gap:40px}
@@ -545,7 +584,7 @@ footer .logo-text{font-size:17px}
   section{padding:62px 0}
   .hero{padding:64px 0 56px}
   .features-grid{grid-template-columns:1fr}
-  .products-grid{grid-template-columns:1fr}
+  .products-grid{grid-auto-columns:82%;padding-left:0;padding-right:0}
   .mk-clgrid{grid-template-columns:1fr}
   .ep-list{grid-template-columns:1fr}
   .ep-left{padding:32px 24px}
@@ -654,7 +693,7 @@ footer .logo-text{font-size:17px}
     <div class="stats-card">
       <div class="stats-dots" aria-hidden="true"></div>
       <div class="stat">
-        <div class="stat-num" id="statTools">5</div>
+        <div class="stat-num" id="statTools">6</div>
         <div class="stat-label"><span class="lang-en">Tools</span><span class="lang-fr">Outils</span></div>
       </div>
       <div class="stat">
@@ -674,13 +713,20 @@ footer .logo-text{font-size:17px}
     <span class="eyebrow lang-en">Our products</span>
     <span class="eyebrow lang-fr">Nos produits</span>
     <h2 class="h2">
-      <span class="lang-en">Five tools. One workflow.</span>
-      <span class="lang-fr">Cinq outils. Un seul workflow.</span>
+      <span class="lang-en">Six tools. One workflow.</span>
+      <span class="lang-fr">Six outils. Un seul workflow.</span>
     </h2>
     <p class="lead lang-en">From the full AI panel to free utilities, pick what your workflow needs.</p>
     <p class="lead lang-fr">Du panneau IA complet aux utilitaires gratuits, choisissez ce dont votre workflow a besoin.</p>
 
-    <div class="products-grid">
+    <div class="products-carousel">
+      <button class="pc-arrow prev" id="pcPrev" aria-label="Previous product">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="pc-arrow next" id="pcNext" aria-label="Next product">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <div class="products-grid" id="pcTrack">
 
       <!-- Neyko FX -->
       <div class="product featured-p">
@@ -784,6 +830,49 @@ footer .logo-text{font-size:17px}
         </div>
       </div>
 
+      <!-- Neyko FX Preview -->
+      <div class="product">
+        <span class="p-badge once"><span class="lang-en">ONE-TIME PURCHASE</span><span class="lang-fr">PAIEMENT UNIQUE</span></span>
+        <div class="p-visual">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="lgP6" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8a5cf6"/>
+                <stop offset="1" stop-color="#5b32cc"/>
+              </linearGradient>
+            </defs>
+            <path d="M4 30 C10 30 10 12 20 12 C30 12 30 30 36 30" fill="none" stroke="url(#lgP6)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="6" cy="30" r="3" fill="url(#lgP6)"/>
+            <circle cx="34" cy="30" r="3" fill="url(#lgP6)"/>
+            <circle cx="20" cy="12" r="3" fill="#fff" stroke="url(#lgP6)" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-name">Neyko FX Preview</div>
+          <p class="p-desc lang-en">Professional keyframe curves and easing tools, directly inside After Effects.</p>
+          <p class="p-desc lang-fr">Courbes de keyframes et outils d'easing pro, directement dans After Effects.</p>
+          <ul style="list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:5px;font-size:11.5px;color:var(--muted);text-align:left">
+            <li>⚡ <span class="lang-en">Custom easing curves</span><span class="lang-fr">Courbes d'easing sur mesure</span></li>
+            <li>🎬 <span class="lang-en">Time Remap controls</span><span class="lang-fr">Contrôles Time Remap</span></li>
+            <li>👁️ <span class="lang-en">Live preview before applying</span><span class="lang-fr">Aperçu live avant d'appliquer</span></li>
+            <li>🖱️ <span class="lang-en">One-click apply to any property</span><span class="lang-fr">Un clic pour appliquer à toute propriété</span></li>
+          </ul>
+          <div class="p-price">
+            9€
+            <small class="lang-en">one-time payment</small>
+            <small class="lang-fr">paiement unique</small>
+          </div>
+          <a href="https://payhip.com/b/BeEkP" target="_blank" rel="noopener" class="p-cta">
+            <span class="lang-en">Get Neyko FX Preview →</span>
+            <span class="lang-fr">Obtenir Neyko FX Preview →</span>
+          </a>
+          <div class="p-sub" style="text-align:center;font-size:11px;color:var(--green);font-weight:600">
+            <span class="lang-en">✅ 100% offline, no account needed</span>
+            <span class="lang-fr">✅ 100% offline, aucun compte requis</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Neyko Editing Pack -->
       <div class="product">
         <span class="p-badge pack"><span class="lang-en">EDITING PACK</span><span class="lang-fr">EDITING PACK</span></span>
@@ -845,7 +934,10 @@ footer .logo-text{font-size:17px}
         </div>
       </div>
 
-    </div>
+      </div><!-- /.products-grid -->
+
+      <div class="pc-dots" id="pcDots" role="tablist" aria-label="Product navigation"></div>
+    </div><!-- /.products-carousel -->
   </div>
 </section>
 
@@ -1291,6 +1383,7 @@ footer .logo-text{font-size:17px}
           <li><a href="https://payhip.com/b/kvIW3" target="_blank" rel="noopener">Neyko FX<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
           <li><a href="https://payhip.com/b/LOA3u" target="_blank" rel="noopener">Neyko Impact<span class="fp-price">29€</span></a></li>
           <li><a href="https://payhip.com/b/PeV5w" target="_blank" rel="noopener">Neyko Precomp<span class="fp-price">19€</span></a></li>
+          <li><a href="https://payhip.com/b/BeEkP" target="_blank" rel="noopener">Neyko FX Preview<span class="fp-price">9€</span></a></li>
           <li><a href="https://payhip.com/b/JVgcy" target="_blank" rel="noopener">Neyko Editing Pack<span class="fp-price">9€</span></a></li>
           <li><a href="#cleaner">Neyko FX Cleaner<span class="fp-free"><span class="lang-en">FREE</span><span class="lang-fr">GRATUIT</span></span></a></li>
           <li><a href="https://payhip.com/444Neyko" target="_blank" rel="noopener"><span class="lang-en">See the full store →</span><span class="lang-fr">Voir tout le store →</span></a></li>
@@ -1350,6 +1443,63 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   burger.classList.remove('open');
   navLinks.classList.remove('open');
 }));
+
+// Products carousel: arrows + dots + scroll sync
+(function(){
+  const track = document.getElementById('pcTrack');
+  const prev  = document.getElementById('pcPrev');
+  const next  = document.getElementById('pcNext');
+  const dotsC = document.getElementById('pcDots');
+  if (!track || !prev || !next || !dotsC) return;
+
+  const cards = Array.from(track.children);
+
+  // Build one dot per card
+  cards.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'pc-dot';
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', 'Go to product ' + (i + 1));
+    b.addEventListener('click', () => scrollToCard(i));
+    dotsC.appendChild(b);
+  });
+  const dots = Array.from(dotsC.children);
+
+  function step(){
+    const first = cards[0];
+    const second = cards[1];
+    if (!first) return 0;
+    if (second) return second.offsetLeft - first.offsetLeft;
+    return first.getBoundingClientRect().width;
+  }
+  function scrollToCard(i){
+    track.scrollTo({ left: step() * i, behavior: 'smooth' });
+  }
+  function currentIndex(){
+    const s = step();
+    if (!s) return 0;
+    return Math.round(track.scrollLeft / s);
+  }
+  function update(){
+    const i = currentIndex();
+    dots.forEach((d, k) => d.classList.toggle('active', k === i));
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= maxScroll - 2;
+  }
+
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
+
+  let raf;
+  track.addEventListener('scroll', () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(update);
+  });
+  window.addEventListener('resize', update);
+  update();
+})();
 </script>
 
 <!-- Live user counter (Supabase) -->
